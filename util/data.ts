@@ -1,3 +1,11 @@
+interface Blog {
+  slug: string;
+  title: string;
+  month: string;
+  year: number;
+  description?: string;
+}
+
 export const skillsData = {
   Frontend: [
     "Next.js",
@@ -277,5 +285,5 @@ export const experienceData = [
 //   }
 ];
 
-export const blogsData = [];
+export const blogsData: Blog[] = [];
 
