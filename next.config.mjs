@@ -10,11 +10,11 @@ const nextConfig = {
 	webpack: (config) => {
 		config.ignoreWarnings = [
 			{
-				module: /@contentlayer\/core/
-			}
+				module: /@contentlayer\/core/,
+			},
 		];
 		return config;
-	}
+	},
 };
 
 export default withContentlayer(nextConfig);
