@@ -22,7 +22,12 @@ const socials = [
   },
   {
     icon: <Linkedin size={28} />,
-    href: "https://linkedin.com/in/laksh-nijhawan",
+    href: "https://www.linkedin.com/in/laksh-nijhawan-576888280/",
+    image: null,
+  },
+  {
+    icon: <Github size={28} />,
+    href: "https://github.com/laksh2005",
     image: null,
   },
   {
@@ -32,7 +37,7 @@ const socials = [
   },
   {
     icon: null,
-    href: "https://codepersona.app",
+    href: "https://codepersona.app/laksh2005",
     image: "/cplogo.png",
   },
 ];

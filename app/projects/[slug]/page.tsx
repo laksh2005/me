@@ -1,15 +1,18 @@
-"use client";
-import { useParams } from "next/navigation";
 import { Navigation } from "@/app/components/nav";
 import { projectsData } from "@/util/data";
-import { Github, ExternalLink, ArrowLeft } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { ReportView } from "./view";
 
-export default function ProjectDetailPage() {
-  const params = useParams();
-  const slug = (params?.slug as string) || "";
+export async function generateStaticParams() {
+  return projectsData.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
+export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
   const project = projectsData.find((p) => p.slug === slug);
 
   if (!project) {
@@ -100,6 +103,7 @@ export default function ProjectDetailPage() {
             )}
           </div>
       </div>
+      <ReportView slug={slug} />
     </div>
   );
 }

@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { projectsData } from "@/util/data";
 import { Github, ExternalLink } from "lucide-react";
 
 export default function ProjectsPage() {
+  const router = useRouter();
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   const getBorderColor = (slug: string, type: string) => {
@@ -50,7 +52,7 @@ export default function ProjectsPage() {
                   className={`relative w-full h-full p-4 cursor-pointer border-2 transition-all duration-300 ${
                     getBorderColor(project.slug, project.type)
                   } ${getHoverBorderColor(project.slug, project.type)} rounded-lg overflow-hidden`}
-                  onClick={() => window.location.href = `/projects/${project.slug}`}
+                  onClick={() => router.push(`/projects/${project.slug}`)}
                 >
                     
                     {/* Type Badge */}
