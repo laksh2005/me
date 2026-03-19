@@ -41,7 +41,7 @@ export default function ExperiencePage() {
 								<div className="flex items-start gap-3 md:gap-4 text-left flex-1 min-w-0">
 									{/* Company Logo */}
 									{exp.image && (
-										<div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex-shrink-0 overflow-hidden border border-zinc-700">
+										<div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex-shrink-0 overflow-hidden border border-zinc-700">
 											<Image
 												src={exp.image}
 												alt={exp.company}

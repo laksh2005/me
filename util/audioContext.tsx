@@ -47,7 +47,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
 	// init audio
 	useEffect(() => {
-		const audio = new Audio("/song.mp3");
+		const audio = new Audio("/song2.mp3");
 		audio.loop = true;
 		audio.volume = 0;
 		audio.preload = "auto";

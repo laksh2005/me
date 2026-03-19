@@ -9,7 +9,7 @@ import { PageTransition } from "./components/page-transition";
 
 export const metadata: Metadata = {
 	title: {
-		default: "Laksh Nijhawan",
+		default: "Hi, I'm Laksh",
 		template: "laksh1.me",
 	},
 	description: "",
