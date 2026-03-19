@@ -1,55 +1,53 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
+
+import { useAudio } from "@/util/audioContext";
+import { ArrowLeft, Home, Music, Music2 } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 export const Navigation: React.FC = () => {
-	const ref = useRef<HTMLElement>(null);
-	const [isIntersecting, setIntersecting] = useState(true);
+  const router = useRouter();
+  const { isPlaying, togglePlayPause } = useAudio();
 
-	useEffect(() => {
-		if (!ref.current) return;
-		const observer = new IntersectionObserver(([entry]) =>
-			setIntersecting(entry.isIntersecting),
-		);
+  const goBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  };
 
-		observer.observe(ref.current);
-		return () => observer.disconnect();
-	}, []);
+  return (
+    <div className="fixed top-4 inset-x-0 mx-auto z-50 w-max">
+      <div className="flex items-center gap-3 px-2 py-1 rounded-full backdrop-blur-lg border border-zinc-600/30 bg-zinc-900/40 hover:border-zinc-500/50 transition-all duration-300 group">
+        {/* Back Button */}
+        <button
+          onClick={goBack}
+          className="p-2 hover:bg-zinc-800 rounded-full transition-colors duration-200 text-zinc-400 hover:text-zinc-200"
+          title="Go back"
+        >
+          <ArrowLeft size={18} />
+        </button>
 
-	return (
-		<header ref={ref}>
-			<div
-				className={`fixed inset-x-0 top-0 z-50 backdrop-blur  duration-200 border-b  ${
-					isIntersecting
-						? "bg-zinc-900/0 border-transparent"
-						: "bg-zinc-900/500  border-zinc-800 "
-				}`}
-			>
-				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
-					<div className="flex justify-between gap-8">
-						<Link
-							href="/projects"
-							className="duration-200 text-zinc-400 hover:text-zinc-100"
-						>
-							Projects
-						</Link>
-						<Link
-							href="/contact"
-							className="duration-200 text-zinc-400 hover:text-zinc-100"
-						>
-							Contact
-						</Link>
-					</div>
+        {/* Home Button */}
+        <Link
+          href="/"
+          className="p-2 hover:bg-zinc-800 rounded-full transition-colors duration-200 text-zinc-400 hover:text-zinc-200"
+          title="Go to home"
+        >
+          <Home size={18} />
+        </Link>
 
-					<Link
-						href="/"
-						className="duration-200 text-zinc-300 hover:text-zinc-100"
-					>
-						<ArrowLeft className="w-6 h-6 " />
-					</Link>
-				</div>
-			</div>
-		</header>
-	);
+        {/* Music Toggle */}
+        <button
+          onClick={togglePlayPause}
+          className="p-2 hover:bg-zinc-800 rounded-full transition-colors duration-200 text-zinc-400 hover:text-zinc-200"
+          title={isPlaying ? "Mute" : "Unmute"}
+        >
+          {isPlaying ? <Music size={18} /> : <Music2 size={18} />}
+        </button>
+      </div>
+    </div>
+  );
 };

@@ -3,27 +3,29 @@ import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
+import { AudioProvider } from "@/util/audioContext";
+import { PageTransition } from "./components/page-transition";
 
 export const metadata: Metadata = {
   title: {
-    default: "chronark.com",
-    template: "%s | chronark.com",
+    default: "Laksh Nijhawan",
+    template: "laksh1.me",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "",
   openGraph: {
-    title: "chronark.com",
+    title: "laksh1.me",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
-    siteName: "chronark.com",
+      "dev, ai, programming",
+    url: "laksh1.me",
+    siteName: "laksh nijhawan",
     images: [
       {
-        url: "https://chronark.com/og.png",
-        width: 1920,
+        url: "https://pbs.twimg.com/profile_images/2004531799670886400/saRZ-rxa_400x400.jpg",
+        width: 1080,
         height: 1080,
       },
     ],
-    locale: "en-US",
+    locale: "en-In",
     type: "website",
   },
   robots: {
@@ -38,11 +40,11 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "laksh_2705",
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/favicon.png",
+    shortcut: "/favicon.jpg",
   },
 };
 const inter = Inter({
@@ -69,7 +71,12 @@ export default function RootLayout({
         className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
-        {children}
+        <AudioProvider>
+          {/* global transition overlay when route changes */}
+          <script type="module" />
+          <PageTransition />
+          {children}
+        </AudioProvider>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,5 +8,140 @@
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
   }
-} 
+  
+  .font-serif-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+}
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@layer components {
+  .page-enter {
+    animation: fadeInUp 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .element-enter-1 {
+    animation: slideInLeft 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.1s both;
+  }
+
+  .element-enter-2 {
+    animation: slideInRight 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.2s both;
+  }
+
+  .element-enter-3 {
+    animation: fadeInUp 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.3s both;
+  }
+
+  .element-enter-4 {
+    animation: slideInLeft 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.4s both;
+  }
+
+  .element-enter-5 {
+    animation: slideInRight 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.5s both;
+  }
+}
+
+
+/* FLASH */
+@keyframes flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.animate-flash {
+  animation: flash 0.3s ease-out forwards;
+}
+
+/* NOISE */
+.noise {
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+/* SCANLINES */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05) 0px,
+    rgba(0,0,0,0.2) 2px,
+    transparent 4px
+  );
+  animation: scan 0.2s linear infinite;
+}
+
+@keyframes scan {
+  from { transform: translateY(0); }
+  to { transform: translateY(4px); }
+}
+
+/* GLITCH BARS */
+.glitch-bars::before,
+.glitch-bars::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  background: rgba(255,255,255,0.1);
+  animation: glitch 0.6s infinite;
+}
+
+.glitch-bars::before {
+  top: 20%;
+}
+.glitch-bars::after {
+  bottom: 15%;
+}
+
+@keyframes glitch {
+  0% { transform: translateX(0); opacity: 0.1; }
+  20% { transform: translateX(-10px); opacity: 0.3; }
+  40% { transform: translateX(10px); opacity: 0.2; }
+  60% { transform: translateX(-5px); opacity: 0.4; }
+  80% { transform: translateX(5px); opacity: 0.2; }
+  100% { transform: translateX(0); opacity: 0.1; }
+}
