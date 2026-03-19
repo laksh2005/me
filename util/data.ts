@@ -170,7 +170,7 @@ export const projectsData = [
     live: "https://inquira.vercel.app",
     github: "https://github.com/laksh2005/inquira",
     tech_stack: [
-      "React",
+      "React.js",
       "Node.js",
       "AI/NLP"
     ],
@@ -187,7 +187,7 @@ export const projectsData = [
     live: "https://tasklin.netlify.app",
     github: "https://github.com/laksh2005/tasklin",
     tech_stack: [
-      "React",
+      "React.js",
       "JavaScript",
       "UI/UX"
     ],
@@ -261,7 +261,7 @@ export const experienceData = [
     location: "Delhi, India",
     image: "/swoc.jpg",
     description: [
-      " Finished at 41st Rank out of 400+ participants."
+      "Finished at 41st Rank out of 400+ participants."
     ],
   },
 //     {
