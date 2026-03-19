@@ -184,17 +184,17 @@ export const projectsData = [
 ];
 
 export const experienceData = [
-	// {
-	//   company: "Times Internet (The Times Group)",
-	//   role: "AI Agent Developer Intern",
-	//   duration: "Mar 2026 - Present",
-	//   mode: "Hybrid",
-	//   location: "Noida, India",
-	//   image: "/til.png",
-	//   description: [
-	//     "Working in HR Tech, building agentic tools to automate workflows and improve process efficiency and output quality."
-	//   ],
-	// },
+	{
+	  company: "Times Internet (The Times Group)",
+	  role: "AI Agent Developer Intern",
+	  duration: "Mar 2026 - Present",
+	  mode: "Hybrid",
+	  location: "Noida, India",
+	  image: "/til.png",
+	  description: [
+	    "Working in HR Tech, building agentic tools to automate workflows and improve process efficiency and output quality."
+	  ],
+	},
 	{
 		company: "IAmMaturity",
 		role: "Front End Web Developer Intern",

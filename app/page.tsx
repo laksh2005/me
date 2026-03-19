@@ -123,12 +123,12 @@ export default function Home() {
 						feel to use.
 					</span>
 
-					{/* <span className="block">
+					<span className="block">
       Currently building AI agents at{" "}
       <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         Times Internet
       </a>.
-    </span> */}
+    </span>
 
 					<span className="block">
 						Previously worked on frontend and full-stack systems at{" "}
