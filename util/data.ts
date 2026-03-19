@@ -3,6 +3,7 @@ interface Blog {
   title: string;
   month: string;
   year: number;
+  overview?: string;
   description?: string;
 }
 
