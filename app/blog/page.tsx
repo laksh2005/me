@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { blogsData } from "@/util/data";
 import { Card } from "../components/card";
@@ -35,8 +34,10 @@ export default function BlogsPage() {
                 style={{ animationDelay: `${idx * 0.05}s` }}
               >
                 <Card>
-                  <Link href={`/blog/${idx}`}>
-                    <article className="relative w-full h-full p-6 cursor-pointer border border-zinc-800 hover:border-zinc-600 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-900/50">
+                  <article 
+                    className="relative w-full h-full p-6 cursor-pointer border border-zinc-800 hover:border-zinc-600 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-900/50"
+                    onClick={() => window.location.href = `/blog/${idx}`}
+                  >
                       <div className="flex flex-col h-full">
                         {/* Date */}
                         <div className="text-xs text-zinc-500 mb-3">
@@ -59,7 +60,6 @@ export default function BlogsPage() {
                         </div>
                       </div>
                     </article>
-                  </Link>
                 </Card>
               </div>
             ))}

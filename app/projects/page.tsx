@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import React, { useState } from "react";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { projectsData } from "@/util/data";
 import { Github, ExternalLink } from "lucide-react";
-import Image from "next/image";
 
 export default function ProjectsPage() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
@@ -34,7 +32,7 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="mt-4 text-zinc-400 element-enter-2">
-            Stuff I made out sometimes with the motive of learning, out of curiousity, out of random sticky notes 
+            Stuff I made with a motive of learning, and some straight out of random sticky notes at my desk
           </p>
         </div>
 
@@ -48,10 +46,12 @@ export default function ProjectsPage() {
               style={{ animationDelay: `${idx * 0.05}s` }}
             >
               <Card>
-                <Link href={`/projects/${project.slug}`}>
-                  <article className={`relative w-full h-full p-4 cursor-pointer border-2 transition-all duration-300 ${
+                <article 
+                  className={`relative w-full h-full p-4 cursor-pointer border-2 transition-all duration-300 ${
                     getBorderColor(project.slug, project.type)
-                  } ${getHoverBorderColor(project.slug, project.type)} rounded-lg overflow-hidden`}>
+                  } ${getHoverBorderColor(project.slug, project.type)} rounded-lg overflow-hidden`}
+                  onClick={() => window.location.href = `/projects/${project.slug}`}
+                >
                     
                     {/* Type Badge */}
                     <div className="flex items-start justify-between mb-4">
@@ -97,20 +97,6 @@ export default function ProjectsPage() {
                       ))}
                     </div>
 
-                    {/* Image Preview on Hover */}
-                    {/* {hoveredProject === project.slug && project.image && (
-                      <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute bottom-0 right-0 w-40 h-48 bg-gradient-to-br from-transparent via-transparent to-zinc-900/40 rounded-tl-lg overflow-hidden border-l border-t border-zinc-700/50">
-                          <Image
-                            src={project.image}
-                            alt={project.name}
-                            fill
-                            className="object-cover opacity-80"
-                          />
-                        </div>
-                      </div>
-                    )} */}
-
                     {/* Links */}
                     <div className="flex gap-3 flex-wrap">
                       {project.live && (
@@ -138,8 +124,7 @@ export default function ProjectsPage() {
                         </a>
                       )}
                     </div>
-                  </article>
-                </Link>
+                </article>
               </Card>
             </div>
           ))}

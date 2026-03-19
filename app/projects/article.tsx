@@ -1,5 +1,4 @@
 import type { Project } from "@/.contentlayer/generated";
-import Link from "next/link";
 import { Eye } from "lucide-react";
 
 type Props = {
@@ -9,8 +8,10 @@ type Props = {
 
 export const Article: React.FC<Props> = ({ project, views }) => {
 	return (
-		<Link href={`/projects/${project.slug}`}>
-			<article className="p-4 md:p-8">
+		<article 
+			className="p-4 md:p-8 cursor-pointer"
+			onClick={() => window.location.href = `/projects/${project.slug}`}
+		>
 				<div className="flex justify-between gap-2 items-center">
 					<span className="text-xs duration-1000 text-zinc-200 group-hover:text-white group-hover:border-zinc-200 drop-shadow-orange">
 						{project.date ? (
@@ -35,6 +36,5 @@ export const Article: React.FC<Props> = ({ project, views }) => {
 					{project.description}
 				</p>
 			</article>
-		</Link>
 	);
 };
