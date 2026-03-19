@@ -7,6 +7,14 @@ const nextConfig = {
 	experimental: {
 		mdxRs: true,
 	},
+	webpack: (config) => {
+		config.ignoreWarnings = [
+			{
+				module: /@contentlayer\/core/
+			}
+		];
+		return config;
+	}
 };
 
 export default withContentlayer(nextConfig);
