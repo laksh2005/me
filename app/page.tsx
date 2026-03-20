@@ -84,7 +84,7 @@ export default function Home() {
 
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 
-			<h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-1300 bg-white cursor-default text-edge-outline animate-title font-serif-title sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+			<h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-100 bg-white cursor-default text-edge-outline animate-title font-serif-title sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
 				Laksh Nijhawan
 			</h1>
 
@@ -115,73 +115,46 @@ export default function Home() {
 
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 mt-8" />
 
-			<div className="my-4 text-left animate-fade-in px-4 max-w-2xl">
-				<p className="text-sm md:text-md text-zinc-400 leading-relaxed space-y-2">
-					<span className="block">
-						<strong>Product-focused Engineer</strong> who builds end-to-end
-						systems. I turn ideas into working products and care about how they
-						feel to use.
-					</span>
+<div className="my-4 text-left animate-fade-in px-4 max-w-2xl">
+  <p className="text-sm md:text-md text-zinc-400 leading-relaxed space-y-2" suppressHydrationWarning>
+    
+    <span className="block">
+      <strong className="text-white">Product-focused Engineer</strong> building end-to-end systems that turn ideas into real, usable products.
+    </span>
 
-					<span className="block">
-      Currently building AI agents at{" "}
+    <span className="block">
+      Building AI agents at{" "}
       <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         Times Internet
+      </a>{" "}
+      · previously dev at{" "}
+      <a href="https://iammaturity.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+        IAmMaturity
+      </a>{" "}
+      &{" "}
+      <a href="https://writecream.org" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+        WriteCream
       </a>.
     </span>
 
-					<span className="block">
-						Previously worked on frontend and full-stack systems at{" "}
-						<a
-							href="https://iammaturity.com"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="font-semibold text-white hover:underline"
-						>
-							IAmMaturity
-						</a>{" "}
-						&{" "}
-						<a
-							href="https://writecream.org"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="font-semibold text-white hover:underline"
-						>
-							WriteCream
-						</a>
-						.
-					</span>
+    <span className="block">
+      Built{" "}
+      <a href="https://codepersona.app" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+        CodePersona
+      </a>{" "}
+       used by <strong>3.5K+ users</strong> across <strong>91 countries</strong>.
+    </span>
 
-					<span className="block">
-						Built{" "}
-						<a
-							href="https://codepersona.app"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="font-semibold text-white hover:underline"
-						>
-							CodePersona
-						</a>
-						, a developer profiling platform that reached{" "}
-						<strong>1.5K+ visitors</strong>,<strong>83 countries</strong> in 4
-						weeks.
-					</span>
+    <span className="block">
+      <strong>35+ products</strong> · <strong>10+ hackathons</strong>.
+    </span>
 
-					<span className="block">
-						Worked across <strong>frontend, backend, and AI</strong> to ship
-						real-world products.
-					</span>
+    <span className="block">
+      <strong>Open to full-time, freelance, or collaborations.</strong>
+    </span>
 
-					<span className="block">
-						<strong>35+ products built</strong>. <strong>10+ hackathons</strong>
-						. <strong>multiple failed products</strong>.
-					</span>
-
-					<span className="block">
-						<strong>Open to full-time, freelance, or collaborations.</strong>
-					</span>
-				</p>
-			</div>
+  </p>
+</div>
 
 			{/* Resume Button */}
 			<div className="relative z-20 mt-4 transition-opacity duration-500 ease-in-out">

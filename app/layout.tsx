@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { AudioProvider } from "@/util/audioContext";
-import { PageTransition } from "./components/page-transition";
 
 export const metadata: Metadata = {
 	title: {
@@ -73,9 +72,7 @@ export default function RootLayout({
 				}`}
 			>
 				<AudioProvider>
-					{/* global transition overlay when route changes */}
-					<script type="module" />
-					<PageTransition />
+
 					{children}
 				</AudioProvider>
 				<VercelAnalytics />

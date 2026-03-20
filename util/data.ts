@@ -5,6 +5,8 @@ interface Blog {
 	year: number;
 	overview?: string;
 	description?: string;
+	content?: any[];
+	image?: string;
 }
 
 export const skillsData = {
@@ -18,6 +20,15 @@ export const skillsData = {
 		"CSS",
 	],
 	Backend: ["Node.js", "Express.js", "Nest.js", "Flask", "REST API"],
+		"Data Science & AI": [
+		"LangChain",
+		"LangGraph",
+		"Pandas",
+		"NumPy",
+		"scikit-learn",
+		"TensorFlow",
+		"PyTorch",
+	],
 	"DevOps, Databases & Tools": [
 		"Docker",
 		"Git",
@@ -27,21 +38,12 @@ export const skillsData = {
 		"MySQL",
 		"Supabase",
 	],
-	Programming: ["Python", "C++", "Java"],
-	"Data Science & AI": [
-		"LangChain",
-		"LangGraph",
-		"Pandas",
-		"NumPy",
-		"scikit-learn",
-		"TensorFlow",
-		"PyTorch",
-	],
+	Programming: ["Python", "C++", "Java"]
 };
 
 export const projectsData = [
 	{
-		name: "CodePersona",
+		name: "CodePersona ⭐",
 		slug: "codepersona",
 		type: "dev",
 		live: "https://codepersona.app",
@@ -60,7 +62,7 @@ export const projectsData = [
 		image: "/cp.png",
 	},
 	{
-		name: "Duplex Sync Engine",
+		name: "Duplex Sync Engine ⭐",
 		slug: "duplex-sync-engine",
 		type: "dev",
 		live: null,
@@ -78,7 +80,7 @@ export const projectsData = [
 		image: "/sync.png",
 	},
 	{
-		name: "One Stack",
+		name: "One Stack ⭐",
 		slug: "one-stack",
 		type: "dev",
 		live: "https://one-stack.vercel.app",
@@ -222,7 +224,7 @@ export const experienceData = [
 	{
 		company: "Social Winter of Code 5.0",
 		role: "Contributor",
-		duration: "Dec 2025 - Mar 2025",
+		duration: "Dec 2024 - Mar 2025",
 		mode: "Remote",
 		location: "Delhi, India",
 		image: "/swoc.jpg",
@@ -241,4 +243,36 @@ export const experienceData = [
 	//   }
 ];
 
-export const blogsData: Blog[] = [];
+export const blogsData: Blog[] = [
+	{
+		slug: "reduce-api-latency-caching",
+		title: "How I reduced API latency using aggressive caching",
+		month: "March",
+		year: 2026,
+		overview: "Most APIs don't feel slow because of logic. They feel slow because they keep fetching the same data again and again. Here's how I fixed it.",
+		image: "/blog1.png",
+		content: [
+			{
+				type: "paragraph",
+				text: `Most APIs don't feel slow because of logic. They feel slow because they keep fetching the same data again and again. While building <a href="https://codepersona.app" target="_blank" rel="noopener noreferrer"><strong>CodePersona</strong></a>, I was heavily dependent on external APIs like GitHub. The problem was simple. Every request meant fresh API calls, which made responses inconsistent and sometimes painfully slow.`,
+			},
+			{
+				type: "paragraph",
+				text: `This created a bad user experience. Profiles were not loading instantly, and I was also getting closer to API rate limits. <strong>The real issue</strong> was repeated fetching of data that does not change very often. So instead of optimizing computation, I focused on reducing how often I fetch data.`,
+			},
+			{
+				type: "image",
+				src: "/blog1.png",
+				alt: "API Caching Strategy",
+			},
+			{
+				type: "paragraph",
+				text: `<strong>The approach was simple. Cache aggressively.</strong> First, I cached API responses after the initial request. So instead of hitting GitHub every time, most requests were served directly from cache. Second, I added a <strong>time-based expiry</strong>. Each cached response had a TTL, so the data stayed reasonably fresh without unnecessary calls. Third, I started storing <strong>processed data</strong> instead of raw responses. This removed the need to recompute things on every request.`,
+			},
+			{
+				type: "paragraph",
+				text: `The difference was immediate. <strong>Response times dropped significantly</strong>, API calls reduced, and the product started feeling instant instead of reactive. A simple shift in thinking helped. Most performance issues are not about speed of code. They are about how often you depend on slow systems. <strong>If your system depends on external APIs, caching is not optional. It is the system.</strong>`,
+			},
+		]
+	}
+];

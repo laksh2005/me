@@ -11,7 +11,7 @@ export function PageTransition() {
 		if (!pathname) return;
 
 		setActive(true);
-		const t = setTimeout(() => setActive(false), 1500);
+		const t = setTimeout(() => setActive(false), 200);
 		return () => clearTimeout(t);
 	}, [pathname]);
 
@@ -22,10 +22,10 @@ export function PageTransition() {
 				active ? "opacity-100" : "opacity-0"
 			} transition-opacity duration-300`}
 		>
-			{/* BASE FLASH */}
+			{/* BASE FLASH
 			<div
 				className={`absolute inset-0 bg-white ${active ? "animate-flash" : ""}`}
-			/>
+			/> */}
 
 			{/* DARK VIGNETTE */}
 			<div
