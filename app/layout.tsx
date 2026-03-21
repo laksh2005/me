@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 	description: "",
 	openGraph: {
 		title: "laksh1.me",
-		description: "more than an engineer",
+		description: "working is the moat",
 		url: "laksh1.me",
 		siteName: "Laksh Nijhawan",
 		images: [
 			{
-				url: "https://ibb.co/sd09g82f",
+				url: "https://pbs.twimg.com/media/HD6GC49boAA0yaZ?format=jpg&name=900x900",
 				width: 1920,
-				height: 1091,
+				height: 1080,
 			},
 		],
 		locale: "en-In",
