@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 		title: "laksh1.me",
 		description: "more than an engineer",
 		url: "laksh1.me",
-		siteName: "laksh nijhawan",
+		siteName: "Laksh Nijhawan",
 		images: [
 			{
-				url: "/https://media.discordapp.net/attachments/1114085620516659281/1484767081030226010/banner-portfolio.png?ex=69bf6c99&is=69be1b19&hm=37dcbb5c8d2f5e5e483a7c89f743100f6a237739442646b93da0b4a6b256d65b&=&format=webp&quality=lossless&width=1488&height=837",
+				url: "https://ibb.co/sd09g82f",
 				width: 1920,
 				height: 1091,
 			},
