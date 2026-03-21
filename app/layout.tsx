@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 	description: "",
 	openGraph: {
 		title: "laksh1.me",
-		description: "dev, ai, programming",
+		description: "product-focused engineer who's more than an engineer",
 		url: "laksh1.me",
 		siteName: "laksh nijhawan",
 		images: [
 			{
-				url: "https://pbs.twimg.com/profile_images/2004531799670886400/saRZ-rxa_400x400.jpg",
-				width: 1080,
-				height: 1080,
+				url: "/banner-portfolio.png",
+				width: 1920,
+				height: 1091,
 			},
 		],
 		locale: "en-In",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 		},
 	},
 	twitter: {
-		title: "laksh_2705",
+		title: "Laksh Nijhawan",
 		card: "summary_large_image",
 	},
 	icons: {
