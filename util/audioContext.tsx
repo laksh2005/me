@@ -15,8 +15,8 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
-const MIN_VOLUME = 0.03;
-const FADE_DURATION = 1200;
+const MIN_VOLUME = 0.015;
+const FADE_DURATION = 2000;
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
 	const [isPlaying, setIsPlaying] = useState(true);
@@ -101,8 +101,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 		if (!audioRef.current) return;
 
 		if (isPlaying) {
-			fadeVolume(0, 600);
-			setTimeout(() => audioRef.current?.pause(), 600);
+			fadeVolume(0, 300);
+			setTimeout(() => audioRef.current?.pause(), 300);
 		} else {
 			audioRef.current.play().then(() => {
 				fadeVolume(MIN_VOLUME, FADE_DURATION);

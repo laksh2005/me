@@ -34,7 +34,7 @@ export default function ProjectsPage() {
 						Projects
 					</h1>
 					<p className="mt-4 text-zinc-400 element-enter-2">
-						Stuff I made with a motive of learning, and some straight out of sticky notes at my desk
+						Stuff I made with a motive of learning, and some straight out of the sticky notes at my desk
 					</p>
 				</div>
 
