@@ -15,7 +15,7 @@ export default function BlogsPage() {
 						Blog
 					</h1>
 					<p className="mt-4 text-zinc-400 element-enter-2">
-						Random thoughts and insights about technology and development.
+						My insights and opinions about technology, compiled at a place
 					</p>
 				</div>
 
