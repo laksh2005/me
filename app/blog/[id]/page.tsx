@@ -7,7 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const loadTwitterWidgets = () => {
 	if (typeof window === "undefined") return;
@@ -21,6 +21,20 @@ export default function BlogDetailPage() {
 	const params = useParams();
 	const id = parseInt(params?.id as string) || 0;
 	const blog = blogsData[id];
+	const [scroll, setScroll] = useState(0);
+
+useEffect(() => {
+	const handleScroll = () => {
+		const totalHeight =
+			document.documentElement.scrollHeight - window.innerHeight;
+		const scrollPosition = window.scrollY;
+		const progress = (scrollPosition / totalHeight) * 100;
+		setScroll(progress);
+	};
+
+	window.addEventListener("scroll", handleScroll);
+	return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
 	useEffect(() => {
 		loadTwitterWidgets();
@@ -36,6 +50,12 @@ export default function BlogDetailPage() {
 
 	return (
 		<>
+		<div className="fixed top-0 left-0 w-full h-[2px] bg-zinc-800 z-50">
+	<div
+		className="h-full bg-white transition-all duration-150"
+		style={{ width: `${scroll}%` }}
+	/>
+</div>
 			<Script
 				src="https://platform.twitter.com/widgets.js"
 				strategy="afterInteractive"
@@ -67,8 +87,7 @@ export default function BlogDetailPage() {
 							</p>
 						</div>
 
-						<div className="space-y-6 text-zinc-300 leading-relaxed 
-							[&_a]:text-white [&_a]:hover:text-zinc-300">
+						<div className="space-y-6 text-zinc-300 leading-relaxed [&_a]:underline [&_a]:hover:text-zinc-300">
 
 							{blog.content?.map((block, idx) => {
 								if (block.type === "paragraph") {

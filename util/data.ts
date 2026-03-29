@@ -249,7 +249,7 @@ export const blogsData: Blog[] = [
 		title: "How I reduced API latency using aggressive caching",
 		month: "March",
 		year: 2026,
-		overview: "Most APIs don't feel slow because of logic. They feel slow because they keep fetching the same data again and again. Here's how I fixed it.",
+		// overview: "Most APIs don't feel slow because of logic. They feel slow because they keep fetching the same data again and again. Here's how I fixed it.",
 		image: "/blog1.png",
 		content: [
 			{
@@ -280,40 +280,23 @@ export const blogsData: Blog[] = [
 		title: "What I learned from shipping 35+ products (including weak ones)",
 		month: "March",
 		year: 2026,
-		overview: "I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
+		// overview: "I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
 		image: "/times.jpeg",
-		content: [
-			{
-				type: "paragraph",
-				text: `Most of them didn’t work as planned. Not in a dramatic way, they just didn’t go anywhere. No users, no traction, nothing worth continuing.`,
-			},
-			{
-				type: "paragraph",
-				text: `Most projects don’t fail loudly, they just quietly stop existing.`,
-			},
-			{
-				type: "paragraph",
-				text: `At first, it felt like I was doing something wrong. But over time, I realized something important.`,
-			},
-			{
-				type: "paragraph",
-				text: `<strong>Building a lot is the only way you start seeing patterns.</strong>`,
-			},
-			{
-				type: "paragraph",
-				text: `Back in early 2024, when I started building seriously, my focus was different. I was more inclined towards making things feel “cool”, using new tech and making ideas more interesting, which usually made the logic unnecessarily complex.`,
-			},
-			{
-				type: "paragraph",
-				text: `I would spend time polishing features before even knowing if anyone else would use it.`,
-			},
-			{
-				type: "paragraph",
-				text: `That led to the first flaw I identified, <strong>LACK OF PLANNING</strong>. Whether it’s a solo project or a team project, the motive, features, user flow, edge cases, and technical approach should be thought through as seriously as the code itself.`,
-			},
-{
-	type: "embed",
-	html: `<blockquote class="twitter-tweet">
+content: [
+	{ type: "paragraph", 
+	text: `I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing, no users, no traction, nothing worth continuing.` },
+	{
+		type: "paragraph",
+		text: `Back in early 2024, when I started building seriously, my focus was different. I was more inclined towards making things feel “cool”, using new tech and making ideas more interesting, which usually made the logic unnecessarily complex.
+<br/><br/>
+I would spend time polishing features before even knowing if anyone else would use it. And I slowly started finding out flaws in the process.
+<br/><br/>
+<strong>1.</strong> The first flaw I identified, was <strong>lack of planning</strong>. Whether it’s a solo project or a team project, the motive, features, user flow, edge cases, and technical approach should be thought through as seriously as the code itself.`,
+	},
+
+	{
+		type: "embed",
+		html: `<blockquote class="twitter-tweet">
 	<p lang="en" dir="ltr">
 	there’s no point building a product you wouldn’t use yourself<br><br>
 	build with the user’s mindset...
@@ -322,30 +305,33 @@ export const blogsData: Blog[] = [
 	<a href="https://twitter.com/laksh_2705/status/2016789226512404924">
 	January 29, 2026</a>
 </blockquote>`
-},
-			{
-				type: "paragraph",
-				text: `The second flaw, <strong>MOST IDEAS ARE NOT WORTH BUILDING</strong>. Just because something sounds interesting doesn’t mean it needs a full product.`,
-			},
-			{
-				type: "paragraph",
-				text: `Ideas are cheap, execution filters them.`,
-			},
-			{
-				type: "paragraph",
-				text: `Over time, I started validating faster, building smaller, and only going deeper if there was some signal.`,
-			},
-			{
-				type: "paragraph",
-				text: `Another thing I learned, <strong>WORKING PRODUCTS TEACH MORE THAN FINISHED ONES</strong>. A lot of my learning didn’t come from perfectly built projects, it came from things that were just good enough to be used.`,
-			},
-			{
-				type: "paragraph",
-				text: `For example, building <a href="https://codepersona.app/laksh2005" target="_blank" rel="noopener noreferrer"><strong>CodePersona</strong></a> felt different. It wasn’t just about building, it was about creating something that people could actually use and share.`,
-			},
-			{
-	type: "embed",
-	html: `<blockquote class="twitter-tweet">
+	},
+
+	{
+		type: "paragraph",
+		text: `<strong>2.</strong> The second flaw, <strong>most ideas are not worth building</strong>. Just because something sounds interesting doesn’t mean it needs a full product.
+
+<br/><br/>
+
+Ideas are cheap, execution filters them.
+
+<br/><br/>
+
+Over time, I started validating faster, building smaller, and only going deeper if there was some signal.
+
+<br/><br/>
+
+Another thing I learned, <strong>working products teach more than finished ones</strong>. A lot of my learning didn’t come from perfectly built projects, it came from things that were just good enough to be used.`,
+	},
+
+	{
+		type: "paragraph",
+		text: `For example, building <a href="https://codepersona.app/laksh2005" target="_blank" rel="noopener noreferrer"><strong>CodePersona</strong></a> felt different. It wasn’t just about building, it was about creating something that people could actually use and share.`,
+	},
+
+	{
+		type: "embed",
+		html: `<blockquote class="twitter-tweet">
 	<p lang="en" dir="ltr">
 	Your code tells a story, it’s just not presented well enough<br><br>
 	Check out https://codepersona.app<br><br>
@@ -355,44 +341,47 @@ export const blogsData: Blog[] = [
 	<a href="https://twitter.com/laksh_2705/status/2007066849574301796">
 	January 2, 2026</a>
 </blockquote>`
-},
-			{
-				type: "paragraph",
-				text: `Another major shift in my thinking came from <strong>internships</strong>. They changed how I approach building.`,
-			},
-			{
-				type: "paragraph",
-				text: `At <a href="https://writecream.org" target="_blank" rel="noopener noreferrer">WriteCream</a>, I learned to focus on execution. The goal was to ship exactly what was required, without overthinking or adding unnecessary complexity.`,
-			},
-			{
-				type: "paragraph",
-				text: `At <a href="https://iammaturity.com" target="_blank" rel="noopener noreferrer">IAmMaturity</a>, I started thinking more about users. The focus was on building simple, intuitive interfaces and improving them with constant feedback.`,
-			},
-			{
-				type: "image",
-				src: "/times.jpg",
-				alt: "Times Internet Work",
-			},
-			{
-				type: "paragraph",
-				text: `Now at <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer">Times Internet</a>, the focus has shifted towards impact. I’m working on agentic tools that automate repetitive workflows and complex pipelines.`,
-			},
-			{
-				type: "paragraph",
-				text: `Eventually, <strong>MY PROCESS CHANGED</strong>. Earlier, I would start building first and think along the way.`,
-			},
-			{
-				type: "paragraph",
-				text: `Now, I think about who this is for, what problem it solves, what success looks like, and most importantly, if I were the user, would I even want to use this.`,
-			},
-			{
-				type: "paragraph",
-				text: `<strong>Build things that actually work.</strong>`,
-			},
-			{
-				type: "paragraph",
-				text: `I’m still figuring things out, but now I care less about building more, and more about building things that actually matter.`,
-			}
-		]
+	},
+
+	{
+		type: "paragraph",
+		text: `<strong>3.</strong> Another major shift in my thinking came from <strong>internships</strong>. They changed how I approach building.
+
+<br/><br/>
+
+At <a href="https://writecream.org" target="_blank" rel="noopener noreferrer">WriteCream</a>, I learned to focus on execution. The goal was to ship exactly what was required, without overthinking or adding unnecessary complexity.
+
+<br/><br/>
+
+At <a href="https://iammaturity.com" target="_blank" rel="noopener noreferrer">IAmMaturity</a>, I started thinking more about users. The focus was on building simple, intuitive interfaces and improving them with constant feedback.
+
+<br/><br/>
+
+Now at <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer">Times Internet</a>, the focus has shifted towards impact. I’m working on agentic tools that automate repetitive workflows and complex pipelines.`,
+	},
+
+	{
+		type: "image",
+		src: "/times.jpg",
+		alt: "Times Internet Work",
+	},
+
+	{
+		type: "paragraph",
+		text: `<strong>4.</strong> Eventually, <strong>my process changed</strong>. Earlier, I would start building first and think along the way.
+
+<br/><br/>
+
+Now, I think about who this is for, what problem it solves, what success looks like, and most importantly, if I were the user, would I even want to use this.
+
+<br/><br/>
+
+<strong>Build things that actually work.</strong>
+
+<br/><br/>
+
+I’m still figuring things out, but now I care less about building more, and more about building things that actually matter.`,
+	}
+]
 	}
 ];
