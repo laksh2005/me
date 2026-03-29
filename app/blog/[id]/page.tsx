@@ -97,7 +97,13 @@ export default function BlogDetailPage() {
 								}
 
 								if (block.type === "embed") {
-									return <TweetEmbed key={idx} html={block.html} />;
+									return (
+										<TweetEmbed
+											key={idx}
+											tweetId={block.tweetId}
+											html={block.html}
+										/>
+									);
 								}
 
 								return null;

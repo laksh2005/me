@@ -299,15 +299,7 @@ I would spend time polishing features before even knowing if anyone else would u
     },
     {
       type: "embed",
-      html: `<blockquote class="twitter-tweet">
-<p lang="en" dir="ltr">
-there’s no point building a product you wouldn’t use yourself<br><br>
-build with the user’s mindset...
-</p>
-&mdash; Laksh Nijhawan (@laksh_2705)
-<a href="https://twitter.com/laksh_2705/status/2016789226512404924">
-January 29, 2026</a>
-</blockquote>`
+      tweetId: "2016789226512404924"
     },
     {
       type: "paragraph",
@@ -319,16 +311,7 @@ For example, building <a href="https://codepersona.app/laksh2005" target="_blank
     },
     {
       type: "embed",
-      html: `<blockquote class="twitter-tweet">
-<p lang="en" dir="ltr">
-Your code tells a story, it’s just not presented well enough<br><br>
-Check out https://codepersona.app<br><br>
-Built this to turn your journey into a clean, detailed proof of work report, showing what you’ve built, what you focus on, and where your strengths lie
-</p>
-&mdash; Laksh Nijhawan (@laksh_2705)
-<a href="https://twitter.com/laksh_2705/status/2007066849574301796">
-January 2, 2026</a>
-</blockquote>`
+      tweetId: "2007066849574301796"
     },
     {
       type: "paragraph",
