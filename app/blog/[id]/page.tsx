@@ -1,21 +1,13 @@
 "use client";
 
 import { Navigation } from "@/app/components/nav";
+import { TweetEmbed } from "@/app/components/tweet";
 import { blogsData } from "@/util/data";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import Script from "next/script";
 import { useEffect, useState } from "react";
-
-const loadTwitterWidgets = () => {
-	if (typeof window === "undefined") return;
-	const twttr = (window as any).twttr;
-	if (twttr?.widgets?.load) {
-		twttr.widgets.load();
-	}
-};
 
 export default function BlogDetailPage() {
 	const params = useParams();
@@ -23,22 +15,18 @@ export default function BlogDetailPage() {
 	const blog = blogsData[id];
 	const [scroll, setScroll] = useState(0);
 
-useEffect(() => {
-	const handleScroll = () => {
-		const totalHeight =
-			document.documentElement.scrollHeight - window.innerHeight;
-		const scrollPosition = window.scrollY;
-		const progress = (scrollPosition / totalHeight) * 100;
-		setScroll(progress);
-	};
-
-	window.addEventListener("scroll", handleScroll);
-	return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-
 	useEffect(() => {
-		loadTwitterWidgets();
-	}, [blog]);
+		const handleScroll = () => {
+			const totalHeight =
+				document.documentElement.scrollHeight - window.innerHeight;
+			const scrollPosition = window.scrollY;
+			const progress = (scrollPosition / totalHeight) * 100;
+			setScroll(progress);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	if (!blog) {
 		return (
@@ -50,17 +38,12 @@ useEffect(() => {
 
 	return (
 		<>
-		<div className="fixed top-0 left-0 w-full h-[2px] bg-zinc-800 z-50">
-	<div
-		className="h-full bg-white transition-all duration-150"
-		style={{ width: `${scroll}%` }}
-	/>
-</div>
-			<Script
-				src="https://platform.twitter.com/widgets.js"
-				strategy="afterInteractive"
-				onLoad={loadTwitterWidgets}
-			/>
+			<div className="fixed top-0 left-0 w-full h-[2px] bg-zinc-800 z-50">
+				<div
+					className="h-full bg-white transition-all duration-150"
+					style={{ width: `${scroll}%` }}
+				/>
+			</div>
 
 			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen page-enter">
 				<Navigation />
@@ -88,13 +71,12 @@ useEffect(() => {
 						</div>
 
 						<div className="space-y-6 text-zinc-300 leading-relaxed [&_a]:underline [&_a]:hover:text-zinc-300">
-
 							{blog.content?.map((block, idx) => {
 								if (block.type === "paragraph") {
 									return (
 										<p
 											key={idx}
-											className="text-base md:text-lg text-zinc-400"
+											className="text-base whitespace-pre-line md:text-lg text-zinc-400"
 											dangerouslySetInnerHTML={{ __html: block.text }}
 										/>
 									);
@@ -115,13 +97,7 @@ useEffect(() => {
 								}
 
 								if (block.type === "embed") {
-									return (
-										<div
-											key={idx}
-											className="flex justify-center my-6"
-											dangerouslySetInnerHTML={{ __html: block.html }}
-										/>
-									);
+									return <TweetEmbed key={idx} html={block.html} />;
 								}
 
 								return null;

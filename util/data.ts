@@ -282,106 +282,79 @@ export const blogsData: Blog[] = [
 		year: 2026,
 		// overview: "I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
 		image: "/times.jpeg",
-content: [
-	{ type: "paragraph", 
-	text: `I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing, no users, no traction, nothing worth continuing.` },
-	{
-		type: "paragraph",
-		text: `Back in early 2024, when I started building seriously, my focus was different. I was more inclined towards making things feel “cool”, using new tech and making ideas more interesting, which usually made the logic unnecessarily complex.
-<br/><br/>
-I would spend time polishing features before even knowing if anyone else would use it. And I slowly started finding out flaws in the process.
-<br/><br/>
-<strong>1.</strong> The first flaw I identified, was <strong>lack of planning</strong>. Whether it’s a solo project or a team project, the motive, features, user flow, edge cases, and technical approach should be thought through as seriously as the code itself.`,
-	},
+  content: [
+    { 
+      type: "paragraph", 
+      text: `I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing, no users, no traction, nothing worth continuing.` 
+    },
+    {
+      type: "paragraph",
+      text: `Back in early 2024, when I started building seriously, my focus was different. I was more inclined towards making things feel “cool”, using new tech and making ideas more interesting, which usually made the logic unnecessarily complex.
 
-	{
-		type: "embed",
-		html: `<blockquote class="twitter-tweet">
-	<p lang="en" dir="ltr">
-	there’s no point building a product you wouldn’t use yourself<br><br>
-	build with the user’s mindset...
-	</p>
-	&mdash; Laksh Nijhawan (@laksh_2705)
-	<a href="https://twitter.com/laksh_2705/status/2016789226512404924">
-	January 29, 2026</a>
+I would spend time polishing features before even knowing if anyone else would use it. And I slowly started finding out flaws in the process.`
+    },
+    {
+      type: "paragraph",
+      text: `<strong>1.</strong> The first flaw I identified was <strong>lack of planning</strong>. Whether it’s a solo project or a team project, the motive, features, user flow, edge cases, and technical approach should be thought through as seriously as the code itself.`
+    },
+    {
+      type: "embed",
+      html: `<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+there’s no point building a product you wouldn’t use yourself<br><br>
+build with the user’s mindset...
+</p>
+&mdash; Laksh Nijhawan (@laksh_2705)
+<a href="https://twitter.com/laksh_2705/status/2016789226512404924">
+January 29, 2026</a>
 </blockquote>`
-	},
+    },
+    {
+      type: "paragraph",
+      text: `<strong>2.</strong> The second flaw - <strong>most ideas are not worth building</strong>. Just because something sounds interesting doesn’t mean it needs a full product. Ideas are cheap, execution filters them.
 
-	{
-		type: "paragraph",
-		text: `<strong>2.</strong> The second flaw, <strong>most ideas are not worth building</strong>. Just because something sounds interesting doesn’t mean it needs a full product.
+Over time, I started validating faster, building smaller, and only going deeper if there was some signal. Another thing I learned, <strong>working products teach more than finished ones</strong>. A lot of my learning didn’t come from perfectly built projects, it came from things that were just good enough to be used.
 
-<br/><br/>
-
-Ideas are cheap, execution filters them.
-
-<br/><br/>
-
-Over time, I started validating faster, building smaller, and only going deeper if there was some signal.
-
-<br/><br/>
-
-Another thing I learned, <strong>working products teach more than finished ones</strong>. A lot of my learning didn’t come from perfectly built projects, it came from things that were just good enough to be used.`,
-	},
-
-	{
-		type: "paragraph",
-		text: `For example, building <a href="https://codepersona.app/laksh2005" target="_blank" rel="noopener noreferrer"><strong>CodePersona</strong></a> felt different. It wasn’t just about building, it was about creating something that people could actually use and share.`,
-	},
-
-	{
-		type: "embed",
-		html: `<blockquote class="twitter-tweet">
-	<p lang="en" dir="ltr">
-	Your code tells a story, it’s just not presented well enough<br><br>
-	Check out https://codepersona.app<br><br>
-	Built this to turn your journey into a clean, detailed proof of work report, showing what you’ve built, what you focus on, and where your strengths lie
-	</p>
-	&mdash; Laksh Nijhawan (@laksh_2705)
-	<a href="https://twitter.com/laksh_2705/status/2007066849574301796">
-	January 2, 2026</a>
+For example, building <a href="https://codepersona.app/laksh2005" target="_blank" rel="noopener noreferrer"><strong>CodePersona</strong></a> felt different. It wasn’t just about building, it was about creating something that people could actually use and share.`
+    },
+    {
+      type: "embed",
+      html: `<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Your code tells a story, it’s just not presented well enough<br><br>
+Check out https://codepersona.app<br><br>
+Built this to turn your journey into a clean, detailed proof of work report, showing what you’ve built, what you focus on, and where your strengths lie
+</p>
+&mdash; Laksh Nijhawan (@laksh_2705)
+<a href="https://twitter.com/laksh_2705/status/2007066849574301796">
+January 2, 2026</a>
 </blockquote>`
-	},
-
-	{
-		type: "paragraph",
-		text: `<strong>3.</strong> Another major shift in my thinking came from <strong>internships</strong>. They changed how I approach building.
-
-<br/><br/>
+    },
+    {
+      type: "paragraph",
+      text: `<strong>3.</strong> Another major shift in my thinking came from <strong>internships</strong>. They changed how I approach building.
 
 At <a href="https://writecream.org" target="_blank" rel="noopener noreferrer">WriteCream</a>, I learned to focus on execution. The goal was to ship exactly what was required, without overthinking or adding unnecessary complexity.
 
-<br/><br/>
-
 At <a href="https://iammaturity.com" target="_blank" rel="noopener noreferrer">IAmMaturity</a>, I started thinking more about users. The focus was on building simple, intuitive interfaces and improving them with constant feedback.
 
-<br/><br/>
-
-Now at <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer">Times Internet</a>, the focus has shifted towards impact. I’m working on agentic tools that automate repetitive workflows and complex pipelines.`,
-	},
-
-	{
-		type: "image",
-		src: "/times.jpg",
-		alt: "Times Internet Work",
-	},
-
-	{
-		type: "paragraph",
-		text: `<strong>4.</strong> Eventually, <strong>my process changed</strong>. Earlier, I would start building first and think along the way.
-
-<br/><br/>
+Now at <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer">Times Internet</a>, the focus has shifted towards impact. I’m working on agentic tools that automate repetitive workflows and complex pipelines.`
+    },
+    {
+      type: "image",
+      src: "/times.jpg",
+      alt: "Times Internet Work"
+    },
+    {
+      type: "paragraph",
+      text: `<strong>4.</strong> Eventually, <strong>my process changed</strong>. Earlier, I would start building first and think along the way.
 
 Now, I think about who this is for, what problem it solves, what success looks like, and most importantly, if I were the user, would I even want to use this.
 
-<br/><br/>
-
 <strong>Build things that actually work.</strong>
 
-<br/><br/>
-
-I’m still figuring things out, but now I care less about building more, and more about building things that actually matter.`,
+I’m still figuring things out, but now I care less about building more, and more about building things that actually matter.`
 	}
-]
-	}
+  ]
+}
 ];
