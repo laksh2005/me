@@ -332,7 +332,7 @@ Now at <a href="https://timesinternet.in" target="_blank" rel="noopener noreferr
       type: "paragraph",
       text: `<strong>4.</strong> Eventually, <strong>my process changed</strong>. Earlier, I would start building first and think along the way.
 
-Now, I think about who this is for, what problem it solves, what success looks like, and most importantly, if I were the user, would I even want to use this.
+Now, I think about who this is for, what problem it solves, what success looks like, and most importantly, if I were the user, <strong>would I even want to use this?</strong>.
 
 <strong>Build things that actually work.</strong>
 
