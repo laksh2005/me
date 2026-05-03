@@ -194,7 +194,9 @@ export const experienceData = [
 	  location: "Noida, India",
 	  image: "/til.png",
 	  description: [
-	    "Working in HR Tech, building agentic tools to automate workflows and improve process efficiency and output quality."
+		"Working in the Human Resources Tech} department, building scalable automation tools for automating work for the quality outputs and smoother process.",
+        "Built a live recruiter assignment system using NestJS and Google Apps Script, automating job-to-recruiter mapping based on domain expertise and real-time workload."
+    
 	  ],
 	},
 	{

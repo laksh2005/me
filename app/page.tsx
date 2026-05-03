@@ -51,13 +51,13 @@ export default function Home() {
 			title: "Development Resume",
 			key: "dev",
 			image: "/devresume.png",
-			link: "https://drive.google.com/file/d/1DqfHYH52XvNtVmx4m_sUyNECSxPDP_DU/view?usp=sharing",
+			link: "https://drive.google.com/file/d/1TyGPIDxzjnxFuAVBR1plJ05FkWbKrgS9/view?usp=sharing",
 		},
 		{
 			title: "Machine Learning Resume",
 			key: "ml",
 			image: "/mlresume.png",
-			link: "https://drive.google.com/file/d/14X3n3nPVEKD0XThbcmEfbBkzPEqhlMy8/view?usp=sharing",
+			link: "https://drive.google.com/file/d/1PuUyl2Qq-wEIGyRX91lrYXztW6H0wmbk/view?usp=sharing",
 		},
 	];
 
@@ -123,7 +123,7 @@ export default function Home() {
     </span>
 
     <span className="block">
-      Building AI agents at{" "}
+      Building AI & tools at{" "}
       <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         Times Internet
       </a>{" "}
