@@ -16,27 +16,31 @@ export const skillsData = {
 		"TypeScript",
 		"JavaScript",
 		"Tailwind CSS",
+		"Redux",
 		"HTML",
 		"CSS",
 	],
-	Backend: ["Node.js", "Express.js", "Nest.js", "Flask", "REST API"],
+	"Backend & Databases": ["Nest.js", "Node.js", "WebSockets", "MongoDB", "MySQL", "Supabase","Flask"],
+	
+
 		"Data Science & AI": [
 		"LangChain",
 		"LangGraph",
+		"RAG Pipelines",
 		"Pandas",
 		"NumPy",
 		"scikit-learn",
 		"TensorFlow",
 		"PyTorch",
 	],
-	"DevOps, Databases & Tools": [
+	"DevOps & Databases": [
 		"Docker",
 		"Git",
 		"GitHub",
 		"AWS",
-		"MongoDB",
-		"MySQL",
-		"Supabase",
+		"Vercel",
+		"CI/CD",
+		"Kubernetes",
 	],
 	Programming: ["Python", "C++", "Java"]
 };
@@ -188,39 +192,37 @@ export const projectsData = [
 export const experienceData = [
 	{
 	  company: "Times Internet (The Times Group)",
-	  role: "AI Agent Developer Intern",
+	  role: "AI & SDE Intern",
 	  duration: "Mar 2026 - Present",
 	  mode: "Hybrid",
 	  location: "Noida, India",
 	  image: "/til.png",
 	  description: [
-		"Working in the Human Resources Tech} department, building scalable automation tools for automating work for the quality outputs and smoother process.",
-        "Built a live recruiter assignment system using NestJS and Google Apps Script, automating job-to-recruiter mapping based on domain expertise and real-time workload."
-    
-	  ],
+		"Building scalable HR automation tools, using quality-review workflows and enabling non-technical stakeholders to act on outputs directly."
+	],
 	},
 	{
 		company: "IAmMaturity",
-		role: "Front End Web Developer Intern",
+		role: "Front End Developer Intern",
 		duration: "Aug 2025 - Oct 2025",
 		mode: "Remote",
 		location: "Mumbai, India",
 		image: "/iam.jpg",
 		description: [
-			"Developed frontend features and integrated backend APIs for core production product ensuring stability and data flow.",
-			"Supported a live platform with 390+ monthly visits and 25% bounce rate.",
+			"Owned the integration of backend API endpoints into the React frontend for the company’s core production product, and ensuring stable cross-service data flow, contributing to a 20% bounce rate.",
+			" Shipped UI features improved through component-level code splitting and lazy loading, reducing unnecessary bundle weight on initial render.",
 		],
 	},
 	{
 		company: "WriteCream",
-		role: "Full Stack Web Developer Intern",
+		role: "Full Stack Developer Intern",
 		duration: "Jan 2025 - Apr 2025",
 		mode: "Remote",
 		location: "Delhi, India",
 		image: "/writecream.jpg",
 		description: [
-			"Built and shipped features across 5 production-grade products using scalable REST APIs.",
-			"Worked on high-traffic systems with 400K+ monthly visits and 71.34% bounce rate.",
+			"Built and shipped 5 production-grade full-stack products across core platform, serving 400K+ monthly users.Built and shipped features across 5 production-grade products using scalable REST APIs.",
+			"Reduced API response times through payload trimming and caching strategies; maintaining zero-downtime production systems across the entire tenure.",
 		],
 	},
 	{
@@ -230,7 +232,7 @@ export const experienceData = [
 		mode: "Remote",
 		location: "Delhi, India",
 		image: "/swoc.jpg",
-		description: ["Finished at 41st Rank out of 400+ participants."],
+		description: ["Finished at 41st Rank out of 400+ participants, with 15+ merged PRs across 3 different projects involving feature development and UI enhancements."],
 	},
 	//     {
 	//     company: "15FORTEEN",

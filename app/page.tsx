@@ -51,10 +51,10 @@ export default function Home() {
 			title: "Development Resume",
 			key: "dev",
 			image: "/devresume.png",
-			link: "https://drive.google.com/file/d/1TyGPIDxzjnxFuAVBR1plJ05FkWbKrgS9/view?usp=sharing",
+			link: "https://drive.google.com/file/d/14tfZsUXavz6zpHvMKM8LpPLIbMnpA2e4/view?usp=sharing",
 		},
 		{
-			title: "Machine Learning Resume",
+			title: "AI / Machine Learning Resume",
 			key: "ml",
 			image: "/mlresume.png",
 			link: "https://drive.google.com/file/d/1PuUyl2Qq-wEIGyRX91lrYXztW6H0wmbk/view?usp=sharing",
@@ -127,10 +127,7 @@ export default function Home() {
       <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         Times Internet
       </a>{" "}
-      · previously dev at{" "}
-      <a href="https://iammaturity.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        IAmMaturity
-      </a>{" "}
+      · previously dev at{" "}<span  className="font-semibold text-white hover:underline">IAmMaturity </span>
       &{" "}
       <a href="https://writecream.org" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         WriteCream
@@ -142,7 +139,15 @@ export default function Home() {
       <a href="https://codepersona.app" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         CodePersona
       </a>{" "}
-       used by <strong>3.5K+ users</strong> across <strong>91 countries</strong>.
+       used by <strong>4.5K+ users</strong> across <strong>91 countries</strong>.
+    </span>
+
+    <span className="block">
+      Also shipped{" "}
+      <a href="https://www.laksh1.me/projects/duplex-sync-engine" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+        Duplex Sync Engine
+      </a>{" "}
+       , a scalable real-time <strong>bidirectional sync system</strong>.
     </span>
 
     <span className="block">
@@ -150,7 +155,7 @@ export default function Home() {
     </span>
 
     <span className="block">
-      <strong>Open to full-time, freelance, or collaborations.</strong>
+      <strong>Open to full-time, interning, or freelance.</strong>
     </span>
 
   </p>
