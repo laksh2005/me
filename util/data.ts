@@ -191,12 +191,12 @@ export const projectsData = [
 
 export const experienceData = [
 	{
-	  company: "Times Internet (The Times Group)",
+	  company: "The Times of India",
 	  role: "AI & SDE Intern",
 	  duration: "Mar 2026 - Present",
 	  mode: "Hybrid",
 	  location: "Noida, India",
-	  image: "/til.png",
+	  image: "/toi.png",
 	  description: [
 		"Building scalable HR automation tools, using quality-review workflows and enabling non-technical stakeholders to act on outputs directly."
 	],

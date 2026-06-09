@@ -125,7 +125,7 @@ export default function Home() {
     <span className="block">
       Building AI & tools at{" "}
       <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        Times Internet
+        The Times of India
       </a>{" "}
       · previously dev at{" "}<span  className="font-semibold text-white hover:underline">IAmMaturity </span>
       &{" "}
