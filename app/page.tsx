@@ -54,11 +54,10 @@ export default function Home() {
 		    link: "https://drive.google.com/file/d/1zAspLv-UEyOV_3WyOP7s5UJa_vEQpDQW/view?usp=sharing"
 		},
 		{
-			title: "AI / Machine Learning Resume",
+			title: "AI / ML Resume",
 			key: "ml",
 			image: "/mlresume.png",
-			link: "https://drive.google.com/file/d/1PuUyl2Qq-wEIGyRX91lrYXztW6H0wmbk/view?usp=sharing",
-		},
+            link: "https://drive.google.com/file/d/1NLsY0YA_wAn1hMv8Sh10EzU_QaabtKmD/view?usp=sharing"		},
 	];
 
 	return (
