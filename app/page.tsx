@@ -51,7 +51,7 @@ export default function Home() {
 			title: "Development Resume",
 			key: "dev",
 			image: "/devresume.png",
-			link: "https://drive.google.com/file/d/14tfZsUXavz6zpHvMKM8LpPLIbMnpA2e4/view?usp=sharing",
+		    link: "https://drive.google.com/file/d/1zAspLv-UEyOV_3WyOP7s5UJa_vEQpDQW/view?usp=sharing"
 		},
 		{
 			title: "AI / Machine Learning Resume",
