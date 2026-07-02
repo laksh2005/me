@@ -61,7 +61,7 @@ export const projectsData = [
 		],
 		description: [
 			"Built a scalable developer profiling platform with structured data pipelines and aggressive caching.",
-			"Reached 1.5K+ users and 3.1K+ views across 83 countries with shareable profiles and PDF exports.",
+			"Reached 5K+ users across 95 countries with shareable profiles and PDF exports.",
 		],
 		image: "/cp.png",
 	},
@@ -198,7 +198,7 @@ export const experienceData = [
 	  location: "Noida, India",
 	  image: "/toi.png",
 	  description: [
-		"Building scalable HR automation tools, using quality-review workflows and enabling non-technical stakeholders to act on outputs directly."
+		"Building scalable HR automation tools, using quality-review workflows, eliminating 90% of manual QA tasks and enabling non-technical stakeholders to act on outputs directly"
 	],
 	},
 	{
@@ -209,7 +209,7 @@ export const experienceData = [
 		location: "Mumbai, India",
 		image: "/iam.jpg",
 		description: [
-			"Owned the integration of backend API endpoints into the React frontend for the company’s core production product, and ensuring stable cross-service data flow, contributing to a 20% bounce rate.",
+			"Owned the integration of backend API endpoints into the React frontend for the company’s core production product, and ensuring stable cross-service data flow, w, reducing user bounce rate by 10%.",
 			" Shipped UI features improved through component-level code splitting and lazy loading, reducing unnecessary bundle weight on initial render.",
 		],
 	},

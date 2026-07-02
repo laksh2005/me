@@ -7,6 +7,7 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { AudioProvider } from "@/util/audioContext";
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://www.laksh1.me"),
 	title: {
 		default: "Hi, I'm Laksh",
 		template: "laksh1.me",

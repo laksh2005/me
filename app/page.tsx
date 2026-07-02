@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Particles from "./components/particles";
 import Image from "next/image";
 import { useAudio } from "@/util/audioContext";
@@ -43,22 +43,12 @@ const socials = [
 ];
 
 export default function Home() {
-	const [showResumeButtons, setShowResumeButtons] = useState(false);
 	const { isPlaying, togglePlayPause } = useAudio();
 
-	const resumes = [
-		{
-			title: "Development Resume",
-			key: "dev",
-			image: "/devresume.png",
-		    link: "https://drive.google.com/file/d/1zAspLv-UEyOV_3WyOP7s5UJa_vEQpDQW/view?usp=sharing"
-		},
-		{
-			title: "AI / ML Resume",
-			key: "ml",
-			image: "/mlresume.png",
-            link: "https://drive.google.com/file/d/1NLsY0YA_wAn1hMv8Sh10EzU_QaabtKmD/view?usp=sharing"		},
-	];
+	const devResumeLink =
+		"https://drive.google.com/file/d/186HfkpSx11RrQb17iYq3RLr15oGJmK8z/view?usp=sharing";
+	// const mlResumeLink =
+	// 	"https://drive.google.com/file/d/1NLsY0YA_wAn1hMv8Sh10EzU_QaabtKmD/view?usp=sharing";
 
 	return (
 		<div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
@@ -112,9 +102,21 @@ export default function Home() {
 				))}
 			</div>
 
-			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 mt-8" />
+			<div className="hidden w-screen h-px mt-6 animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 
-<div className="my-4 text-left animate-fade-in px-4 max-w-2xl">
+			{/* Resume Button */}
+			<div className="relative z-20 mt-1 mb-6 transition-opacity duration-500 ease-in-out">
+				<a
+					href={devResumeLink}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="inline-block px-6 py-2 text-sm font-medium text-zinc-100 border border-zinc-600 rounded hover:bg-zinc-900 hover:border-zinc-500 transition-colors duration-50 animate-fade-in"
+				>
+					View Resume
+				</a>
+			</div>
+
+			<div className="text-left animate-fade-in px-4 max-w-2xl">
   <p className="text-sm md:text-md text-zinc-400 leading-relaxed space-y-2" suppressHydrationWarning>
     
     <span className="block">
@@ -123,7 +125,7 @@ export default function Home() {
 
     <span className="block">
       Building AI & tools at{" "}
-      <a href="https://timesinternet.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+      <a href="https://timesofindia.indiatimes.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         The Times of India
       </a>{" "}
       · previously dev at{" "}<span  className="font-semibold text-white hover:underline">IAmMaturity </span>
@@ -138,7 +140,7 @@ export default function Home() {
       <a href="https://codepersona.app" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         CodePersona
       </a>{" "}
-       used by <strong>4.5K+ users</strong> across <strong>91 countries</strong>.
+       used by <strong>5K+ users</strong> across <strong>95 countries</strong>.
     </span>
 
     <span className="block">
@@ -158,32 +160,6 @@ export default function Home() {
     </span>
 
   </p>
-</div>
-
-			{/* Resume Button */}
-			<div className="relative z-20 mt-4 transition-opacity duration-500 ease-in-out">
-				{!showResumeButtons ? (
-					<button
-						onClick={() => setShowResumeButtons(true)}
-						className="px-6 py-2 text-sm font-medium text-zinc-100 border border-zinc-600 rounded hover:bg-zinc-900 hover:border-zinc-500 transition-colors duration-50 animate-fade-in"
-					>
-						View Resume
-					</button>
-				) : (
-					<div className="flex flex-row gap-3 animate-fade-in">
-						{resumes.map((resume) => (
-							<a
-								key={resume.key}
-								href={resume.link}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="flex-1 text-center px-2 my-2 py-1 bg-zinc-800 border border-zinc-600 text-sm font-medium text-zinc-200 rounded hover:bg-zinc-700 hover:border-zinc-500 transition-colors duration-300"
-							>
-								{resume.title}
-							</a>
-						))}
-					</div>
-				)}
 			</div>
 		</div>
 	);
