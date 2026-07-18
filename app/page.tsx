@@ -46,7 +46,7 @@ export default function Home() {
 	const { isPlaying, togglePlayPause } = useAudio();
 
 	const devResumeLink =
-		"https://drive.google.com/file/d/1-xQJe6ews0ySfx0r7P_Z8tEEdO2-hLMc/view?usp=sharing";
+		"https://drive.google.com/file/d/1yh_i07AzMMlhSV9mQ5PH6_n7nvYpVAs3/view?usp=sharing";
 	// const mlResumeLink =
 	// 	"https://drive.google.com/file/d/1NLsY0YA_wAn1hMv8Sh10EzU_QaabtKmD/view?usp=sharing";
 

@@ -192,7 +192,7 @@ export const projectsData = [
 export const experienceData = [
 	{
 	  company: "The Times of India",
-	  role: "AI & SDE Intern",
+	  role: "SDE Intern",
 	  duration: "Mar 2026 - Present",
 	  mode: "Hybrid",
 	  location: "Noida, India",
@@ -209,8 +209,8 @@ export const experienceData = [
 		location: "Mumbai, India",
 		image: "/iam.jpg",
 		description: [
-			"Owned the integration of backend API endpoints into the React frontend for the company’s core production product, and ensuring stable cross-service data flow, w, reducing user bounce rate by 10%.",
-			" Shipped UI features improved through component-level code splitting and lazy loading, reducing unnecessary bundle weight on initial render.",
+			"Owned the integration of backend API endpoints into the React frontend for the company’s core production product, and ensuring stable cross-service data flow, reducing user bounce rate by 10%.",
+			"Shipped UI features improved through component-level code splitting and lazy loading, reducing unnecessary bundle weight on initial render.",
 		],
 	},
 	{
@@ -221,7 +221,7 @@ export const experienceData = [
 		location: "Delhi, India",
 		image: "/writecream.jpg",
 		description: [
-			"Built and shipped 5 production-grade full-stack products across core platform, serving 400K+ monthly users.Built and shipped features across 5 production-grade products using scalable REST APIs.",
+			"Built and shipped 5 production-grade full-stack products across core platform, serving 1M+ monthly users.",
 			"Reduced API response times through payload trimming and caching strategies; maintaining zero-downtime production systems across the entire tenure.",
 		],
 	},
