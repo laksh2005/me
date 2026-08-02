@@ -26,9 +26,8 @@ export default function Home() {
 
 					{/* broadcast HUD */}
 					<motion.div
-						initial={{ opacity: 0, x: -20 }}
+						initial={false}
 						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.3, duration: 0.7 }}
 						className="pointer-events-none absolute left-[1.6%] top-[3.5%] flex items-center gap-2.5"
 					>
 						<span className="flex h-2 w-2 items-center justify-center">
@@ -40,9 +39,8 @@ export default function Home() {
 					</motion.div>
 
 					<motion.div
-						initial={{ opacity: 0, x: 20 }}
+						initial={false}
 						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.3, duration: 0.7 }}
 						className="absolute right-[1.6%] top-[3%] flex items-center gap-2"
 					>
 						<a
@@ -64,9 +62,8 @@ export default function Home() {
 
 					{/* instruction */}
 					<motion.div
-						initial={{ opacity: 0, y: 16 }}
+						initial={false}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 1.3, duration: 0.8 }}
 						className="pointer-events-none absolute inset-x-0 bottom-[3%] flex justify-center"
 					>
 						<span className="rounded-full border border-emerald-300/25 bg-black/65 px-4 py-1.5 font-stadium text-[10px] uppercase tracking-[0.3em] text-emerald-100/70 backdrop-blur sm:text-xs">

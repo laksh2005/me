@@ -151,7 +151,7 @@ const SOCIALS = [
 	{ href: "https://codepersona.app/laksh2005", label: "CodePersona", img: "/cplogo.png", glyph: "CP" },
 ];
 
-const TICKER = [
+const TICKER_TEXT = [
 	"Open to full-time · interning · freelance",
 	"35+ products shipped",
 	"10+ hackathons",
@@ -160,7 +160,28 @@ const TICKER = [
 	"Ex — The Times of India",
 ];
 
+/**
+ * Lay the ticker out by measured-ish advance width rather than a fixed stride,
+ * otherwise the longer entries print on top of each other.
+ */
+const TICKER = (() => {
+	const ADVANCE = 12.4; // ~21px Barlow Condensed caps + 3 letter-spacing
+	const GAP = 52;
+	let acc = 0;
+	const items = TICKER_TEXT.map((t) => {
+		const x = acc;
+		acc += t.length * ADVANCE + GAP;
+		return { t, x };
+	});
+	return { items, total: acc };
+})();
+
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// SVG <text> has no inherited font, and its default is a serif. Set the stacks
+// explicitly rather than leaning on a utility class.
+const JERSEY = "Anton, 'Arial Narrow', sans-serif";
+const STADIUM = "'Barlow Condensed', 'Arial Narrow', sans-serif";
 
 /* ============================================================
    Scene
@@ -257,12 +278,13 @@ export const PenaltyScene: React.FC = () => {
 		legR.start({ rotate: -40, transition: { duration: 0.35, ease: "easeOut" } });
 		player.start({ y: 4, x: 108, transition: { duration: 0.35 } });
 
-		const midX = BALL_HOME.x + (c.x - BALL_HOME.x) * 0.52;
-		const midY = BALL_HOME.y + (c.y - BALL_HOME.y) * 0.44 - 34;
+		// deltas from the penalty spot, which is the ball group's static origin
+		const dx = c.x - BALL_HOME.x;
+		const dy = c.y - BALL_HOME.y;
 
 		ball.start({
-			x: [BALL_HOME.x, midX, c.x],
-			y: [BALL_HOME.y, midY, c.y],
+			x: [0, dx * 0.52, dx],
+			y: [0, dy * 0.44 - 34, dy],
 			scale: [1, 0.78, 0.52],
 			transition: { duration: 0.56, ease: [0.24, 0.58, 0.42, 1], times: [0, 0.52, 1] },
 		});
@@ -277,8 +299,8 @@ export const PenaltyScene: React.FC = () => {
 		});
 		spin.start({ rotate: 1320, transition: { duration: 0.4, ease: "easeOut" } });
 		ball.start({
-			x: c.x + (c.x < 800 ? 26 : -26),
-			y: c.y + 66,
+			x: dx + (c.x < 800 ? 26 : -26),
+			y: dy + 66,
 			scale: 0.47,
 			transition: { duration: 0.42, ease: [0.5, 0, 0.9, 0.6] },
 		});
@@ -457,7 +479,7 @@ export const PenaltyScene: React.FC = () => {
 						x={800}
 						y={78}
 						textAnchor="middle"
-						className="font-jersey"
+						fontFamily={JERSEY}
 						fontSize="62"
 						letterSpacing="10"
 						fill="#f7e6b0"
@@ -471,7 +493,7 @@ export const PenaltyScene: React.FC = () => {
 						x={800}
 						y={134}
 						textAnchor="middle"
-						className="font-stadium"
+						fontFamily={STADIUM}
 						fontSize="23"
 						letterSpacing="3.4"
 						fill="#bfe9d2"
@@ -485,7 +507,7 @@ export const PenaltyScene: React.FC = () => {
 						x={314}
 						y={186}
 						textAnchor="middle"
-						className="font-jersey"
+						fontFamily={JERSEY}
 						fontSize="27"
 						letterSpacing="2.4"
 						fill="#eafff3"
@@ -499,7 +521,7 @@ export const PenaltyScene: React.FC = () => {
 						x={1286}
 						y={186}
 						textAnchor="middle"
-						className="font-jersey"
+						fontFamily={JERSEY}
 						fontSize="27"
 						letterSpacing="2.4"
 						fill="#f7e6b0"
@@ -509,14 +531,14 @@ export const PenaltyScene: React.FC = () => {
 				</Banner>
 
 				<Banner x={16} y={216} w={330} h={58} rot={0.8}>
-					<text x={181} y={240} textAnchor="middle" className="font-jersey" fontSize="21" fill="#eafff3">
+					<text x={181} y={240} textAnchor="middle" fontFamily={JERSEY} fontSize="21" fill="#eafff3">
 						CODEPERSONA
 					</text>
 					<text
 						x={181}
 						y={262}
 						textAnchor="middle"
-						className="font-stadium"
+						fontFamily={STADIUM}
 						fontSize="17"
 						letterSpacing="1.6"
 						fill="#7fd6a8"
@@ -526,14 +548,14 @@ export const PenaltyScene: React.FC = () => {
 				</Banner>
 
 				<Banner x={1254} y={216} w={330} h={58} rot={-0.8}>
-					<text x={1419} y={240} textAnchor="middle" className="font-jersey" fontSize="21" fill="#eafff3">
+					<text x={1419} y={240} textAnchor="middle" fontFamily={JERSEY} fontSize="21" fill="#eafff3">
 						WRITECREAM
 					</text>
 					<text
 						x={1419}
 						y={262}
 						textAnchor="middle"
-						className="font-stadium"
+						fontFamily={STADIUM}
 						fontSize="17"
 						letterSpacing="1.6"
 						fill="#7fd6a8"
@@ -548,7 +570,7 @@ export const PenaltyScene: React.FC = () => {
 						x={800}
 						y={170}
 						textAnchor="middle"
-						className="font-stadium"
+						fontFamily={STADIUM}
 						fontSize="14"
 						letterSpacing="4"
 						fill="#6fc79b"
@@ -582,7 +604,7 @@ export const PenaltyScene: React.FC = () => {
 										<text
 											textAnchor="middle"
 											y="6"
-											className="font-jersey"
+											fontFamily={JERSEY}
 											fontSize="17"
 											fill="#bff5d8"
 										>
@@ -599,21 +621,21 @@ export const PenaltyScene: React.FC = () => {
 				<g clipPath="url(#ledClip)">
 					<rect x="0" y={LED_TOP} width={W} height={PITCH_TOP - LED_TOP} fill="url(#led)" />
 					<motion.g
-						animate={{ x: [0, -1900] }}
-						transition={{ duration: 26, ease: "linear", repeat: Infinity }}
+						animate={{ x: [0, -TICKER.total] }}
+						transition={{ duration: TICKER.total / 74, ease: "linear", repeat: Infinity }}
 					>
 						{[0, 1].map((rep) =>
-							TICKER.map((t, i) => (
+							TICKER.items.map((item, i) => (
 								<text
 									key={`${rep}-${i}`}
-									x={rep * 1900 + i * 317 + 20}
+									x={rep * TICKER.total + item.x + 20}
 									y={LED_TOP + 26}
-									className="font-stadium"
+									fontFamily="'Barlow Condensed', 'Arial Narrow', sans-serif"
 									fontSize="21"
 									letterSpacing="3"
 									fill="#7cf3b4"
 								>
-									{t.toUpperCase()} ◆
+									{item.t.toUpperCase()} ◆
 								</text>
 							)),
 						)}
@@ -799,9 +821,12 @@ export const PenaltyScene: React.FC = () => {
 					animate={{ opacity: busy ? 0 : 0.5 }}
 					transition={{ duration: 0.3 }}
 				/>
+				{/* Position comes from a static parent transform so the ball sits on the
+				    spot even before any animation frame has run. */}
+				<g transform={`translate(${BALL_HOME.x} ${BALL_HOME.y})`}>
 				<motion.g
 					animate={ball}
-					initial={{ x: BALL_HOME.x, y: BALL_HOME.y, scale: 1 }}
+					initial={{ x: 0, y: 0, scale: 1 }}
 					style={{ transformBox: "view-box", transformOrigin: "0px 0px" }}
 				>
 					<circle r={BALL_R} fill="url(#ballSphere)" />
@@ -826,6 +851,7 @@ export const PenaltyScene: React.FC = () => {
 					<circle r={BALL_R} fill="none" stroke="#000" strokeOpacity="0.35" strokeWidth="1.5" />
 					<ellipse cx={-8} cy={-9} rx={8} ry={6} fill="#fff" opacity="0.6" />
 				</motion.g>
+				</g>
 
 				{/* ---------------- the taker ---------------- */}
 				<motion.g animate={player} initial={{ x: 0, y: 0 }}>
@@ -881,7 +907,7 @@ export const PenaltyScene: React.FC = () => {
 							x="50"
 							y="54"
 							textAnchor="middle"
-							className="font-jersey"
+							fontFamily={JERSEY}
 							fontSize="8"
 							letterSpacing="0.6"
 							fill="#eafff3"
@@ -892,7 +918,7 @@ export const PenaltyScene: React.FC = () => {
 							x="50"
 							y="84"
 							textAnchor="middle"
-							className="font-jersey"
+							fontFamily={JERSEY}
 							fontSize="30"
 							fill="#eafff3"
 						>
@@ -990,12 +1016,14 @@ const CornerTarget: React.FC<{
 			}}
 			className={disabled ? "cursor-default" : "cursor-pointer"}
 			style={{ transformBox: "fill-box", transformOrigin: "center", outline: "none" }}
-			initial={{ opacity: 0, scale: 0.6 }}
+			// No entrance fade: the nav must be visible even if animations never
+			// run (backgrounded tab, throttled rAF, reduced motion).
+			initial={false}
 			animate={{
 				opacity: dimmed ? 0.2 : 1,
 				scale: active ? 1.14 : 1,
 			}}
-			transition={{ delay: dimmed || active ? 0 : 0.5 + index * 0.11, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+			transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
 			whileHover={disabled ? {} : { scale: 1.12 }}
 		>
 			{/* reticle */}
@@ -1043,7 +1071,7 @@ const CornerTarget: React.FC<{
 					x={left ? -14 : 14}
 					y={-2}
 					textAnchor={left ? "end" : "start"}
-					className="font-jersey"
+					fontFamily={JERSEY}
 					fontSize="24"
 					letterSpacing="1.6"
 					fill={active ? "#f0c04a" : "#eafff3"}
@@ -1054,7 +1082,7 @@ const CornerTarget: React.FC<{
 					x={left ? -14 : 14}
 					y={13}
 					textAnchor={left ? "end" : "start"}
-					className="font-stadium"
+					fontFamily={STADIUM}
 					fontSize="12"
 					letterSpacing="2.6"
 					fill="#6fc79b"
