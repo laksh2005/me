@@ -124,14 +124,9 @@ export default function Home() {
     </span>
 
     <span className="block">
-      Building AI & tools at{" "}
+      Previously built AI & tools at{" "}
       <a href="https://timesofindia.indiatimes.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
         The Times of India
-      </a>{" "}
-      · previously dev at{" "}<span  className="font-semibold text-white hover:underline">IAmMaturity </span>
-      &{" "}
-      <a href="https://writecream.org" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        WriteCream
       </a>.
     </span>
 
@@ -144,11 +139,11 @@ export default function Home() {
     </span>
 
     <span className="block">
-      Also shipped{" "}
-      <a href="https://www.laksh1.me/projects/duplex-sync-engine" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        Duplex Sync Engine
+      Also shipped products at{" "}
+      <a href="https://writecream.org" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
+        Writecream
       </a>{" "}
-       , a scalable real-time <strong>bidirectional sync system</strong>.
+       to <strong>1M+ users</strong>.
     </span>
 
     <span className="block">
