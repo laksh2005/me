@@ -2,160 +2,134 @@
 
 import Link from "next/link";
 import React from "react";
-import Particles from "./components/particles";
-import Image from "next/image";
-import { useAudio } from "@/util/audioContext";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Smartphone } from "lucide-react";
 
-const navigation = [
-	{ name: "Experience", href: "/experience" },
-	{ name: "Skills", href: "/skills" },
-	{ name: "Projects", href: "/projects" },
-	{ name: "Blog", href: "/blog" },
-];
+import { PenaltyScene } from "./components/penalty-scene";
 
-const socials = [
-	{
-		icon: <Mail size={28} />,
-		href: "mailto:lakshnijhawan.work@gmail.com",
-		image: null,
-	},
-	{
-		icon: <Linkedin size={28} />,
-		href: "https://www.linkedin.com/in/laksh-nijhawan-576888280/",
-		image: null,
-	},
-	{
-		icon: <Github size={28} />,
-		href: "https://github.com/laksh2005",
-		image: null,
-	},
-	{
-		icon: null,
-		href: "https://x.com/laksh_2705",
-		image: "/x.png",
-	},
-	{
-		icon: null,
-		href: "https://codepersona.app/laksh2005",
-		image: "/cplogo.png",
-	},
-];
+const RESUME =
+	"https://drive.google.com/file/d/1yh_i07AzMMlhSV9mQ5PH6_n7nvYpVAs3/view?usp=sharing";
 
 export default function Home() {
-	const { isPlaying, togglePlayPause } = useAudio();
-
-	const devResumeLink =
-		"https://drive.google.com/file/d/1yh_i07AzMMlhSV9mQ5PH6_n7nvYpVAs3/view?usp=sharing";
-	// const mlResumeLink =
-	// 	"https://drive.google.com/file/d/1NLsY0YA_wAn1hMv8Sh10EzU_QaabtKmD/view?usp=sharing";
-
 	return (
-		<div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
-			<Particles
-				className="absolute inset-0 -z-10 animate-fade-in"
-				quantity={100}
-			/>
-
-			<nav className="mt-16 animate-fade-in">
-				<ul className="flex items-center justify-center gap-4 flex-wrap px-4">
-					{navigation.map((item) => (
-						<Link
-							key={item.href}
-							href={item.href}
-							className="text-md duration-500 text-white hover:text-zinc-300 hover:text-lg font-bold mb-2"
-						>
-							{item.name}
-						</Link>
-					))}
-				</ul>
-			</nav>
-
-			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-
-			<h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-100 bg-white cursor-default text-edge-outline animate-title font-serif-title sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
-				Laksh Nijhawan
-			</h1>
-
-			{/* Social Icons below name */}
-			<div className="flex items-center justify-center gap-6 mt-8 z-10 animate-fade-in">
-				{socials.map((social) => (
-					<a
-						key={social.href}
-						href={social.href}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="flex items-center justify-center w-10 h-10 text-zinc-400 hover:text-zinc-200 transition-colors duration-300 hover:scale-110 transform"
-					>
-						{social.image ? (
-							<Image
-								src={social.image}
-								alt="social"
-								width={40}
-								height={40}
-								className="rounded-full"
-							/>
-						) : (
-							social.icon
-						)}
-					</a>
-				))}
-			</div>
-
-			<div className="hidden w-screen h-px mt-6 animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-
-			{/* Resume Button */}
-			<div className="relative z-20 mt-1 mb-6 transition-opacity duration-500 ease-in-out">
-				<a
-					href={devResumeLink}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="inline-block px-6 py-2 text-sm font-medium text-zinc-100 border border-zinc-600 rounded hover:bg-zinc-900 hover:border-zinc-500 transition-colors duration-50 animate-fade-in"
+		<main className="relative min-h-[100svh] w-full overflow-x-hidden bg-[#02100a]">
+			{/* ---------- the stage: always 16:9, letterboxed into the viewport ---------- */}
+			<div className="flex min-h-[100svh] w-full items-center justify-center">
+				<div
+					className="relative shadow-[0_0_120px_-20px_rgba(62,240,140,.25)]"
+					style={{
+						width: "min(100vw, calc(100svh * 16 / 9))",
+						height: "min(100svh, calc(100vw * 9 / 16))",
+					}}
 				>
-					View Resume
-				</a>
+					<PenaltyScene />
+
+					{/* broadcast HUD */}
+					<motion.div
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.3, duration: 0.7 }}
+						className="pointer-events-none absolute left-[1.6%] top-[3.5%] flex items-center gap-2.5"
+					>
+						<span className="flex h-2 w-2 items-center justify-center">
+							<span className="h-2 w-2 animate-pulse rounded-full bg-red-500 shadow-[0_0_10px_3px_rgba(239,68,68,.7)]" />
+						</span>
+						<span className="font-stadium text-[10px] font-bold uppercase tracking-[0.34em] text-emerald-200/80 sm:text-xs">
+							Live · Matchday
+						</span>
+					</motion.div>
+
+					<motion.div
+						initial={{ opacity: 0, x: 20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.3, duration: 0.7 }}
+						className="absolute right-[1.6%] top-[3%] flex items-center gap-2"
+					>
+						<a
+							href={RESUME}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="group inline-flex items-center gap-1.5 rounded-sm border border-emerald-300/40 bg-black/60 px-2.5 py-1.5 font-stadium text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-100 backdrop-blur transition-colors duration-300 hover:border-kit-gold hover:text-kit-gold sm:px-4 sm:py-2 sm:text-xs"
+						>
+							Dossier
+							<ArrowUpRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+						</a>
+						<Link
+							href="/contact"
+							className="inline-flex items-center rounded-sm bg-kit-neon px-2.5 py-1.5 font-stadium text-[10px] font-bold uppercase tracking-[0.18em] text-black shadow-[0_0_24px_-6px_rgba(62,240,140,.9)] transition-transform duration-300 hover:-translate-y-0.5 sm:px-4 sm:py-2 sm:text-xs"
+						>
+							Sign me
+						</Link>
+					</motion.div>
+
+					{/* instruction */}
+					<motion.div
+						initial={{ opacity: 0, y: 16 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 1.3, duration: 0.8 }}
+						className="pointer-events-none absolute inset-x-0 bottom-[3%] flex justify-center"
+					>
+						<span className="rounded-full border border-emerald-300/25 bg-black/65 px-4 py-1.5 font-stadium text-[10px] uppercase tracking-[0.3em] text-emerald-100/70 backdrop-blur sm:text-xs">
+							Pick your corner — the keeper has no chance
+						</span>
+					</motion.div>
+				</div>
 			</div>
 
-			<div className="text-left animate-fade-in px-4 max-w-2xl">
-  <p className="text-sm md:text-md text-zinc-400 leading-relaxed space-y-2" suppressHydrationWarning>
-    
-    <span className="block">
-      <strong className="text-white">Product-focused Engineer</strong> building end-to-end systems that turn ideas into real, usable products.
-    </span>
-
-    <span className="block">
-      Previously built AI & tools at{" "}
-      <a href="https://timesofindia.indiatimes.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        The Times of India
-      </a>.
-    </span>
-
-    <span className="block">
-      Built{" "}
-      <a href="https://codepersona.app" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        CodePersona
-      </a>{" "}
-       used by <strong>5K+ users</strong> across <strong>95 countries</strong>.
-    </span>
-
-    <span className="block">
-      Also shipped products at{" "}
-      <a href="https://writecream.org" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:underline">
-        Writecream
-      </a>{" "}
-       to <strong>1M+ users</strong>.
-    </span>
-
-    <span className="block">
-      <strong>35+ products</strong> · <strong>10+ hackathons</strong>.
-    </span>
-
-    <span className="block">
-      <strong>Open to full-time, interning, or freelance.</strong>
-    </span>
-
-  </p>
+			{/* ---------- portrait fallback: the same copy, readable ---------- */}
+			<div className="px-6 pb-16 landscape:hidden md:hidden">
+				<div className="mx-auto max-w-md rounded-lg border border-emerald-400/20 bg-black/50 p-5">
+					<div className="mb-4 flex items-center gap-2 font-stadium text-[10px] uppercase tracking-[0.3em] text-kit-neon">
+						<Smartphone size={13} />
+						Rotate for the full matchday view
+					</div>
+					<h1 className="font-jersey text-3xl uppercase leading-none text-white">
+						Laksh Nijhawan
+					</h1>
+					<p className="mt-3 font-stadium text-base leading-snug text-emerald-50/70">
+						Product-focused engineer building end-to-end systems that turn ideas
+						into real, usable products.
+					</p>
+					<ul className="mt-4 space-y-2 border-l-2 border-emerald-400/25 pl-3 text-sm text-emerald-50/65">
+						<li>
+							Previously built AI &amp; tools at{" "}
+							<span className="font-semibold text-white">The Times of India</span>.
+						</li>
+						<li>
+							Built{" "}
+							<a
+								href="https://codepersona.app"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="font-semibold text-white underline decoration-kit-neon/60 underline-offset-4"
+							>
+								CodePersona
+							</a>
+							, used by <strong className="text-kit-gold">5K+ users</strong> across{" "}
+							<strong className="text-kit-gold">95 countries</strong>.
+						</li>
+						<li>
+							Shipped products at{" "}
+							<a
+								href="https://writecream.org"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="font-semibold text-white underline decoration-kit-neon/60 underline-offset-4"
+							>
+								Writecream
+							</a>{" "}
+							to <strong className="text-kit-gold">1M+ users</strong>.
+						</li>
+						<li>
+							<strong className="text-white">35+ products</strong> ·{" "}
+							<strong className="text-white">10+ hackathons</strong>.
+						</li>
+						<li className="text-kit-gold">
+							Open to full-time, interning, or freelance.
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</main>
 	);
 }

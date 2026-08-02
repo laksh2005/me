@@ -1,10 +1,14 @@
 "use client";
 
-import { Mail, Github, Mail as MailIcon } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+import { Navigation } from "../components/nav";
+import { PitchBackdrop } from "../components/stadium";
+import { TiltCard } from "../components/tilt-card";
+import { Football } from "../components/football";
 
 const socials = [
 	{
@@ -22,6 +26,13 @@ const socials = [
 		image: null,
 	},
 	{
+		icon: <Linkedin size={20} />,
+		href: "https://www.linkedin.com/in/laksh-nijhawan-576888280/",
+		label: "LinkedIn",
+		handle: "Laksh Nijhawan",
+		image: null,
+	},
+	{
 		icon: null,
 		href: "https://codepersona.app",
 		label: "CodePersona",
@@ -32,62 +43,104 @@ const socials = [
 
 export default function ContactPage() {
 	return (
-		<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen page-enter">
+		<div className="relative min-h-screen">
+			<PitchBackdrop />
 			<Navigation />
-			<div className="container flex flex-col items-center justify-center min-h-screen px-4 mx-auto">
-				{/* Mail Icon at Top */}
-				<div className="mb-20 text-center element-enter-1">
+
+			<div className="container mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 py-28">
+				{/* transfer status */}
+				<motion.div
+					initial={{ opacity: 0, y: -18 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+					className="flex items-center gap-2 rounded-full border border-kit-gold/40 bg-kit-gold/10 px-4 py-2"
+				>
+					<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-kit-gold" />
+					<span className="font-stadium text-[11px] font-bold uppercase tracking-[0.28em] text-kit-gold">
+						Available — full-time · intern · freelance
+					</span>
+				</motion.div>
+
+				<motion.h1
+					initial={{ opacity: 0, y: 24 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+					className="mt-6 text-center font-jersey text-5xl uppercase leading-[0.9] text-white md:text-7xl"
+					style={{ textShadow: "0 12px 50px rgba(0,0,0,.85)" }}
+				>
+					Make an offer
+				</motion.h1>
+
+				<motion.p
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.14, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+					className="mt-4 max-w-md text-center font-stadium text-lg leading-snug text-emerald-50/65"
+				>
+					Open the negotiation with an email, or find me on any of the channels
+					below.
+				</motion.p>
+
+				{/* the mail CTA */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.8 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1.2, 0.36, 1] }}
+					className="mt-10 flex flex-col items-center"
+				>
 					<Link
 						href="mailto:lakshnijhawan.work@gmail.com"
-						className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-zinc-600 hover:border-zinc-400 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all duration-300 group"
-						title="Send an email"
+						className="group inline-flex items-center gap-3 rounded-sm bg-kit-neon px-8 py-4 font-stadium text-base font-bold uppercase tracking-[0.2em] text-black shadow-[0_0_44px_-8px_rgba(62,240,140,.95)] transition-transform duration-300 hover:-translate-y-1"
 					>
-						<Mail
-							size={24}
-							className="text-zinc-400 group-hover:text-zinc-200 transition-colors"
-						/>
+						<Mail size={18} />
+						lakshnijhawan.work@gmail.com
 					</Link>
-					<p className="mt-3 text-xs text-zinc-500 group-hover:text-zinc-400">
-						tap to mail
-					</p>
-				</div>
+					<div className="pointer-events-none mt-6 opacity-70">
+						<Football size={110} spinSeconds={9} />
+					</div>
+				</motion.div>
 
-				{/* Socials Grid - 3 Columns */}
-				<div className="grid w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-3 max-w-3xl element-enter-2">
+				{/* channels */}
+				<div className="mt-6 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 					{socials.map((s, idx) => (
-						<Card key={idx}>
-							<Link
-								href={s.href}
-								target="_blank"
-								className="p-6 relative flex flex-col items-center gap-4 duration-700 group"
-							>
-								<span
-									className="absolute w-px h-2/3 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent"
-									aria-hidden="true"
-								/>
-								<span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange overflow-hidden">
-									{s.image ? (
-										<Image
-											src={s.image}
-											alt={s.label}
-											width={48}
-											height={48}
-											className="w-full h-full object-cover"
-										/>
-									) : (
-										s.icon
-									)}
-								</span>
-								<div className="z-10 flex flex-col items-center text-center">
-									<span className="text-lg font-medium duration-150 text-zinc-200 group-hover:text-white font-display">
-										{s.handle}
+						<motion.div
+							key={s.href}
+							initial={{ opacity: 0, y: 26 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.32 + idx * 0.07, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+						>
+							<TiltCard className="group h-full" intensity={11}>
+								<Link
+									href={s.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="relative flex h-full flex-col items-center gap-3 overflow-hidden rounded-xl border border-emerald-400/20 bg-black/55 p-6 backdrop-blur-md transition-colors duration-500 group-hover:border-kit-neon/60"
+								>
+									<span className="goal-net animate-net pointer-events-none absolute inset-0 opacity-[0.1] transition-opacity duration-500 group-hover:opacity-25" />
+									<span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-emerald-300/30 bg-black text-emerald-100/80 transition-colors duration-300 group-hover:border-kit-neon group-hover:text-kit-neon">
+										{s.image ? (
+											<Image
+												src={s.image}
+												alt={s.label}
+												width={48}
+												height={48}
+												className="h-full w-full object-cover"
+											/>
+										) : (
+											s.icon
+										)}
 									</span>
-									<span className="mt-2 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
-										{s.label}
-									</span>
-								</div>
-							</Link>
-						</Card>
+									<div className="relative text-center">
+										<div className="font-jersey text-base uppercase text-white">
+											{s.handle}
+										</div>
+										<div className="mt-1 font-stadium text-[11px] uppercase tracking-[0.24em] text-emerald-100/40">
+											{s.label}
+										</div>
+									</div>
+								</Link>
+							</TiltCard>
+						</motion.div>
 					))}
 				</div>
 			</div>

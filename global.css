@@ -1,20 +1,390 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Anton&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   LAKSH NIJHAWAN FC — matchday design system
+   ============================================================ */
+
+:root {
+  --pitch-deep: #02120a;
+  --pitch: #07301b;
+  --pitch-lit: #0d5330;
+  --chalk: rgba(255, 255, 255, 0.85);
+  --gold: #f0c04a;
+  --gold-deep: #8a6414;
+  --neon: #3ef08c;
+  --flood: #e9fff2;
+}
+
 @layer base {
   .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   }
-  
+
   .font-serif-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
     font-style: normal;
   }
+
+  .font-jersey {
+    font-family: 'Anton', 'Arial Narrow', sans-serif;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+
+  .font-stadium {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  }
+
+  ::selection {
+    background: var(--neon);
+    color: #04150c;
+  }
+
+  html {
+    scrollbar-color: #1c6b41 #04150c;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #04150c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(#2a8f57, #145c33);
+    border-radius: 999px;
+    border: 2px solid #04150c;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#3ef08c, #1c7a45);
+  }
 }
+
+/* ---------- shared utilities ---------- */
+
+.chalk-stroke {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.55);
+  color: transparent;
+}
+
+.chalk-stroke-thin {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+  color: transparent;
+}
+
+.perspective-near {
+  perspective: 900px;
+}
+.perspective-far {
+  perspective: 1600px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.crest-shape {
+  clip-path: polygon(50% 0%, 100% 12%, 100% 62%, 50% 100%, 0% 62%, 0% 12%);
+}
+
+.ticket-notch {
+  clip-path: polygon(
+    0 0, 100% 0, 100% 35%, calc(100% - 6px) 50%, 100% 65%, 100% 100%,
+    0 100%, 0 65%, 6px 50%, 0 35%
+  );
+}
+
+.text-glow-neon {
+  text-shadow: 0 0 12px rgba(62, 240, 140, 0.55), 0 0 32px rgba(62, 240, 140, 0.2);
+}
+.text-glow-gold {
+  text-shadow: 0 0 14px rgba(240, 192, 74, 0.5), 0 0 40px rgba(240, 192, 74, 0.18);
+}
+
+/* ---------- stadium: turf ---------- */
+
+.turf-stripes {
+  background-color: var(--pitch);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.055) 0px,
+    rgba(255, 255, 255, 0.055) 46px,
+    rgba(0, 0, 0, 0.09) 46px,
+    rgba(0, 0, 0, 0.09) 92px
+  );
+}
+
+.turf-blades {
+  background-image: repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 4px
+    ),
+    repeating-linear-gradient(
+      -115deg,
+      rgba(0, 0, 0, 0.05) 0 1px,
+      transparent 1px 5px
+    );
+}
+
+@keyframes turf-roll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.animate-turf-roll {
+  animation: turf-roll 14s linear infinite;
+}
+
+/* ---------- stadium: crowd ---------- */
+
+.crowd-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0.8px, transparent 1.1px),
+    radial-gradient(circle, rgba(62, 240, 140, 0.35) 0.8px, transparent 1.1px),
+    radial-gradient(circle, rgba(240, 192, 74, 0.3) 0.8px, transparent 1.1px);
+  background-size: 7px 7px, 13px 11px, 19px 17px;
+  background-position: 0 0, 3px 5px, 8px 2px;
+}
+
+@keyframes crowd-shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+.animate-crowd {
+  animation: crowd-shimmer 4.5s ease-in-out infinite;
+}
+
+/* ---------- stadium: floodlights ---------- */
+
+@keyframes flood-flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  42% {
+    opacity: 0.72;
+  }
+  46% {
+    opacity: 0.98;
+  }
+  52% {
+    opacity: 0.78;
+  }
+}
+.animate-flood {
+  animation: flood-flicker 7s ease-in-out infinite;
+}
+
+.flood-cone {
+  clip-path: polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(233, 255, 242, 0.28),
+    rgba(233, 255, 242, 0.07) 45%,
+    transparent 85%
+  );
+  filter: blur(14px);
+}
+
+/* ---------- the ball ---------- */
+
+@keyframes ball-roll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.3333%);
+  }
+}
+.animate-ball-roll {
+  animation: ball-roll 7s linear infinite;
+}
+
+@keyframes ball-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+.animate-ball-bob {
+  animation: ball-bob 4.2s ease-in-out infinite;
+}
+
+@keyframes ball-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleX(0.78);
+    opacity: 0.22;
+  }
+}
+.animate-ball-shadow {
+  animation: ball-shadow 4.2s ease-in-out infinite;
+}
+
+.ball-seams {
+  background-image: repeating-linear-gradient(
+      62deg,
+      transparent 0 22px,
+      rgba(0, 0, 0, 0.07) 22px 23px
+    ),
+    repeating-linear-gradient(
+      -62deg,
+      transparent 0 22px,
+      rgba(0, 0, 0, 0.07) 22px 23px
+    );
+}
+
+/* ---------- LED perimeter board ---------- */
+
+@keyframes led-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-led {
+  animation: led-scroll 26s linear infinite;
+}
+
+.led-panel {
+  background: linear-gradient(180deg, #04170d 0%, #072715 48%, #03110a 100%);
+  box-shadow: inset 0 1px 0 rgba(62, 240, 140, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.8), 0 8px 30px -10px rgba(62, 240, 140, 0.35);
+}
+
+.led-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* ---------- holographic FUT card ---------- */
+
+@keyframes holo-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+.animate-holo {
+  animation: holo-sweep 1.1s ease-out;
+}
+
+.holo-foil {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.14) 38%,
+    rgba(62, 240, 140, 0.22) 46%,
+    rgba(240, 192, 74, 0.24) 54%,
+    rgba(255, 255, 255, 0.14) 62%,
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+}
+
+.card-gold {
+  background: linear-gradient(160deg, #3c2f07 0%, #a9832a 22%, #f4d375 48%, #a9832a 74%, #2c2205 100%);
+}
+.card-icon {
+  background: linear-gradient(160deg, #1a1408 0%, #6d5417 18%, #f7e39a 46%, #8a6a1c 72%, #12100a 100%);
+}
+.card-special {
+  background: linear-gradient(160deg, #140a26 0%, #452a86 24%, #9b7dff 50%, #3d2578 76%, #0d0718 100%);
+}
+.card-steel {
+  background: linear-gradient(160deg, #061a10 0%, #14503010 0%, #1c6b41 26%, #6fe3a6 50%, #175c39 74%, #04140b 100%);
+}
+
+/* ---------- misc motion ---------- */
+
+@keyframes score-flip {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+.animate-score-flip {
+  animation: score-flip 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes net-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.34;
+  }
+}
+.animate-net {
+  animation: net-pulse 5s ease-in-out infinite;
+}
+
+.goal-net {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes whistle-wipe {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+/* ---------- legacy page/element entrances (kept) ---------- */
 
 @keyframes fadeInUp {
   from {
@@ -86,11 +456,14 @@
   }
 }
 
-
 /* FLASH */
 @keyframes flash {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .animate-flash {
   animation: flash 0.3s ease-out forwards;
@@ -103,45 +476,19 @@
   mix-blend-mode: overlay;
 }
 
-/* SCANLINES */
-.scanlines {
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.05) 0px,
-    rgba(0,0,0,0.2) 2px,
-    transparent 4px
-  );
-  animation: scan 0.2s linear infinite;
-}
+/* ---------- accessibility ---------- */
 
-@keyframes scan {
-  from { transform: translateY(0); }
-  to { transform: translateY(4px); }
-}
-
-/* GLITCH BARS */
-.glitch-bars::before,
-.glitch-bars::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 20%;
-  background: rgba(255,255,255,0.1);
-  animation: glitch 0.6s infinite;
-}
-
-.glitch-bars::before {
-  top: 20%;
-}
-.glitch-bars::after {
-  bottom: 15%;
-}
-
-@keyframes glitch {
-  0% { transform: translateX(0); opacity: 0.1; }
-  20% { transform: translateX(-10px); opacity: 0.3; }
-  40% { transform: translateX(10px); opacity: 0.2; }
-  60% { transform: translateX(-5px); opacity: 0.4; }
-  80% { transform: translateX(5px); opacity: 0.2; }
-  100% { transform: translateX(0); opacity: 0.1; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-turf-roll,
+  .animate-crowd,
+  .animate-flood,
+  .animate-ball-roll,
+  .animate-ball-bob,
+  .animate-ball-shadow,
+  .animate-led,
+  .animate-net,
+  .animate-holo,
+  .animate-score-flip {
+    animation: none !important;
+  }
 }

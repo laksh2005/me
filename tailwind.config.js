@@ -31,6 +31,28 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
 				display: ["var(--font-calsans)"],
+				jersey: ["Anton", "Arial Narrow", ...defaultTheme.fontFamily.sans],
+				stadium: ["Barlow Condensed", "Arial Narrow", ...defaultTheme.fontFamily.sans],
+			},
+			colors: {
+				pitch: {
+					950: "#02120a",
+					900: "#04190e",
+					800: "#062616",
+					700: "#07301b",
+					600: "#0a4126",
+					500: "#0d5330",
+					400: "#16794a",
+					300: "#22a266",
+					200: "#4fd196",
+				},
+				kit: {
+					gold: "#f0c04a",
+					goldDeep: "#8a6414",
+					neon: "#3ef08c",
+					flood: "#e9fff2",
+					card: "#7c5cff",
+				},
 			},
 			backgroundImage: {
 				"gradient-radial":
@@ -41,6 +63,7 @@ module.exports = {
 				title: "title 3s ease-out forwards",
 				"fade-left": "fade-left 3s ease-in-out forwards",
 				"fade-right": "fade-right 3s ease-in-out forwards",
+				"rise-in": "rise-in 0.7s cubic-bezier(0.22,1,0.36,1) both",
 			},
 			keyframes: {
 				"fade-in": {

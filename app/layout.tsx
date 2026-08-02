@@ -67,11 +67,7 @@ export default function RootLayout({
 			<head>
 				<Analytics />
 			</head>
-			<body
-				className={`bg-black ${
-					process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-				}`}
-			>
+			<body className="bg-[#02100a] text-emerald-50">
 				<AudioProvider>
 
 					{children}

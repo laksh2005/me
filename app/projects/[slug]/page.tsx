@@ -1,119 +1,183 @@
 import { Navigation } from "@/app/components/nav";
+import { PitchBackdrop } from "@/app/components/stadium";
 import { projectsData } from "@/util/data";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { ReportView } from "./view";
 
 export async function generateStaticParams() {
-  return projectsData.map((project) => ({
-    slug: project.slug,
-  }));
+	return projectsData.map((project) => ({
+		slug: project.slug,
+	}));
 }
 
+const cleanName = (n: string) => n.replace("⭐", "").trim();
+
 export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
-  const project = projectsData.find((p) => p.slug === slug);
+	const slug = params.slug;
+	const project = projectsData.find((p) => p.slug === slug);
 
 	if (!project) {
 		return (
-			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen">
+			<div className="relative min-h-screen">
+				<PitchBackdrop />
 				<Navigation />
-				<div className="container px-4 pt-20 mx-auto max-w-4xl">
-					<div className="text-center py-16">
-						<h1 className="text-2xl font-bold text-zinc-100">
-							Project not found
+				<div className="container mx-auto max-w-4xl px-4 pt-32">
+					<div className="py-16 text-center">
+						<h1 className="font-jersey text-3xl uppercase text-white">
+							No such fixture
 						</h1>
-						{/* <Link href="/projects" className="mt-4 text-zinc-400 hover:text-zinc-200">
-              Back to projects
-            </Link> */}
+						<Link
+							href="/projects"
+							className="mt-4 inline-block font-stadium text-sm uppercase tracking-[0.2em] text-kit-neon hover:underline"
+						>
+							Back to the trophy cabinet
+						</Link>
 					</div>
 				</div>
 			</div>
 		);
 	}
 
-	const firstLine = project.description?.[0] || "";
-	const secondLine = project.description?.[1] || "";
-	const additional = project.description?.slice(2) || [];
+	const [firstLine = "", secondLine = "", ...additional] = project.description ?? [];
+	const isStar = project.name.includes("⭐");
 
 	return (
-		<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen pb-16">
+		<div className="relative min-h-screen pb-24">
+			<PitchBackdrop />
 			<Navigation />
-			<div className="container px-4 pt-20 mx-auto max-w-4xl md:pt-24 lg:pt-32">
-				<div className="mb-10">
-					{/* <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 mb-4 transition">
-            <ArrowLeft size={16} />
-            Back to projects
-          </Link> */}
-					<h1 className="text-4xl font-serif-title font-bold text-zinc-100 sm:text-5xl mb-3">
-						{project.name}
-					</h1>
-					<p className="text-md text-zinc-400 mb-6">{firstLine}</p>
-				</div>
 
-				<div className="w-full overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/60">
+			<div className="container mx-auto max-w-4xl px-4 pt-24 md:pt-28">
+				<Link
+					href="/projects"
+					className="inline-flex items-center gap-2 font-stadium text-xs uppercase tracking-[0.24em] text-emerald-100/50 transition-colors hover:text-kit-neon"
+				>
+					<ArrowLeft size={14} />
+					Trophy cabinet
+				</Link>
+
+				{/* headline */}
+				<header className="mt-6 animate-rise-in">
+					<div className="flex flex-wrap items-center gap-2">
+						<span className="rounded-sm bg-kit-neon px-2 py-1 font-stadium text-[10px] font-bold uppercase tracking-[0.22em] text-black">
+							Full time
+						</span>
+						<span className="rounded-sm border border-emerald-400/35 px-2 py-1 font-stadium text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-200/80">
+							{project.type === "dev" ? "Development" : "Machine learning"}
+						</span>
+						{isStar && (
+							<span className="rounded-sm border border-kit-gold/50 bg-kit-gold/10 px-2 py-1 font-stadium text-[10px] font-bold uppercase tracking-[0.22em] text-kit-gold">
+								★ Standout
+							</span>
+						)}
+					</div>
+
+					<h1
+						className="mt-4 font-jersey text-5xl uppercase leading-[0.9] text-white md:text-7xl"
+						style={{ textShadow: "0 10px 40px rgba(0,0,0,.8)" }}
+					>
+						{cleanName(project.name)}
+					</h1>
+					<p className="mt-4 max-w-2xl font-stadium text-lg leading-snug text-emerald-50/70 md:text-xl">
+						{firstLine}
+					</p>
+				</header>
+
+				{/* hero shot */}
+				<div className="mt-8 overflow-hidden rounded-xl border border-emerald-400/25 bg-black/50 shadow-[0_40px_90px_-30px_rgba(0,0,0,.95)] animate-rise-in">
 					{project.image ? (
-						<div className="relative w-full h-64 md:h-72">
+						<div className="relative h-64 w-full md:h-80">
 							<Image
 								src={project.image}
-								alt={project.name}
+								alt={cleanName(project.name)}
 								fill
+								sizes="(max-width: 768px) 100vw, 900px"
 								className="object-cover"
 							/>
+							<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 						</div>
 					) : (
-						<div className="w-full h-64 md:h-72 bg-zinc-800" />
+						<div className="h-64 w-full bg-black/40 md:h-80" />
 					)}
 				</div>
 
-				<p className="mt-4 text-md text-zinc-400">{secondLine}</p>
+				{/* report */}
+				<div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+					<div className="md:col-span-2">
+						<h2 className="font-stadium text-[11px] font-bold uppercase tracking-[0.34em] text-kit-neon">
+							Match report
+						</h2>
+						<div className="mt-4 space-y-4">
+							{secondLine && (
+								<p className="text-[15px] leading-relaxed text-emerald-50/70 md:text-base">
+									{secondLine}
+								</p>
+							)}
+							{additional.map((desc, i) => (
+								<p
+									key={i}
+									className="border-l-2 border-emerald-400/30 pl-4 text-[15px] leading-relaxed text-emerald-50/70"
+								>
+									{desc}
+								</p>
+							))}
+						</div>
 
-				<div className="mt-6 text-sm text-zinc-300 space-y-2">
-					{additional.map((desc, i) => (
-						<p key={i}>• {desc}</p>
-					))}
-				</div>
-
-				<div className="mt-6">
-					<div className="flex flex-wrap gap-2 mb-6">
-						{project.tech_stack.map((tech) => (
-							<span
-								key={tech}
-								className="px-2 py-1 text-sm text-zinc-300 border border-zinc-700 rounded"
-							>
-								{tech}
-							</span>
-						))}
+						{/* links */}
+						<div className="mt-8 flex flex-wrap gap-3">
+							{project.live && (
+								<a
+									href={project.live}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center gap-2 rounded-sm bg-kit-neon px-5 py-3 font-stadium text-sm font-bold uppercase tracking-[0.18em] text-black shadow-[0_0_30px_-8px_rgba(62,240,140,.9)] transition-transform duration-300 hover:-translate-y-0.5"
+								>
+									<ExternalLink size={15} />
+									Watch it live
+								</a>
+							)}
+							{project.github && (
+								<a
+									href={project.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center gap-2 rounded-sm border border-emerald-300/40 px-5 py-3 font-stadium text-sm font-bold uppercase tracking-[0.18em] text-emerald-100 transition-colors duration-300 hover:border-kit-gold hover:text-kit-gold"
+								>
+									<Github size={15} />
+									Source
+								</a>
+							)}
+						</div>
 					</div>
-				</div>
 
-				<div className="flex gap-2 flex-wrap">
-					{project.live && (
-						<a
-							href={project.live}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 text-zinc-100 rounded hover:bg-zinc-700 transition"
-						>
-							<ExternalLink size={16} />
-							Live Demo
-						</a>
-					)}
-					{project.github && (
-						<a
-							href={project.github}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 text-zinc-100 rounded hover:bg-zinc-700 transition"
-						>
-							<Github size={16} />
-							GitHub
-						</a>
-					)}
+					{/* lineup */}
+					<aside>
+						<div className="overflow-hidden rounded-lg border border-emerald-400/25 bg-black/55 backdrop-blur-md">
+							<div className="border-b border-emerald-400/20 bg-emerald-500/10 px-4 py-2.5 font-stadium text-[11px] font-bold uppercase tracking-[0.28em] text-emerald-200/80">
+								Starting XI
+							</div>
+							<ul className="divide-y divide-emerald-400/10">
+								{project.tech_stack.map((tech, i) => (
+									<li
+										key={tech}
+										className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-emerald-500/5"
+									>
+										<span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-kit-neon font-jersey text-[11px] leading-none text-black">
+											{i + 1}
+										</span>
+										<span className="font-stadium text-sm uppercase tracking-wide text-emerald-50/85">
+											{tech}
+										</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					</aside>
 				</div>
 			</div>
-      <ReportView slug={slug} />
+
+			<ReportView slug={slug} />
 		</div>
 	);
 }
