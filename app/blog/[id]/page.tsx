@@ -88,9 +88,9 @@ export default function BlogDetailPage() {
 											<Image
 												src={block.src}
 												alt={block.alt}
-												width={800}
-												height={400}
-												className="w-full max-w-md mx-auto rounded-md"
+												width={1200}
+												height={630}
+												className="w-full max-w-2xl mx-auto rounded-md"
 											/>
 										</div>
 									);
