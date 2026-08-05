@@ -1,10 +1,10 @@
 "use client";
 
-import { Mail, Github, Mail as MailIcon } from "lucide-react";
+import { Mail, Github } from "lucide-react";
 import Link from "next/link";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { Navigation } from "../components/nav";
 
 const socials = [
 	{
@@ -15,9 +15,9 @@ const socials = [
 		image: "/x.png",
 	},
 	{
-		icon: <Github size={20} />,
+		icon: <Github size={20} strokeWidth={1.6} />,
 		href: "https://github.com/laksh2005",
-		label: "Github",
+		label: "GitHub",
 		handle: "laksh2005",
 		image: null,
 	},
@@ -32,62 +32,67 @@ const socials = [
 
 export default function ContactPage() {
 	return (
-		<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen page-enter">
+		<div className="relative min-h-screen">
 			<Navigation />
-			<div className="container flex flex-col items-center justify-center min-h-screen px-4 mx-auto">
-				{/* Mail Icon at Top */}
-				<div className="mb-20 text-center element-enter-1">
+			<div className="flex flex-col items-center justify-center min-h-screen px-6 py-24">
+				<motion.div
+					initial={{ opacity: 0, y: 16 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+					className="flex flex-col items-center text-center"
+				>
+					<span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-violet-300/70">
+						Get in touch
+					</span>
+					<h1 className="font-serif-title mt-4 text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.02] text-white">
+						Let's talk.
+					</h1>
 					<Link
 						href="mailto:lakshnijhawan.work@gmail.com"
-						className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-zinc-600 hover:border-zinc-400 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all duration-300 group"
-						title="Send an email"
+						className="group mt-8 inline-flex items-center gap-2.5 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-[14px] font-medium text-zinc-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-300/30 hover:text-white"
 					>
-						<Mail
-							size={24}
-							className="text-zinc-400 group-hover:text-zinc-200 transition-colors"
-						/>
+						<Mail size={16} className="text-violet-300/80" />
+						lakshnijhawan.work@gmail.com
 					</Link>
-					<p className="mt-3 text-xs text-zinc-500 group-hover:text-zinc-400">
-						tap to mail
-					</p>
-				</div>
+				</motion.div>
 
-				{/* Socials Grid - 3 Columns */}
-				<div className="grid w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-3 max-w-3xl element-enter-2">
+				<div className="mt-16 grid w-full grid-cols-1 gap-4 mx-auto sm:grid-cols-3 max-w-2xl">
 					{socials.map((s, idx) => (
-						<Card key={idx}>
+						<motion.div
+							key={s.label}
+							initial={{ opacity: 0, y: 16 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.1 + idx * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+						>
 							<Link
 								href={s.href}
 								target="_blank"
-								className="p-6 relative flex flex-col items-center gap-4 duration-700 group"
+								rel="noopener noreferrer"
+								className="group flex flex-col items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-violet-300/25 hover:bg-white/[0.035]"
 							>
-								<span
-									className="absolute w-px h-2/3 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent"
-									aria-hidden="true"
-								/>
-								<span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange overflow-hidden">
+								<span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/[0.1] bg-white/[0.03] text-zinc-300 transition-colors group-hover:text-white">
 									{s.image ? (
 										<Image
 											src={s.image}
 											alt={s.label}
-											width={48}
-											height={48}
-											className="w-full h-full object-cover"
+											width={44}
+											height={44}
+											className="h-full w-full object-cover"
 										/>
 									) : (
 										s.icon
 									)}
 								</span>
-								<div className="z-10 flex flex-col items-center text-center">
-									<span className="text-lg font-medium duration-150 text-zinc-200 group-hover:text-white font-display">
+								<div className="flex flex-col items-center text-center">
+									<span className="font-serif-title text-base text-white">
 										{s.handle}
 									</span>
-									<span className="mt-2 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
+									<span className="mt-1 text-[11.5px] text-zinc-500">
 										{s.label}
 									</span>
 								</div>
 							</Link>
-						</Card>
+						</motion.div>
 					))}
 				</div>
 			</div>

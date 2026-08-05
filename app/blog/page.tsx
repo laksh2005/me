@@ -1,71 +1,101 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "../components/nav";
 import { blogsData } from "@/util/data";
-import { Card } from "../components/card";
+
+const Reveal: React.FC<{
+	children: React.ReactNode;
+	delay?: number;
+	className?: string;
+	y?: number;
+}> = ({ children, delay = 0, className = "", y = 20 }) => (
+	<motion.div
+		initial={{ opacity: 0, y }}
+		whileInView={{ opacity: 1, y: 0 }}
+		viewport={{ once: true, margin: "-90px" }}
+		transition={{ delay, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+		className={className}
+	>
+		{children}
+	</motion.div>
+);
 
 export default function BlogsPage() {
 	return (
-		<div className="relative pb-16 page-enter">
+		<div className="relative min-h-screen pb-28 pt-32 md:pt-40">
 			<Navigation />
-			<div className="px-6 pt-20 mx-auto space-y-8 max-w-6xl lg:px-8 md:space-y-16 md:pt-24">
-				<div className="max-w-2xl mx-auto lg:mx-0">
-					<h1 className="text-4xl font-serif-title font-bold tracking-tight text-zinc-100 sm:text-5xl element-enter-1">
+
+			<div className="px-6">
+				<Reveal className="flex flex-col items-center text-center">
+					<span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-violet-300/70">
 						Blog
+					</span>
+					<h1 className="font-serif-title mt-4 text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.02] text-white">
+						Things I've written
 					</h1>
-					<p className="mt-4 text-zinc-400 element-enter-2">
-						My insights and opinions about technology, compiled at a place
+					<p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-zinc-500">
+						Mostly what shipping has taught me.
 					</p>
-				</div>
+				</Reveal>
 
-				{/* Blogs Grid - 2 Columns */}
 				{blogsData.length === 0 ? (
-					<div className="flex items-center justify-center min-h-[400px] element-enter-3">
-						<div className="text-center">
-							<p className="text-zinc-500 text-lg font-serif-title mb-2">
-								New Blogs Coming Soon
-							</p>
-							<p className="text-zinc-600 text-sm">
-								I'm working on sharing my thoughts and insights. Stay tuned!
-							</p>
-						</div>
-					</div>
+					<Reveal className="mt-20 text-center">
+						<p className="font-serif-title text-2xl text-zinc-400">
+							New entries coming soon
+						</p>
+					</Reveal>
 				) : (
-					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8 element-enter-3">
-						{blogsData.map((blog, idx) => (
-							<Link key={blog.slug} href={`/blog/${idx}`}>
-								<div style={{ animationDelay: `${idx * 0.05}s` }}>
-									<Card>
-										<article
-											className="relative w-full h-full p-6 cursor-pointer border border-zinc-800 hover:border-zinc-600 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-900/50"
-										>
-											<div className="flex flex-col h-full">
-												{/* Date */}
-												<div className="text-xs text-zinc-500 mb-3">
-													{blog.month} {blog.year}
-												</div>
+					<div className="mx-auto mt-20 max-w-3xl divide-y divide-white/[0.07] border-y border-white/[0.07]">
+						{[...blogsData]
+							.map((blog, originalIndex) => ({ blog, originalIndex }))
+							.reverse()
+							.map(({ blog, originalIndex }, idx) => (
+								<Reveal
+									key={blog.slug}
+									delay={Math.min(idx, 6) * 0.05}
+								>
+									<Link
+										href={`/blog/${originalIndex}`}
+										className="group flex items-center gap-5 py-6 transition-colors md:gap-8"
+									>
+										{blog.image && (
+											<div className="relative hidden h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/[0.08] sm:block md:h-20 md:w-28">
+												<Image
+													src={blog.image}
+													alt={blog.title}
+													fill
+													sizes="112px"
+													className="object-cover transition-transform duration-700 group-hover:scale-105"
+												/>
+											</div>
+										)}
 
-												{/* Title */}
-												<h3 className="text-xl font-serif-title text-zinc-100 group-hover:text-white transition-colors mb-3">
-													{blog.title}
-												</h3>
+										<div className="min-w-0 flex-1">
+											<span className="text-[10px] uppercase tracking-[0.14em] text-violet-300/70">
+												{blog.month} {blog.year}
+											</span>
+											<h3 className="font-serif-title mt-1.5 text-xl leading-snug text-white transition-colors md:text-2xl">
+												{blog.title}
+											</h3>
 
-												{/* Overview */}
-												<p className="text-sm leading-6 text-zinc-400 flex-grow">
+											{blog.overview && (
+												<p className="mt-1.5 line-clamp-1 text-[13px] text-zinc-500">
 													{blog.overview}
 												</p>
+											)}
+										</div>
 
-												{/* Read More */}
-												<div className="mt-4 text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-													Read more →
-												</div>
-											</div>
-										</article>
-									</Card>
-								</div>
-							</Link>
-						))}
+										<ArrowUpRight
+											size={17}
+											className="shrink-0 text-zinc-600 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
+										/>
+									</Link>
+								</Reveal>
+							))}
 					</div>
 				)}
 			</div>

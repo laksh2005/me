@@ -17,6 +17,7 @@ const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 const MIN_VOLUME = 0.015;
 const FADE_DURATION = 2000;
+const START_TIME = 15; // Start playback at 17 seconds
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
 	const [isPlaying, setIsPlaying] = useState(true);
@@ -47,10 +48,14 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
 	// init audio
 	useEffect(() => {
-		const audio = new Audio("/song2.mp3");
+		const audio = new Audio("/song4.m4a");
 		audio.loop = true;
 		audio.volume = 0;
 		audio.preload = "auto";
+
+		audio.addEventListener("loadedmetadata", () => {
+			audio.currentTime = START_TIME;
+		});
 
 		audioRef.current = audio;
 
@@ -58,6 +63,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 		audio
 			.play()
 			.then(() => {
+				audio.currentTime = START_TIME;
 				unlockedRef.current = true;
 				fadeVolume(MIN_VOLUME, FADE_DURATION);
 			})
@@ -66,15 +72,17 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 			});
 
 		return () => {
-			rafRef.current && cancelAnimationFrame(rafRef.current);
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
 			audio.pause();
 		};
 	}, []);
 
-	// 🔑 unlock on first interaction (mobile + safari fix)
+	// unlock on first interaction (mobile + safari fix)
 	useEffect(() => {
 		const unlock = () => {
 			if (!audioRef.current || unlockedRef.current) return;
+
+			audioRef.current.currentTime = START_TIME;
 
 			audioRef.current
 				.play()

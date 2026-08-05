@@ -40,32 +40,32 @@ export default function BlogDetailPage() {
 		<>
 			<div className="fixed top-0 left-0 w-full h-[2px] bg-zinc-800 z-50">
 				<div
-					className="h-full bg-white transition-all duration-150"
+					className="h-full bg-violet-300 transition-all duration-150"
 					style={{ width: `${scroll}%` }}
 				/>
 			</div>
 
-			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 min-h-screen page-enter">
+			<div className="relative min-h-screen page-enter">
 				<Navigation />
 
-				<div className="container px-4 mx-auto max-w-3xl py-20">
+				<div className="container relative px-6 mx-auto max-w-2xl pt-32 pb-20 md:pt-40">
 					<Link
 						href="/blog"
-						className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-200 mb-8"
+						className="inline-flex items-center gap-2 text-[13px] text-zinc-500 hover:text-white transition-colors mb-10"
 					>
-						<ArrowLeft size={16} />
-						Back to blog
+						<ArrowLeft size={14} />
+						Back to Blog
 					</Link>
 
 					<article className="space-y-8">
 						<div>
-							<div className="text-sm text-zinc-500 mb-4">
+							<span className="text-[10px] uppercase tracking-[0.16em] text-violet-300/70">
 								{blog.month} {blog.year}
-							</div>
-							<h1 className="text-4xl md:text-5xl font-bold font-serif-title text-zinc-100 mb-6">
+							</span>
+							<h1 className="font-serif-title text-[clamp(2.2rem,5.5vw,3.6rem)] leading-[1.05] text-white mt-3 mb-5">
 								{blog.title}
 							</h1>
-							<p className="text-lg text-zinc-400 leading-relaxed">
+							<p className="text-[15px] text-zinc-400 leading-relaxed">
 								{blog.overview}
 							</p>
 						</div>

@@ -16,6 +16,117 @@
   }
 }
 
+/* ============================================================
+   GLOBAL BACKDROP — one identity, mounted once in the root layout,
+   position:fixed so it's always viewport-aligned regardless of scroll.
+   Every page shares this; nothing renders its own copy.
+   ============================================================ */
+
+.gb-backdrop {
+  --mx: 50vw;
+  --my: 40vh;
+  background: #08080A;
+}
+
+.gb-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.11;
+  -webkit-mask-image: radial-gradient(
+    620px circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.4) 45%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    620px circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.4) 45%,
+    transparent 78%
+  );
+}
+
+.gb-wash {
+  background:
+    radial-gradient(60% 48% at 50% 0%, rgba(167, 139, 250, 0.16), transparent 68%),
+    radial-gradient(50% 42% at 6% 96%, rgba(167, 139, 250, 0.09), transparent 70%),
+    radial-gradient(46% 40% at 96% 88%, rgba(167, 139, 250, 0.07), transparent 70%);
+  animation: gb-breathe 16s ease-in-out infinite;
+}
+
+@keyframes gb-breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.gb-spot {
+  background: radial-gradient(
+    560px circle at var(--mx) var(--my),
+    rgba(167, 139, 250, 0.16) 0%,
+    rgba(255, 255, 255, 0.05) 38%,
+    transparent 72%
+  );
+}
+
+.gb-vignette {
+  background: radial-gradient(
+    ellipse 100% 85% at 50% 40%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+/* staggered entrance — CSS so it never depends on hydration */
+@keyframes lp-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lp-in {
+  opacity: 0;
+  animation: lp-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* the name gets a slow champagne sheen sweeping across it */
+@keyframes lp-sheen {
+  0% { background-position: -140% 0; }
+  100% { background-position: 240% 0; }
+}
+
+/* Note: this element must NOT also carry .lp-in — a second `animation`
+   declaration would override the entrance and strand it at opacity 0.
+   The rise lives on a wrapper instead. */
+.lp-name {
+  background-image: linear-gradient(
+    100deg,
+    #F4F1EA 0%,
+    #F4F1EA 38%,
+    #A78BFA 50%,
+    #F4F1EA 62%,
+    #F4F1EA 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: lp-sheen 7s ease-in-out 1.4s infinite;
+}
+
+/* soft pulse on the availability dot */
+@keyframes lp-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+.lp-dot { animation: lp-pulse 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-wash, .lp-name, .lp-dot { animation: none !important; }
+  .lp-in { animation-duration: 0.01ms !important; }
+  .lp-name { color: #F4F1EA; }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

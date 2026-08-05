@@ -1,143 +1,109 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { projectsData } from "@/util/data";
+import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
+import { Navigation } from "../components/nav";
+import { projectsData } from "@/util/data";
+
+const Reveal: React.FC<{
+	children: React.ReactNode;
+	delay?: number;
+	className?: string;
+	y?: number;
+}> = ({ children, delay = 0, className = "", y = 20 }) => (
+	<motion.div
+		initial={{ opacity: 0, y }}
+		whileInView={{ opacity: 1, y: 0 }}
+		viewport={{ once: true, margin: "-90px" }}
+		transition={{ delay, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+		className={className}
+	>
+		{children}
+	</motion.div>
+);
 
 export default function ProjectsPage() {
 	const router = useRouter();
-	const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-
-	const getBorderColor = (slug: string, type: string) => {
-		if (slug === "codepersona") return "border-yellow-500";
-		if (type === "dev") return "border-blue-900/50";
-		if (type === "ml") return "border-purple-900/50";
-		return "border-zinc-800";
-	};
-
-	const getHoverBorderColor = (slug: string, type: string) => {
-		if (slug === "codepersona") return "hover:border-yellow-400";
-		if (type === "dev") return "hover:border-blue-700/80";
-		if (type === "ml") return "hover:border-purple-700/80";
-		return "hover:border-zinc-600";
-	};
 
 	return (
-		<div className="relative pb-16 page-enter">
+		<div className="relative min-h-screen pb-28 pt-32 md:pt-40">
 			<Navigation />
-			<div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24">
-				<div className="max-w-2xl mx-auto lg:mx-0">
-					<h1 className="text-4xl font-serif-title font-bold tracking-tight text-zinc-100 sm:text-5xl element-enter-1">
-						Projects
-					</h1>
-					<p className="mt-4 text-zinc-400 element-enter-2">
-						Stuff I made with a motive of learning, and some straight out of the sticky notes at my desk
-					</p>
-				</div>
 
-			{/* Projects Grid - 2 Columns */}
-			<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8 element-enter-3">
-				{projectsData.map((project, idx) => (
-					<div
-						key={project.slug}
-						onMouseEnter={() => setHoveredProject(project.slug)}
-						onMouseLeave={() => setHoveredProject(null)}
-						style={{ animationDelay: `${idx * 0.05}s` }}
-					>
-						<Card>
+			<div className="px-6">
+				<Reveal className="flex flex-col items-center text-center">
+					<span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-violet-300/70">
+						Projects
+					</span>
+					<h1 className="font-serif-title mt-4 text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.02] text-white">
+						Things I've built
+					</h1>
+					<p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-zinc-500">
+						Some made to learn, some straight off the sticky notes at my desk.{" "}
+						{projectsData.length} shipped so far.
+					</p>
+				</Reveal>
+
+				<div className="mx-auto mt-20 grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-2">
+					{projectsData.map((project, idx) => (
+						<Reveal key={project.slug} delay={Math.min(idx, 6) * 0.05}>
 							<article
-								className={`relative w-full h-full p-4 cursor-pointer border-2 transition-all duration-300 ${getBorderColor(
-									project.slug,
-									project.type,
-								)} ${getHoverBorderColor(
-									project.slug,
-									project.type,
-								)} rounded-lg overflow-hidden`}
 								onClick={() => router.push(`/projects/${project.slug}`)}
+								className="group relative flex h-full cursor-pointer flex-col rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-300/25 hover:bg-white/[0.035]"
 							>
-								{/* Type Badge */}
-								<div className="flex items-start justify-between mb-4">
-									<span
-										className={`text-xs font-semibold px-3 py-1 rounded-full ${
-											project.type === "dev"
-												? "bg-blue-900/30 text-blue-300"
-												: "bg-purple-900/30 text-purple-300"
-										}`}
-									>
-										{project.type === "dev"
-											? "Development"
-											: "Machine Learning"}
+								<div className="flex items-start justify-between gap-3">
+									<h3 className="font-serif-title text-2xl leading-tight text-white">
+										{project.name}
+									</h3>
+									<span className="shrink-0 rounded-full border border-white/[0.1] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-zinc-400">
+										{project.type === "dev" ? "Dev" : "ML"}
 									</span>
 								</div>
-									<div className="mb-4">
-										<div className="mb-4 flex items-baseline gap-2">
-											<h3 className="text-xl font-serif-title font-bold text-zinc-100 group-hover:text-white transition-colors">
-												{project.name}
-											</h3>
 
-											{/* Hover Text */}
-											<div
-												className={`mt-3 text-sm text-zinc-500 transition-opacity duration-300 ${
-													hoveredProject === project.slug
-														? "opacity-100"
-														: "opacity-0"
-												}`}
-											>
-												(tap if curious)
-											</div>
-										</div>
-									</div>
+								<p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-zinc-400">
+									{project.description[0]}
+								</p>
 
-									{/* Description */}
-									<p className="text-sm leading-6 text-zinc-400 mb-4">
-										{project.description[0]}
-									</p>
+								<div className="mt-5 flex flex-wrap gap-1.5">
+									{project.tech_stack.slice(0, 4).map((tech) => (
+										<span
+											key={tech}
+											className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-zinc-500"
+										>
+											{tech}
+										</span>
+									))}
+								</div>
 
-									{/* Tech Stack */}
-									<div className="flex flex-wrap gap-2 mb-6">
-										{project.tech_stack.slice(0, 3).map((tech) => (
-											<span
-												key={tech}
-												className="px-2 py-1 text-xs text-zinc-400 border border-zinc-700 rounded"
-											>
-												{tech}
-											</span>
-										))}
-									</div>
-
-									{/* Links */}
-									<div className="flex gap-3 flex-wrap">
-										{project.live && (
-											<a
-												href={project.live}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="inline-flex items-center gap-2 text-xs text-zinc-400 hover:text-zinc-200 transition"
-												onClick={(e) => e.stopPropagation()}
-											>
-												<ExternalLink size={14} />
-												Live
-											</a>
-										)}
-										{project.github && (
-											<a
-												href={project.github}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="inline-flex items-center gap-2 text-xs text-zinc-400 hover:text-zinc-200 transition"
-												onClick={(e) => e.stopPropagation()}
-											>
-												<Github size={14} />
-												GitHub
-											</a>
-										)}
-									</div>
-								</article>
-							</Card>
-						</div>
+								<div className="mt-5 flex gap-5 border-t border-white/[0.07] pt-4">
+									{project.live && (
+										<a
+											href={project.live}
+											target="_blank"
+											rel="noopener noreferrer"
+											onClick={(e) => e.stopPropagation()}
+											className="inline-flex items-center gap-1.5 text-[12px] font-medium text-zinc-400 transition-colors hover:text-violet-300"
+										>
+											<ExternalLink size={13} />
+											Live
+										</a>
+									)}
+									{project.github && (
+										<a
+											href={project.github}
+											target="_blank"
+											rel="noopener noreferrer"
+											onClick={(e) => e.stopPropagation()}
+											className="inline-flex items-center gap-1.5 text-[12px] font-medium text-zinc-400 transition-colors hover:text-violet-300"
+										>
+											<Github size={13} />
+											Source
+										</a>
+									)}
+								</div>
+							</article>
+						</Reveal>
 					))}
 				</div>
 			</div>

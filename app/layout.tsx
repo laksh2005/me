@@ -5,18 +5,21 @@ import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { AudioProvider } from "@/util/audioContext";
+import GlobalBackdrop from "./components/global-backdrop";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.laksh1.me"),
 	title: {
-		default: "Hi, I'm Laksh",
-		template: "laksh1.me",
+		default: "Hi! I'm Laksh",
+		template: "%s · Laksh Nijhawan",
 	},
-	description: "",
+	description:
+		"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
 	openGraph: {
-		title: "laksh1.me",
-		description: "working is the moat",
-		url: "laksh1.me",
+		title: "Laksh Nijhawan — Product-focused engineer",
+		description:
+			"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
+		url: "https://www.laksh1.me",
 		siteName: "Laksh Nijhawan",
 		images: [
 			{
@@ -67,14 +70,10 @@ export default function RootLayout({
 			<head>
 				<Analytics />
 			</head>
-			<body
-				className={`bg-black ${
-					process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-				}`}
-			>
+			<body className="relative bg-[#08080A] text-zinc-200">
+				<GlobalBackdrop />
 				<AudioProvider>
-
-					{children}
+					<div className="relative z-10">{children}</div>
 				</AudioProvider>
 				<VercelAnalytics />
 			</body>

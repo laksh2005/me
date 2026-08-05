@@ -51,7 +51,7 @@ export const projectsData = [
 		slug: "codepersona",
 		type: "dev",
 		live: "https://codepersona.app",
-		github: null,
+		github: "https://github.com/laksh2005/codepersona",
 		tech_stack: [
 			"TypeScript",
 			"React",
@@ -285,7 +285,7 @@ export const blogsData: Blog[] = [
 		month: "March",
 		year: 2026,
 		// overview: "I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
-		image: "/times.jpeg",
+		image: "/times.jpg",
   content: [
     { 
       type: "paragraph", 
