@@ -40,8 +40,7 @@ export default function ProjectsPage() {
 						Things I've built
 					</h1>
 					<p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-zinc-500">
-						Some made to learn, some straight off the sticky notes at my desk.{" "}
-						{projectsData.length} shipped so far.
+						Some made to learn, some straight off the sticky notes at my desk.
 					</p>
 				</Reveal>
 
