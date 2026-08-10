@@ -48,7 +48,7 @@ const stats = [
 ];
 
 const RESUME =
-	"https://drive.google.com/file/d/1yh_i07AzMMlhSV9mQ5PH6_n7nvYpVAs3/view?usp=sharing";
+	"https://drive.google.com/file/d/1mAy2AfE7nnZt8bbP2IPXuqO__tMPM1xn/view?usp=sharing";
 
 /** Small helper so the entrance stagger stays readable inline. */
 const rise = (delay: number) => ({ animationDelay: `${delay}s` });
@@ -102,6 +102,21 @@ export default function Home() {
 						<span className="text-zinc-100">Product-focused Engineer</span>{" "}
 						building end-to-end systems that turn ideas into real, usable
 						products.
+					</p>
+
+										<p
+						className="lp-in mt-4 max-w-2xl text-center text-[13.5px] leading-relaxed text-zinc-500 md:text-sm"
+						style={rise(0.45)}
+					>
+						Newest work: {" "}
+						<a
+							href="https://laksh1.me/projects/keepr"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="font-medium text-zinc-300 decoration-zinc-600 underline-offset-4 transition-colors hover:text-white hover:underline"
+						>
+							Keepr
+						</a>.
 					</p>
 
 					{/* proof line */}

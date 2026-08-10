@@ -47,6 +47,27 @@ export const skillsData = {
 
 export const projectsData = [
 	{
+		name: "Keepr ⭐",
+		slug: "keepr",
+		type: "dev",
+		live: "https://keepr.website",
+		github: "https://github.com/laksh2005/Keepr",
+		tech_stack: [
+			"NestJS",
+			"TypeScript",
+			"MongoDB Atlas",
+			"Vector Search",
+			"WhatsApp Cloud API",
+			"Hugging Face",
+		],
+		description: [
+			"Built a WhatsApp-native personal memory service that saves and recalls messages, links, and media context through a single Business number.",
+			"Engineered semantic recall using Atlas Vector Search with per-user pre-filtering, plus zero-shot intent classification to route messages between save and recall flows.",
+			"Designed for privacy and idempotency: stores only metadata and never media, with a unique compound index making webhook retries safe.",
+		],
+		image: "/keepr.png",
+	},
+	{
 		name: "CodePersona ⭐",
 		slug: "codepersona",
 		type: "dev",
@@ -84,7 +105,7 @@ export const projectsData = [
 		image: "/sync.png",
 	},
 	{
-		name: "One Stack ⭐",
+		name: "One Stack",
 		slug: "one-stack",
 		type: "dev",
 		live: "https://one-stack.vercel.app",
