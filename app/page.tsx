@@ -113,7 +113,7 @@ export default function Home() {
 							href="https://laksh1.me/projects/keepr"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="font-medium text-zinc-300 decoration-zinc-600 underline-offset-4 transition-colors hover:text-white hover:underline"
+							className="font-medium text-[15px] text-[#A78BFA] decoration-[#A78BFA] underline-offset-4 transition-colors hover:text-white hover:underline"
 						>
 							Keepr
 						</a>.
