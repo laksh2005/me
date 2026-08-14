@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ReportView } from "./view";
 import { Reveal } from "@/app/components/reveal";
+import { ProjectVideo } from "@/app/components/project-video";
 
 const clean = (n: string) => n.replace("⭐", "").trim();
 const isStar = (n: string) => n.includes("⭐");
@@ -106,26 +107,40 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
 					)}
 				</Reveal>
 
-				{/* hero image */}
-				<Reveal delay={0.14} className="mt-12">
-					<div className="grain relative w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
-						{project.image ? (
-							<div className="relative aspect-[16/9] w-full">
-								<Image
-									src={project.image}
-									alt={clean(project.name)}
-									fill
-									sizes="(max-width: 1024px) 100vw, 960px"
-									className="object-cover"
-									priority
-								/>
-								<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08080A]/50 via-transparent to-transparent" />
-							</div>
-						) : (
-							<div className="aspect-[16/9] w-full bg-white/[0.03]" />
-						)}
-					</div>
-				</Reveal>
+				{/* Media: a demo video stands in for the screenshot where one exists,
+				    otherwise fall back to the static image. Projects without a video
+				    (every one but Keepr today) are unaffected. */}
+				{project.video ? (
+					<Reveal delay={0.12} className="mt-12 flex justify-center">
+						<div className="grain relative w-full max-w-[300px] overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] shadow-[0_20px_60px_-24px_rgba(0,0,0,0.9)] md:max-w-[340px]">
+							<ProjectVideo
+								src={project.video}
+								poster={project.image}
+								className="block aspect-[9/16] w-full object-cover"
+							/>
+						</div>
+					</Reveal>
+				) : (
+					<Reveal delay={0.14} className="mt-12">
+						<div className="grain relative w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+							{project.image ? (
+								<div className="relative aspect-[16/9] w-full">
+									<Image
+										src={project.image}
+										alt={clean(project.name)}
+										fill
+										sizes="(max-width: 1024px) 100vw, 960px"
+										className="object-cover"
+										priority
+									/>
+									<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08080A]/50 via-transparent to-transparent" />
+								</div>
+							) : (
+								<div className="aspect-[16/9] w-full bg-white/[0.03]" />
+							)}
+						</div>
+					</Reveal>
+				)}
 
 				{/* body + sidebar */}
 				<div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1fr)_16rem]">

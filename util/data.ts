@@ -66,6 +66,7 @@ export const projectsData = [
 			"Designed for privacy and idempotency: stores only metadata and never media, with a unique compound index making webhook retries safe.",
 		],
 		image: "/keepr.png",
+		video: "/keepr.mp4",
 	},
 	{
 		name: "CodePersona ⭐",
