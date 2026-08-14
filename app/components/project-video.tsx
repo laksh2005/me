@@ -1,71 +1,89 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
+import { Play, Pause } from "lucide-react";
 
 /**
- * Autoplaying, looping, muted demo video.
+ * Click-to-play demo video.
  *
- * Two things browsers are strict about, both handled here:
- *  - `muted` must be set as a DOM *property*, not just a JSX attribute. React
- *    can emit the attribute after the element is created, and Chrome/Safari
- *    evaluate autoplay eligibility at creation — so the attribute alone
- *    intermittently fails and the video silently never starts. Setting
- *    `.muted = true` in an effect (before calling play) makes it reliable.
- *  - `playsInline` stops iOS Safari hijacking it into fullscreen playback.
+ * `preload="none"` is the whole point: the browser fetches *nothing* until the
+ * visitor actually presses play. The poster image carries the first paint, so
+ * a heavy video never competes with the rest of the page for bandwidth on
+ * load. (Autoplay was doing the opposite — pulling the entire file down on
+ * every visit, whether or not anyone watched it.)
  *
- * Playback is also paused while offscreen, so a 14 MB file isn't decoding
- * behind content the visitor isn't looking at.
+ * Still muted + looping once started, so it behaves like an ambient demo
+ * rather than something that ambushes you with sound.
  */
 export const ProjectVideo: React.FC<{
 	src: string;
 	poster?: string;
 	className?: string;
-}> = ({ src, poster, className = "" }) => {
+	label?: string;
+}> = ({ src, poster, className = "", label = "Play demo" }) => {
 	const ref = useRef<HTMLVideoElement>(null);
+	const [started, setStarted] = useState(false);
+	const [playing, setPlaying] = useState(false);
 
-	useEffect(() => {
+	const toggle = useCallback(() => {
 		const el = ref.current;
 		if (!el) return;
 
-		// must be a property, not just the attribute — see note above
-		el.muted = true;
-		el.defaultMuted = true;
-
-		const tryPlay = () => {
+		if (el.paused) {
+			// must be a property, not just the JSX attribute — browsers decide
+			// playback eligibility at call time and the attribute can land late
+			el.muted = true;
 			const p = el.play();
-			// Autoplay can still be refused (power saving, strict settings).
-			// Swallow it: the controls-less poster stays visible rather than
-			// throwing an unhandled rejection.
 			if (p && typeof p.catch === "function") p.catch(() => {});
-		};
-
-		tryPlay();
-
-		// don't decode while scrolled away
-		const io = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) tryPlay();
-				else el.pause();
-			},
-			{ threshold: 0.15 },
-		);
-		io.observe(el);
-
-		return () => io.disconnect();
+			setStarted(true);
+			setPlaying(true);
+		} else {
+			el.pause();
+			setPlaying(false);
+		}
 	}, []);
 
 	return (
-		<video
-			ref={ref}
-			src={src}
-			poster={poster}
-			autoPlay
-			muted
-			loop
-			playsInline
-			preload="metadata"
-			aria-label="Project demo"
-			className={className}
-		/>
+		<div className="group relative">
+			<video
+				ref={ref}
+				src={src}
+				poster={poster}
+				muted
+				loop
+				playsInline
+				preload="none"
+				onClick={toggle}
+				onPlay={() => setPlaying(true)}
+				onPause={() => setPlaying(false)}
+				className={`cursor-pointer ${className}`}
+			/>
+
+			{/* Overlay: full cover before first play, a small corner control after.
+			    Kept as a real <button> so it's keyboard reachable. */}
+			<button
+				type="button"
+				onClick={toggle}
+				aria-label={playing ? "Pause demo" : label}
+				className={
+					started
+						? "absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100 focus-visible:opacity-100"
+						: "absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/35 transition-colors duration-300 hover:bg-black/25"
+				}
+			>
+				{started ? (
+					playing ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />
+				) : (
+					<>
+						<span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-black/50 backdrop-blur transition-transform duration-300 group-hover:scale-105">
+							<Play size={22} className="ml-1 text-white" fill="currentColor" />
+						</span>
+						<span className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/80">
+							{label}
+						</span>
+					</>
+				)}
+			</button>
+		</div>
 	);
 };
