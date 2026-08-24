@@ -220,7 +220,7 @@ export const experienceData = [
 	  location: "Noida, India",
 	  image: "/toi.png",
 	  description: [
-		"Building scalable HR automation tools, using quality-review workflows, eliminating 90% of manual QA tasks and enabling non-technical stakeholders to act on outputs directly"
+		"Built scalable HR automation tools, replacing manual quality-review steps and enabling non-technical stake-holders to act on outputs directly; cutting review cycle time by 90%."
 	],
 	},
 	{
@@ -254,7 +254,7 @@ export const experienceData = [
 		mode: "Remote",
 		location: "Delhi, India",
 		image: "/swoc.jpg",
-		description: ["Finished at 41st Rank out of 400+ participants, with 15+ merged PRs across 3 different projects involving feature development and UI enhancements."],
+		description: ["Finished at 41st Rank out of 347 participants, with 15+ merged PRs across 3 different projects involving feature development and UI enhancements."],
 	},
 	//     {
 	//     company: "15FORTEEN",
