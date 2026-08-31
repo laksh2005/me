@@ -48,7 +48,7 @@ const stats = [
 ];
 
 const RESUME =
-	"https://drive.google.com/file/d/1mAy2AfE7nnZt8bbP2IPXuqO__tMPM1xn/view?usp=sharing";
+	"https://drive.google.com/file/d/1xP6SzxNy9WOBb-zdDxYx_iIpnqEzn5nT/view?usp=sharing";
 
 /** Small helper so the entrance stagger stays readable inline. */
 const rise = (delay: number) => ({ animationDelay: `${delay}s` });
