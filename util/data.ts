@@ -23,26 +23,26 @@ export const skillsData = {
 	"Backend & Databases": ["Nest.js", "Node.js", "WebSockets", "MongoDB", "MySQL", "Supabase","Flask"],
 	
 
-		"Data Science & AI": [
-		"LangChain",
-		"LangGraph",
-		"RAG Pipelines",
-		"Pandas",
-		"NumPy",
-		"scikit-learn",
-		"TensorFlow",
-		"PyTorch",
-	],
+	// 	"Data Science & AI": [
+	// 	"LangChain",
+	// 	"LangGraph",
+	// 	"RAG Pipelines",
+	// 	"Pandas",
+	// 	"NumPy",
+	// 	"scikit-learn",
+	// 	"TensorFlow",
+	// 	"PyTorch",
+	// ],
 	"DevOps & Databases": [
 		"Docker",
 		"Git",
 		"GitHub",
-		"AWS",
+		"AWS (EC2)",
 		"Vercel",
 		"CI/CD",
-		"Kubernetes",
+		// "Kubernetes",
 	],
-	Programming: ["Python", "C++", "Java"]
+	Programming: ["Python", "C++"]
 };
 
 export const projectsData = [
