@@ -104,27 +104,21 @@ export default function Home() {
 						products.
 					</p>
 
-										<p
-						className="lp-in mt-4 max-w-2xl text-center text-[13.5px] leading-relaxed text-zinc-500 md:text-sm"
-						style={rise(0.45)}
-					>
-						Newest work: {" "}
-						<a
-							href="https://laksh1.me/projects/keepr"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="font-medium text-[15px] text-[#A78BFA] decoration-[#A78BFA] underline-offset-4 transition-colors hover:text-white hover:underline"
-						>
-							Keepr
-						</a>.
-					</p>
-
-					{/* proof line */}
+					{/* proof line — newest work + prior work, one line */}
 					<p
 						className="lp-in mt-4 max-w-2xl text-center text-[13.5px] leading-relaxed text-zinc-500 md:text-sm"
 						style={rise(0.45)}
 					>
-						Previously built AI &amp; tools at{" "}
+						Newest work:{" "}
+						<a
+							href="https://laksh1.me/projects/keepr"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="font-medium text-[#A78BFA] decoration-[#A78BFA] underline-offset-4 transition-colors hover:text-white hover:underline"
+						>
+							Keepr
+						</a>
+						. Previously built at{" "}
 						<a
 							href="https://timesofindia.indiatimes.com/"
 							target="_blank"
@@ -141,10 +135,10 @@ export default function Home() {
 							className="font-medium text-zinc-300 decoration-zinc-600 underline-offset-4 transition-colors hover:text-white hover:underline"
 						>
 							CodePersona
-						</a>
-						, which has <span className="text-[#A78BFA]">5K+</span> users across <span className="text-[#A78BFA]">95</span> countries, and shipped production-grade
-
-						products at{" "}
+						</a>{" "}
+						(<span className="text-[#A78BFA]">5K+</span> users,{" "}
+						<span className="text-[#A78BFA]">95</span> countries), &amp; shipped
+						at{" "}
 						<a
 							href="https://writecream.org"
 							target="_blank"
@@ -152,8 +146,8 @@ export default function Home() {
 							className="font-medium text-zinc-300 decoration-zinc-600 underline-offset-4 transition-colors hover:text-white hover:underline"
 						>
 							Writecream
-						</a>
-						, serving <span className="text-[#A78BFA]">1M+</span> monthly users.
+						</a>{" "}
+						(<span className="text-[#A78BFA]">1M+</span> users).
 					</p>
 
 					{/* stats */}
