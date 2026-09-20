@@ -1,11 +1,10 @@
 import "../global.css";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { AudioProvider } from "@/util/audioContext";
-import GlobalBackdrop from "./components/global-backdrop";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.laksh1.me"),
@@ -55,6 +54,14 @@ const inter = Inter({
 	variable: "--font-inter",
 });
 
+// Self hosted by next/font, so the mono face costs no extra network request
+// and never flashes a fallback.
+const mono = JetBrains_Mono({
+	subsets: ["latin"],
+	variable: "--font-mono",
+	display: "swap",
+});
+
 const calSans = LocalFont({
 	src: "../public/fonts/CalSans-SemiBold.ttf",
 	variable: "--font-calsans",
@@ -66,12 +73,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+		<html lang="en" className={[inter.variable, mono.variable, calSans.variable].join(" ")}>
 			<head>
+				{/* Applies the stored theme before first paint. Without this the
+				    page renders dark, then snaps to light on hydration, which is
+				    the classic theme flash. Inline and synchronous on purpose. */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `(function(){try{var t=localStorage.getItem("ak-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}})();`,
+					}}
+				/>
 				<Analytics />
 			</head>
-			<body className="relative bg-[#08080A] text-zinc-200">
-				<GlobalBackdrop />
+			<body className="relative">
 				<AudioProvider>
 					<div className="relative z-10">{children}</div>
 				</AudioProvider>

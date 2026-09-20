@@ -1,258 +1,721 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-  }
-  
-  .font-serif-title {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-}
-
 /* ============================================================
-   GLOBAL BACKDROP — one identity, mounted once in the root layout,
-   position:fixed so it's always viewport-aligned regardless of scroll.
-   Every page shares this; nothing renders its own copy.
+   ASK THE SYSTEM
+   Charcoal, one lime accent, Inter for prose and JetBrains Mono
+   for anything machine spoken. The accent is load bearing: it
+   only ever marks something live or interactive, never decoration.
    ============================================================ */
 
-.gb-backdrop {
-  --mx: 50vw;
-  --my: 40vh;
-  background: #08080A;
+:root {
+  --ak-ink: #0B0B0C;
+  --ak-surface: rgba(255, 255, 255, 0.028);
+  --ak-surface-2: rgba(255, 255, 255, 0.045);
+  --ak-line: rgba(255, 255, 255, 0.085);
+  --ak-line-soft: rgba(255, 255, 255, 0.05);
+  --ak-text: #EDEDEF;
+  --ak-dim: #8A8A93;
+  --ak-faint: #5C5C64;
+  --ak-accent: #A3E635;
+  --ak-accent-soft: rgba(163, 230, 53, 0.38);
+  --ak-accent-wash: rgba(163, 230, 53, 0.08);
 }
 
-.gb-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.11;
-  -webkit-mask-image: radial-gradient(
-    620px circle at var(--mx) var(--my),
-    #000 0%,
-    rgba(0, 0, 0, 0.4) 45%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    620px circle at var(--mx) var(--my),
-    #000 0%,
-    rgba(0, 0, 0, 0.4) 45%,
-    transparent 78%
-  );
+/* Light theme.
+   The accent keeps its hue and only changes lightness: lime reads beautifully
+   on charcoal but fails contrast on white, so light mode uses a deep green
+   instead of a different colour entirely. Same identity, legible in both. */
+:root[data-theme="light"] {
+  --ak-ink: #FBFBF9;
+  --ak-surface: rgba(0, 0, 0, 0.022);
+  --ak-surface-2: rgba(0, 0, 0, 0.04);
+  --ak-line: rgba(0, 0, 0, 0.11);
+  --ak-line-soft: rgba(0, 0, 0, 0.07);
+  --ak-text: #18181B;
+  --ak-dim: #55555E;
+  --ak-faint: #86868F;
+  --ak-accent: #2C5E0B;
+  --ak-accent-ink: #FFFFFF;
+  --ak-accent-soft: rgba(44, 94, 11, 0.38);
+  --ak-accent-wash: rgba(44, 94, 11, 0.07);
 }
 
-.gb-wash {
-  background:
-    radial-gradient(60% 48% at 50% 0%, rgba(167, 139, 250, 0.16), transparent 68%),
-    radial-gradient(50% 42% at 6% 96%, rgba(167, 139, 250, 0.09), transparent 70%),
-    radial-gradient(46% 40% at 96% 88%, rgba(167, 139, 250, 0.07), transparent 70%);
-  animation: gb-breathe 16s ease-in-out infinite;
+:root {
+  /* Text colour that sits on top of a filled accent swatch. */
+  --ak-accent-ink: #0B0B0C;
 }
 
-@keyframes gb-breathe {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 1; }
+html,
+body {
+  background: var(--ak-ink);
+  color: var(--ak-text);
 }
 
-.gb-spot {
-  background: radial-gradient(
-    560px circle at var(--mx) var(--my),
-    rgba(167, 139, 250, 0.16) 0%,
-    rgba(255, 255, 255, 0.05) 38%,
-    transparent 72%
-  );
+html { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+
+/* The console owns the viewport. Nothing here scrolls the page itself,
+   only the reply surface inside it, which is what keeps the whole
+   experience inside one window. */
+.ak-root {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.gb-vignette {
-  background: radial-gradient(
-    ellipse 100% 85% at 50% 40%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+.ak-console {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 52rem;
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: 1.1rem;
 }
 
-/* staggered entrance — CSS so it never depends on hydration */
-@keyframes lp-rise {
-  from { opacity: 0; transform: translateY(14px); }
+@media (min-width: 768px) {
+  .ak-console { padding-inline: 2rem; }
+}
+
+/* ---------------------------------------------------------- header */
+
+.ak-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0 0.9rem;
+  border-bottom: 1px solid var(--ak-line-soft);
+}
+
+.ak-head-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.ak-brand-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ak-text);
+  white-space: nowrap;
+}
+
+/* Always on screen, from the first paint. The single action a recruiter is
+   most likely to want should never be something they have to ask for. */
+.ak-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ak-accent-ink);
+  background: var(--ak-accent);
+  border-radius: 7px;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.55);
+  animation: ak-cv-pulse 3.4s ease-out 1.2s 3;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.ak-cv:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+/* Three pulses, then it stops. Enough to catch the eye on arrival without
+   becoming something that nags for the whole visit. */
+@keyframes ak-cv-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.5); }
+  22% { box-shadow: 0 0 0 7px rgba(163, 230, 53, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
+}
+
+.ak-ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid var(--ak-line);
+  border-radius: 10px;
+}
+
+.ak-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 7px;
+  color: var(--ak-text);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.ak-ctrl:hover {
+  color: var(--ak-text);
+  background: var(--ak-surface-2);
+}
+.ak-ctrl.is-on { color: var(--ak-accent); }
+
+/* Always on screen, from the first paint. The single action a recruiter is
+   most likely to want should never be something they have to ask for. */
+.ak-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ak-accent-ink);
+  background: var(--ak-accent);
+  border-radius: 7px;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.55);
+  animation: ak-cv-pulse 3.4s ease-out 1.2s 3;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.ak-cv:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+/* Three pulses, then it stops. Enough to catch the eye on arrival without
+   becoming something that nags for the whole visit. */
+@keyframes ak-cv-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.5); }
+  22% { box-shadow: 0 0 0 7px rgba(163, 230, 53, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
+}
+
+.ak-ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid var(--ak-line);
+  border-radius: 10px;
+}
+
+.ak-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 7px;
+  color: var(--ak-text);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.ak-ctrl:hover {
+  color: var(--ak-text);
+  background: var(--ak-surface-2);
+}
+.ak-ctrl.is-on { color: var(--ak-accent); }
+
+/* ------------------------------------------------- the reply surface */
+
+.ak-surface {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.6rem 0 1.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.ak-surface::-webkit-scrollbar { width: 6px; }
+.ak-surface::-webkit-scrollbar-track { background: transparent; }
+.ak-surface::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+/* the echoed question */
+.ak-asked {
+  display: flex;
+  gap: 0.5rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12.5px;
+  color: var(--ak-dim);
+  margin-bottom: 1.25rem;
+  word-break: break-word;
+}
+
+.ak-asked-caret { color: var(--ak-accent); }
+
+/* three dots, only long enough to register that a question landed */
+.ak-thinking {
+  display: flex;
+  gap: 5px;
+  padding: 0.5rem 0;
+}
+.ak-thinking span {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--ak-faint);
+  animation: ak-blink 1.1s ease-in-out infinite;
+}
+.ak-thinking span:nth-child(2) { animation-delay: 0.16s; }
+.ak-thinking span:nth-child(3) { animation-delay: 0.32s; }
+
+@keyframes ak-blink {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* ---------------------------------------------------------- entrances
+   All CSS, deliberately. A JavaScript driven entrance only advances while
+   requestAnimationFrame is running, so in a throttled or background tab an
+   element that starts at opacity 0 can simply never appear. `fill-mode: both`
+   means these always resolve to their end state. */
+
+@keyframes ak-rise {
+  from { opacity: 0; transform: translateY(9px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.lp-in {
-  opacity: 0;
-  animation: lp-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.ak-rise {
+  animation: ak-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* the name gets a slow champagne sheen sweeping across it */
-@keyframes lp-sheen {
-  0% { background-position: -140% 0; }
-  100% { background-position: 240% 0; }
+.ak-rise-fast {
+  animation: ak-rise 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Note: this element must NOT also carry .lp-in — a second `animation`
-   declaration would override the entrance and strand it at opacity 0.
-   The rise lives on a wrapper instead. */
-.lp-name {
-  background-image: linear-gradient(
-    100deg,
-    #F4F1EA 0%,
-    #F4F1EA 38%,
-    #A78BFA 50%,
-    #F4F1EA 62%,
-    #F4F1EA 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: lp-sheen 7s ease-in-out 1.4s infinite;
+/* the word by word reveal used on every answer lead */
+@keyframes ak-word {
+  from { opacity: 0; filter: blur(9px); transform: translateY(-14px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
 }
 
-/* soft pulse on the availability dot */
-@keyframes lp-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.82); }
+.bt { display: flex; flex-wrap: wrap; }
+
+.bt-seg {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+  animation-name: ak-word;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
 }
-.lp-dot { animation: lp-pulse 2.4s ease-in-out infinite; }
+
+.bt-bottom { animation-name: ak-word-up; }
+
+@keyframes ak-word-up {
+  from { opacity: 0; filter: blur(9px); transform: translateY(14px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------- answers */
+
+.ak-lead {
+  font-size: clamp(1.15rem, 3.1vw, 1.6rem);
+  line-height: 1.45;
+  letter-spacing: -0.017em;
+  color: var(--ak-text);
+  font-weight: 500;
+}
+
+.ak-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1.5rem;
+  background: var(--ak-line-soft);
+  border: 1px solid var(--ak-line-soft);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .ak-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.ak-stat {
+  background: var(--ak-ink);
+  padding: 0.85rem 0.9rem;
+}
+
+.ak-stat-value {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ak-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.ak-stat-label {
+  margin-top: 0.5rem;
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ak-dim);
+}
+
+.ak-stat-note {
+  margin-top: 0.25rem;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--ak-faint);
+}
+
+.ak-media {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 220px;
+  overflow: hidden;
+  border: 1px solid var(--ak-line);
+  border-radius: 12px;
+  background: var(--ak-surface);
+}
+
+.ak-items {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ak-item {
+  position: relative;
+  display: block;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid var(--ak-line-soft);
+  border-radius: 10px;
+  background: var(--ak-surface);
+}
+
+.ak-item-link {
+  padding-right: 2.4rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+.ak-item-link:hover {
+  border-color: var(--ak-accent-soft);
+  background: var(--ak-surface-2);
+  transform: translateY(-1px);
+}
+
+.ak-item-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--ak-faint);
+}
+.ak-item-link:hover .ak-item-arrow { color: var(--ak-accent); }
+
+.ak-item-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ak-text);
+}
+
+.ak-item-sub {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ak-faint);
+}
+
+.ak-item-meta {
+  margin-top: 0.3rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ak-faint);
+}
+
+.ak-item-line {
+  margin-top: 0.55rem;
+  font-size: 13.5px;
+  line-height: 1.68;
+  color: var(--ak-dim);
+  max-width: 44rem;
+}
+
+/* inline markup inside answer copy */
+.ak-inline-link {
+  color: var(--ak-accent);
+  font-weight: 500;
+  border-bottom: 1px solid var(--ak-accent-soft);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.ak-inline-link:hover {
+  border-bottom-color: var(--ak-accent);
+}
+
+.ak-accent-text { color: var(--ak-accent); }
+.ak-progress-fill { background: var(--ak-accent); }
+
+.ak-em {
+  color: var(--ak-text);
+  font-weight: 500;
+}
+
+.ak-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ak-accent);
+  border: 1px solid var(--ak-accent-soft);
+  background: var(--ak-accent-wash);
+  border-radius: 4px;
+  padding: 0.1rem 0.34rem;
+}
+
+.ak-chip {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--ak-dim);
+  border: 1px solid var(--ak-line-soft);
+  border-radius: 5px;
+  padding: 0.2rem 0.45rem;
+}
+
+.ak-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.4rem;
+}
+
+.ak-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--ak-dim);
+  border: 1px solid var(--ak-line);
+  border-radius: 6px;
+  padding: 0.38rem 0.7rem;
+  transition: all 0.25s ease;
+}
+.ak-link:hover {
+  color: var(--ak-accent-ink);
+  background: var(--ak-accent);
+  border-color: var(--ak-accent);
+}
+
+/* ------------------------------------------------------- follow ups */
+
+.ak-followups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.8rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--ak-line-soft);
+}
+
+.ak-followup-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ak-faint);
+  margin-right: 0.15rem;
+}
+
+.ak-followup {
+  font-size: 12.5px;
+  color: var(--ak-text);
+  border: 1px dashed var(--ak-line);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  transition: all 0.25s ease;
+}
+.ak-followup:hover {
+  color: var(--ak-text);
+  border-style: solid;
+  border-color: var(--ak-accent-soft);
+}
+
+/* -------------------------------------------------------- composer */
+
+.ak-composer {
+  flex: 0 0 auto;
+  padding: 0.9rem 0 1.15rem;
+  border-top: 1px solid var(--ak-line-soft);
+  background: var(--ak-ink);
+}
+
+.ak-inputrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ak-line);
+  border-radius: 12px;
+  background: var(--ak-surface);
+  transition: border-color 0.25s ease;
+}
+.ak-inputrow:focus-within { border-color: var(--ak-accent-soft); }
+
+.ak-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--ak-faint);
+  pointer-events: none;
+}
+
+/* Overrides for the vendored Skiper input: it ships with its own rounded
+   box and max width, and here it needs to be the full row instead. */
+.ak-input-wrap {
+  max-width: none !important;
+  width: 100%;
+  background: transparent !important;
+  padding: 0.72rem 3rem 0.72rem 2.5rem !important;
+  border-radius: 12px !important;
+}
+
+.ak-input {
+  font-size: 14.5px;
+  color: var(--ak-text);
+}
+.ak-input::placeholder { color: var(--ak-faint); }
+
+.ak-send {
+  position: absolute;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.95rem;
+  height: 1.95rem;
+  border-radius: 8px;
+  color: var(--ak-faint);
+  transition: all 0.25s ease;
+}
+.ak-send:not(:disabled):hover {
+  color: var(--ak-accent-ink);
+  background: var(--ak-accent);
+}
+.ak-send:disabled { opacity: 0.35; cursor: default; }
+
+.ak-quick {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ak-quick::-webkit-scrollbar { display: none; }
+
+.ak-quick-btn {
+  flex-shrink: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ak-text);
+  border: 1px solid var(--ak-line);
+  border-radius: 7px;
+  padding: 0.42rem 0.8rem;
+  background: var(--ak-surface);
+  transition: all 0.22s ease;
+}
+.ak-quick-btn:hover {
+  color: var(--ak-accent);
+  border-color: var(--ak-accent-soft);
+  background: var(--ak-accent-wash);
+}
+.ak-quick-btn.is-active {
+  color: var(--ak-accent);
+  border-color: var(--ak-accent-soft);
+  background: var(--ak-accent-wash);
+}
+
+/* ============================================================
+   DOCUMENT PAGES
+   /projects and /blog keep the same language so moving between
+   the console and a full page never feels like two sites.
+   ============================================================ */
+
+.ak-page {
+  min-height: 100svh;
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: 0 1.1rem 5rem;
+}
+
+@media (min-width: 768px) {
+  .ak-page { padding-inline: 2rem; }
+}
+
+.ak-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--ak-dim);
+  padding: 1.6rem 0 0;
+  transition: color 0.25s ease;
+}
+.ak-back:hover { color: var(--ak-accent); }
+
+.ak-page-head {
+  padding: 2.4rem 0 1.4rem;
+  border-bottom: 1px solid var(--ak-line-soft);
+}
+
+.ak-eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ak-faint);
+}
+
+.ak-title {
+  margin-top: 0.85rem;
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-weight: 600;
+  color: var(--ak-text);
+}
+
+.ak-sub {
+  margin-top: 0.95rem;
+  max-width: 38rem;
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--ak-dim);
+}
+
+.ak-prose p {
+  margin-top: 1rem;
+  max-width: 42rem;
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--ak-dim);
+}
+
+.ak-rule {
+  height: 1px;
+  background: var(--ak-line-soft);
+  margin: 2.2rem 0;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .lp-wash, .lp-name, .lp-dot { animation: none !important; }
-  .lp-in { animation-duration: 0.01ms !important; }
-  .lp-name { color: #F4F1EA; }
-}
+  .ak-thinking span { animation: none !important; }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  /* Duration, not `none`: killing the animation outright would strip the
+     fill-mode too and leave these at their opacity 0 start. */
+  .ak-rise,
+  .ak-rise-fast,
+  .bt-seg { animation-duration: 0.01ms !important; animation-delay: 0s !important; }
 
-@keyframes fadeOutDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@layer components {
-  .page-enter {
-    animation: fadeInUp 0.6s cubic-bezier(0.32, 0.72, 0, 1);
-  }
-
-  .element-enter-1 {
-    animation: slideInLeft 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.1s both;
-  }
-
-  .element-enter-2 {
-    animation: slideInRight 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.2s both;
-  }
-
-  .element-enter-3 {
-    animation: fadeInUp 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.3s both;
-  }
-
-  .element-enter-4 {
-    animation: slideInLeft 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.4s both;
-  }
-
-  .element-enter-5 {
-    animation: slideInRight 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.5s both;
-  }
-}
-
-
-/* FLASH */
-@keyframes flash {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.animate-flash {
-  animation: flash 0.3s ease-out forwards;
-}
-
-/* NOISE */
-.noise {
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.15;
-  mix-blend-mode: overlay;
-}
-
-/* SCANLINES */
-.scanlines {
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.05) 0px,
-    rgba(0,0,0,0.2) 2px,
-    transparent 4px
-  );
-  animation: scan 0.2s linear infinite;
-}
-
-@keyframes scan {
-  from { transform: translateY(0); }
-  to { transform: translateY(4px); }
-}
-
-/* GLITCH BARS */
-.glitch-bars::before,
-.glitch-bars::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 20%;
-  background: rgba(255,255,255,0.1);
-  animation: glitch 0.6s infinite;
-}
-
-.glitch-bars::before {
-  top: 20%;
-}
-.glitch-bars::after {
-  bottom: 15%;
-}
-
-@keyframes glitch {
-  0% { transform: translateX(0); opacity: 0.1; }
-  20% { transform: translateX(-10px); opacity: 0.3; }
-  40% { transform: translateX(10px); opacity: 0.2; }
-  60% { transform: translateX(-5px); opacity: 0.4; }
-  80% { transform: translateX(5px); opacity: 0.2; }
-  100% { transform: translateX(0); opacity: 0.1; }
+  .ak-cv { animation: none !important; }
 }

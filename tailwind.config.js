@@ -30,7 +30,18 @@ module.exports = {
 			},
 			fontFamily: {
 				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+				mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
 				display: ["var(--font-calsans)"],
+			},
+			colors: {
+				// Tokens the vendored Skiper input expects. Defining them here
+				// beats running `shadcn init`, which would have rewritten this
+				// config and global.css wholesale.
+				foreground: "#EDEDEF",
+				muted2: "rgba(255, 255, 255, 0.04)",
+				muted3: "#A3E635",
+				ink: "#0B0B0C",
+				accent: "#A3E635",
 			},
 			backgroundImage: {
 				"gradient-radial":
