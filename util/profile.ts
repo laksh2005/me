@@ -71,9 +71,12 @@ export const projectMetrics: Record<string, string[]> = {
 		"Built 0 to 1 with edge caching and serverless API ingestion for sub 1s loads.",
 		"Reached 5,000+ users across 95 countries organically, via shareable profiles and one click PDF export.",
 	],
-	"duplex-sync-engine": [
-		"Bidirectional sync between Google Sheets and MySQL with last write wins conflict resolution.",
-		"Real time WebSocket broadcasts with a live dashboard showing sync status across both sources.",
+	"parity": [
+		"52,000 rows/sec write throughput. 830ms median edit-to-sync latency.",
+		"Redis/BullMQ job queue: burst deduplication, exponential backoff retries, last-write-wins conflict resolution.",
+		"99 automated tests (unit, integration, end-to-end) plus a 10K-row load test in CI.",
+		"One-command Docker Compose stack: MySQL, Redis, API, worker, live WebSocket dashboard.",
+		"Dynamic schema: new sheet columns automatically become MySQL columns.",
 	],
 };
 

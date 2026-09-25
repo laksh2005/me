@@ -124,7 +124,7 @@ export const SOCIAL_LINKS: AnswerLink[] = [
 const REPO_CREATED: Record<string, string> = {
 	keepr: "2026-07-26",
 	codepersona: "2025-11-26",
-	"duplex-sync-engine": "2026-02-12",
+	"parity": "2026-02-12",
 	"one-stack": "2025-05-03",
 	"clinical-notes-classifier": "2025-07-24",
 	"ecg-arrhythmia-detection": "2025-07-24",
@@ -285,13 +285,19 @@ const PROJECT_ALIASES: Record<string, string[]> = {
 		"dev profile",
 		"profiling",
 	],
-	"duplex-sync-engine": [
+	"parity": [
+		"parity",
 		"duplex",
 		"sync engine",
 		"duplex sync",
 		"data sync",
 		"synchronisation",
 		"synchronization",
+		"bullmq",
+		"sheets sync",
+		"google sheets mysql",
+		"bidirectional sync",
+		"job queue",
 	],
 	"one-stack": ["one stack", "onestack", "learning platform", "roadmaps"],
 	"clinical-notes-classifier": [
