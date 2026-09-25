@@ -735,13 +735,13 @@ function basicsAnswer(): Answer {
 	return {
 		id: "basics",
 		kind: "stat",
-		lead: `Based in ${profile.base}. Open to ${profile.seeking}, and has worked remote, hybrid and on site.`,
+		lead: `Based in ${profile.base}. Open to ${profile.seeking}, and has worked on-site and remote.`,
 		items: [
 			{
 				title: "The practical details",
 				lines: [
 					`Location: ${profile.base}.`,
-					"Worked hybrid at The Times of India in Noida, and fully remote for IAmMaturity and WriteCream, so both models are proven rather than theoretical.",
+					"Worked on-site at The Times of India in Noida, and fully remote for IAmMaturity and WriteCream, so both models are proven rather than theoretical.",
 					`Replies ${profile.replyTime}.`,
 				],
 			},
@@ -848,7 +848,7 @@ function workingStyleAnswer(): Answer {
 				title: "How the work tends to go",
 				lines: [
 					"Everything here is end to end. The instinct is to own a problem from schema to screen rather than hand half of it off.",
-					"Remote and hybrid are both proven: IAmMaturity and WriteCream were fully remote, The Times of India was hybrid out of Noida.",
+					"Remote and on-site are both proven: IAmMaturity and WriteCream were fully remote, The Times of India was on-site in Noida.",
 					"The writing is part of it. There are [post mortems](/blog) on caching, code splitting and on what a year of commits actually changed, which is the same habit applied to his own work.",
 				],
 			},

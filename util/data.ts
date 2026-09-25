@@ -227,7 +227,7 @@ export const experienceData = [
 	  company: "The Times of India",
 	  role: "SDE Intern",
 	  duration: "Mar 2026 - July 2026",
-	  mode: "Hybrid",
+	  mode: "On-site",
 	  location: "Noida, India",
 	  image: "/toi.png",
 	  description: [

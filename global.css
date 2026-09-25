@@ -719,3 +719,111 @@ html { color-scheme: dark; }
 
   .ak-cv { animation: none !important; }
 }
+
+/* ------------------------------------------------- 404 not-found */
+
+.nf-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--ak-bg);
+  padding: 2rem 1rem;
+}
+
+.nf-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--ak-line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ak-line-soft) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  pointer-events: none;
+}
+
+.nf-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+  max-width: 480px;
+}
+
+.nf-code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(5rem, 20vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ak-accent);
+  text-shadow: 0 0 40px color-mix(in srgb, var(--ak-accent) 35%, transparent);
+  user-select: none;
+  min-width: 4ch;
+}
+
+.nf-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ak-faint);
+  margin-top: -0.5rem;
+}
+
+.nf-msg {
+  font-size: 15px;
+  color: var(--ak-dim);
+  line-height: 1.65;
+  max-width: 36ch;
+}
+
+.nf-routes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.nf-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--ak-text);
+  border: 1px solid var(--ak-line);
+  border-radius: 7px;
+  padding: 0.4rem 0.85rem;
+  background: var(--ak-surface);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.nf-route:hover {
+  color: var(--ak-accent);
+  border-color: var(--ak-accent-soft);
+  background: var(--ak-accent-wash);
+}
+
+.nf-route-caret {
+  color: var(--ak-accent);
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.nf-home {
+  font-size: 13px;
+  color: var(--ak-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.nf-home:hover {
+  color: var(--ak-text);
+}
