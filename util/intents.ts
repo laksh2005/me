@@ -100,7 +100,7 @@ export const EMAIL = "lakshnijhawan.work@gmail.com";
  */
 export const EMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 export const CV_URL =
-	"https://drive.google.com/file/d/1xP6SzxNy9WOBb-zdDxYx_iIpnqEzn5nT/view?usp=sharing";
+	"https://drive.google.com/file/d/1oQIclHA2D0KpLPrUEvonBZlcUx4eMOhh/view?usp=sharing";
 
 export const SOCIAL_LINKS: AnswerLink[] = [
 	{
