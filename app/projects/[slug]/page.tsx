@@ -118,13 +118,23 @@ export default function ProjectDetailPage({
 			{/* A demo video stands in for the screenshot wherever one exists. */}
 			{video ? (
 				<div className="mt-9 flex justify-center">
-					<div className="w-full max-w-[280px] overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
-						<ProjectVideo
-							src={video}
-							poster={project.image}
-							className="block aspect-[9/16] w-full object-cover"
-						/>
-					</div>
+					{(project as any).videoAspect === "16/9" ? (
+						<div className="w-full overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
+							<ProjectVideo
+								src={video}
+								poster={project.image}
+								className="block aspect-video w-full object-cover"
+							/>
+						</div>
+					) : (
+						<div className="w-full max-w-[280px] overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
+							<ProjectVideo
+								src={video}
+								poster={project.image}
+								className="block aspect-[9/16] w-full object-cover"
+							/>
+						</div>
+					)}
 				</div>
 			) : (
 				project.image && (

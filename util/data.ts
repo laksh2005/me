@@ -114,7 +114,9 @@ export const projectsData = [
 			"Real-time bidirectional sync between Google Sheets and MySQL, built with a production job queue.",
 			"Sheet edits push instantly via Google Apps Script webhooks; database edits caught by polling fingerprint. Both paths land on a Redis/BullMQ queue that deduplicates bursts, retries with exponential backoff, and resolves conflicts by last-write-wins timestamp.",
 		],
-		image: "/sync.png",
+		image: "/parity.png",
+		video: "/parity.mp4",
+		videoAspect: "16/9" as const,
 	},
 	{
 		name: "One Stack",
