@@ -21,7 +21,7 @@ export default function ContactPage() {
 		<div className="ak-page">
 			<Link href="/" className="ak-back">
 				<ArrowLeft size={13} />
-				Ask the system
+				Home
 			</Link>
 
 			<header className="ak-page-head">

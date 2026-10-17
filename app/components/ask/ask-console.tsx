@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, CornerDownLeft, Search } from "lucide-react";
 import { SmoothInput } from "../v1/skiper106";
 import { AnswerView } from "./answer-view";
-import { MusicToggle, ThemeToggle } from "./controls";
+import { ThemeToggle } from "./controls";
 import {
 	CV_URL,
 	DEFAULT_ANSWER,
@@ -83,7 +83,6 @@ export function AskConsole() {
 				</div>
 
 				<span className="ak-ctrl-group">
-					<MusicToggle />
 					<ThemeToggle />
 				</span>
 			</header>

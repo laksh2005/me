@@ -370,7 +370,7 @@ const SKILL_ALIASES: Record<string, string[]> = {
  */
 const BLOG_ALIASES: Record<string, string[]> = {
 	"reduce-api-latency-caching": ["caching", "cache", "api latency", "latency", "slow api", "response time"],
-	"shipping-35-products-lessons": ["shipping products", "lessons", "failed projects", "weak projects", "what did you learn"],
+	"shipping-40-products-lessons": ["shipping products", "lessons", "failed projects", "weak projects", "what did you learn"],
 	"stack-2024-vs-2026": ["stack you would pick", "stack today", "stack in 2024", "changed your stack", "stack choices"],
 	"code-quality-2025-vs-2026": ["code quality", "commits", "github commits", "improved", "got better"],
 	"code-splitting-production-react": ["code splitting", "bundle size", "lazy loading", "chunking", "bundle"],

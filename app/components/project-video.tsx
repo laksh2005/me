@@ -9,7 +9,7 @@ import { Play, Pause } from "lucide-react";
  * `preload="none"` is the whole point: the browser fetches *nothing* until the
  * visitor actually presses play. The poster image carries the first paint, so
  * a heavy video never competes with the rest of the page for bandwidth on
- * load. (Autoplay was doing the opposite — pulling the entire file down on
+ * load. (Autoplay was doing the opposite, pulling the entire file down on
  * every visit, whether or not anyone watched it.)
  *
  * Still muted + looping once started, so it behaves like an ambient demo
@@ -30,7 +30,7 @@ export const ProjectVideo: React.FC<{
 		if (!el) return;
 
 		if (el.paused) {
-			// must be a property, not just the JSX attribute — browsers decide
+			// must be a property, not just the JSX attribute; browsers decide
 			// playback eligibility at call time and the attribute can land late
 			el.muted = true;
 			const p = el.play();

@@ -14,7 +14,7 @@ import { projectsData } from "@/util/data";
 
 export const metadata = {
 	title: "Projects",
-	description: "Everything Laksh Nijhawan has built and shipped.",
+	description: "Selected work from 40+ products Laksh Nijhawan has shipped.",
 };
 
 const STAR = "⭐";
@@ -29,16 +29,16 @@ export default function ProjectsPage() {
 		<div className="ak-page">
 			<Link href="/" className="ak-back">
 				<ArrowLeft size={13} />
-				Ask the system
+				Home
 			</Link>
 
 			<header className="ak-page-head">
 				<span className="ak-eyebrow">Index</span>
 				<h1 className="ak-title">Projects</h1>
 				<p className="ak-sub">
-					{projectsData.length} builds, {flagship.length} of them flagship. Some
-					were made to learn something specific, some came straight off the
-					sticky notes at my desk.
+					40+ products shipped since November 2023. These are the{" "}
+					{projectsData.length} worth writing up, {flagship.length} of them
+					flagship.
 				</p>
 			</header>
 

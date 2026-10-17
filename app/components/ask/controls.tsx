@@ -1,16 +1,11 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { Moon, Sun, Volume2, VolumeX } from "lucide-react";
-import { useAudio } from "@/util/audioContext";
+import { Moon, Sun } from "lucide-react";
 
 /**
- * The two navbar toggles.
- *
- * Both are deliberately hand rolled rather than pulled from a component kit:
- * the music one has to drive the existing AudioProvider that already runs
- * sitewide, and the theme one would otherwise mean adding next themes for what
- * is a single attribute on <html>.
+ * The navbar theme toggle. Hand rolled rather than adding next-themes for
+ * what is a single attribute on <html>.
  */
 
 const STORAGE_KEY = "ak-theme";
@@ -54,19 +49,4 @@ export function ThemeToggle() {
 		</button>
 	);
 }
-
-export function MusicToggle() {
-	const { isPlaying, togglePlayPause } = useAudio();
-
-	return (
-		<button
-			type="button"
-			onClick={togglePlayPause}
-			className={`ak-ctrl ${isPlaying ? "is-on" : ""}`}
-			aria-label={isPlaying ? "Mute music" : "Play music"}
-			title={isPlaying ? "Mute music" : "Play music"}
-		>
-			{isPlaying ? <Volume2 size={17} strokeWidth={1.9} /> : <VolumeX size={17} strokeWidth={1.9} />}
-		</button>
-	);
-}
+

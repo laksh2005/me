@@ -4,18 +4,17 @@ import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
-import { AudioProvider } from "@/util/audioContext";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.laksh1.me"),
 	title: {
-		default: "Hi! I'm Laksh",
+		default: "Laksh Nijhawan · Software Engineer",
 		template: "%s · Laksh Nijhawan",
 	},
 	description:
 		"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
 	openGraph: {
-		title: "Laksh Nijhawan — Product-focused engineer",
+		title: "Laksh Nijhawan · Product-focused engineer",
 		description:
 			"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
 		url: "https://www.laksh1.me",
@@ -86,9 +85,7 @@ export default function RootLayout({
 				<Analytics />
 			</head>
 			<body className="relative">
-				<AudioProvider>
-					<div className="relative z-10">{children}</div>
-				</AudioProvider>
+				<div className="relative z-10">{children}</div>
 				<VercelAnalytics />
 			</body>
 		</html>

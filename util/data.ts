@@ -315,16 +315,16 @@ export const blogsData: Blog[] = [
 		]
 	},
 	{
-		slug: "shipping-35-products-lessons",
-		title: "What I learned from shipping 35+ products (including weak ones)",
+		slug: "shipping-40-products-lessons",
+		title: "What I learned from shipping 40+ products (including weak ones)",
 		month: "March",
 		year: 2026,
-		// overview: "I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
+		// overview: "I’ve built over 40 products. Most didn’t fail loudly, they just quietly stopped existing. Here’s what that taught me.",
 		image: "/times.jpg",
   content: [
     { 
       type: "paragraph", 
-      text: `I’ve built over 35 products. Most didn’t fail loudly, they just quietly stopped existing, no users, no traction, nothing worth continuing.` 
+      text: `I’ve built over 40 products. Most didn’t fail loudly, they just quietly stopped existing, no users, no traction, nothing worth continuing.` 
     },
     {
       type: "paragraph",

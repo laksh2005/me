@@ -1,26 +1,13 @@
-import { withContentlayer } from "next-contentlayer";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	output: "standalone",
-	experimental: {
-		mdxRs: true,
-	},
-	webpack: (config) => {
-		config.ignoreWarnings = [
-			{
-				module: /@contentlayer\/core/,
-			},
-		];
-		return config;
-	},
 	async redirects() {
 		// Experience and Skills moved onto the landing page as sections.
 		return [
 			{ source: "/experience", destination: "/#experience", permanent: false },
 			{ source: "/skills", destination: "/#skills", permanent: false },
 			{ source: "/projects/duplex-sync-engine", destination: "/projects/parity", permanent: true },
+			{ source: "/blog/shipping-35-products-lessons", destination: "/blog/shipping-40-products-lessons", permanent: true },
 			// Temporary, so swapping the Drive file later isn't cached by browsers.
 			{
 				source: "/cv",
@@ -32,4 +19,4 @@ const nextConfig = {
 	},
 };
 
-export default withContentlayer(nextConfig);
+export default nextConfig;

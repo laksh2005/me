@@ -29,6 +29,23 @@ export async function generateStaticParams() {
 	return projectsData.map((project) => ({ slug: project.slug }));
 }
 
+export function generateMetadata({ params }: { params: { slug: string } }) {
+	const project = projectsData.find((p) => p.slug === params.slug);
+	if (!project) return { title: "Project not found" };
+	const description = String(project.description?.[0] ?? "")
+		.replace(/<[^>]+>/g, "")
+		.slice(0, 160);
+	return {
+		title: clean(project.name),
+		description,
+		openGraph: {
+			title: `${clean(project.name)} · Laksh Nijhawan`,
+			description,
+			images: project.image ? [{ url: project.image }] : undefined,
+		},
+	};
+}
+
 export default function ProjectDetailPage({
 	params,
 }: {
