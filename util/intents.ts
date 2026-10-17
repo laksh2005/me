@@ -99,8 +99,7 @@ export const EMAIL = "lakshnijhawan.work@gmail.com";
  * tab so the portfolio itself is never navigated away from.
  */
 export const EMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
-export const CV_URL =
-	"https://drive.google.com/file/d/1oQIclHA2D0KpLPrUEvonBZlcUx4eMOhh/view?usp=sharing";
+export const CV_URL = "https://drive.google.com/file/d/1JW2KcuogppJjaL-eUldAqKWdJMHRXETP/view?usp=sharing";
 
 export const SOCIAL_LINKS: AnswerLink[] = [
 	{
