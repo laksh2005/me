@@ -13,7 +13,7 @@ import { Moon, Sun } from "lucide-react";
  * get an instant switch.
  */
 
-const STORAGE_KEY = "ak-theme";
+const STORAGE_KEY = "lk-theme";
 type Theme = "light" | "dark";
 
 export function ThemeToggle() {

@@ -70,7 +70,7 @@ export default function RootLayout({
 				    synchronous on purpose. */}
 				<script
 					dangerouslySetInnerHTML={{
-						__html: `(function(){var t="light";try{var s=localStorage.getItem("ak-theme");if(s==="light"||s==="dark")t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();`,
+						__html: `(function(){var t="light";try{var s=localStorage.getItem("lk-theme");if(s==="light"||s==="dark")t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();`,
 					}}
 				/>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
