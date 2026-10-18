@@ -12,6 +12,8 @@ import {
 import { projectsData } from "@/util/data";
 import { ReportView } from "./view";
 import { ProjectVideo } from "@/app/components/project-video";
+import { flagshipBySlug } from "@/util/portfolio";
+import { FlagshipPage } from "./flagship";
 
 /**
  * A single project.
@@ -30,6 +32,13 @@ export async function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
+	const flagship = flagshipBySlug(params.slug);
+	if (flagship)
+		return {
+			title: flagship.name,
+			description: flagship.oneLiner,
+			openGraph: { title: `${flagship.name} · Laksh Nijhawan`, description: flagship.oneLiner, images: [{ url: flagship.image }] },
+		};
 	const project = projectsData.find((p) => p.slug === params.slug);
 	if (!project) return { title: "Project not found" };
 	const description = String(project.description?.[0] ?? "")
@@ -51,6 +60,9 @@ export default function ProjectDetailPage({
 }: {
 	params: { slug: string };
 }) {
+	const flagship = flagshipBySlug(params.slug);
+	if (flagship) return <FlagshipPage project={flagship} />;
+
 	const index = projectsData.findIndex((p) => p.slug === params.slug);
 	const project = projectsData[index];
 

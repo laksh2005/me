@@ -1,4 +1,5 @@
 import "../global.css";
+import "./lk.css";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
@@ -72,15 +73,21 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={[inter.variable, mono.variable, calSans.variable].join(" ")}>
+		<html lang="en" data-theme="light" suppressHydrationWarning className={[inter.variable, mono.variable, calSans.variable].join(" ")}>
 			<head>
-				{/* Applies the stored theme before first paint. Without this the
-				    page renders dark, then snaps to light on hydration, which is
-				    the classic theme flash. Inline and synchronous on purpose. */}
+				{/* Applies the theme before first paint so it never flashes: the
+				    stored choice if there is one, otherwise light. Inline and
+				    synchronous on purpose. */}
 				<script
 					dangerouslySetInnerHTML={{
-						__html: `(function(){try{var t=localStorage.getItem("ak-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}})();`,
+						__html: `(function(){var t="light";try{var s=localStorage.getItem("ak-theme");if(s==="light"||s==="dark")t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();`,
 					}}
+				/>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link
+					rel="stylesheet"
+					href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500&display=swap"
 				/>
 				<Analytics />
 			</head>
