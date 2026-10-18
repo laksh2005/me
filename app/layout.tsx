@@ -38,9 +38,6 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		creator: "@laksh_2705",
 	},
-	icons: {
-		shortcut: "/favicon.jpg",
-	},
 };
 const inter = Inter({
 	subsets: ["latin"],

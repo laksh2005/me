@@ -2,12 +2,19 @@ import { Redis } from "@upstash/redis";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createHash } from "crypto";
 
-const redis = Redis.fromEnv();
+// Same credentials as /api/visits: Upstash names or the Vercel KV ones.
+const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+const redis = url && token ? new Redis({ url, token }) : null;
 
 export default async function incr(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ): Promise<void> {
+	if (!redis) {
+		res.status(503).send("counter not configured");
+		return;
+	}
 	if (req.method !== "POST") {
 		res.status(405).send("use POST");
 		return;
