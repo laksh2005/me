@@ -6,6 +6,8 @@ import { PageHead, Shell } from "../components/lk/shell";
 export const metadata = {
 	title: "Intro",
 	description: "A 60 second video intro from Laksh Nijhawan.",
+	// Reachable by direct link only: not linked from the site or indexed.
+	robots: { index: false, follow: false },
 	openGraph: {
 		images: [{ url: "/laksh-intro-thumbnail.png" }],
 		videos: [{ url: "/laksh-intro.mp4" }],

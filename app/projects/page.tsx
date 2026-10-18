@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { projectsData } from "@/util/data";
+import { ProjectList } from "../components/lk/project-list";
 import { FLAGSHIPS, HIDDEN_PROJECTS, LINKS } from "@/util/portfolio";
 import { PageHead, Shell } from "../components/lk/shell";
 import { GitHubIcon, GlobeIcon } from "../components/lk/icons";
@@ -33,29 +34,18 @@ export default function ProjectsPage() {
 			/>
 
 			<h2># flagship</h2>
-			{FLAGSHIPS.map((p) => (
-				<div key={p.slug} className="lk-proj">
-					<Link href={`/projects/${p.slug}`} className="lk-tile" aria-hidden tabIndex={-1}>
-						{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img src={p.icon} alt="" />
-					</Link>
-					<Link href={`/projects/${p.slug}`} className="t">
-						<b>{p.name}</b>
-						<span className="lk-m">{p.homeMetric}</span>
-						<small>{p.oneLiner}</small>
-					</Link>
-					<div className="lk-icons">
-						<a href={p.github} {...ext} aria-label={`${p.name} on GitHub`}>
-							<GitHubIcon className="lk-ico" />
-						</a>
-						{p.live && (
-							<a href={p.live} {...ext} aria-label={`${p.name} website`}>
-								<GlobeIcon className="lk-ico" />
-							</a>
-						)}
-					</div>
-				</div>
-			))}
+			<ProjectList
+				items={FLAGSHIPS.map((p) => ({
+					slug: p.slug,
+					name: p.name,
+					icon: p.icon,
+					image: p.image,
+					metric: p.homeMetric,
+					oneLiner: p.oneLiner,
+					github: p.github,
+					live: p.live,
+				}))}
+			/>
 
 			<h2># everything else</h2>
 			{rest.map((p) => (

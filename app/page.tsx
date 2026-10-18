@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import { ProjectList } from "./components/lk/project-list";
 import { FLAGSHIPS, LINKS, ROLES } from "@/util/portfolio";
 import { ThemeToggle } from "./components/lk/theme-toggle";
 import { DelhiClock } from "./components/lk/clock";
-import { DocIcon, GitHubIcon, GlobeIcon, MailIcon, PlayIcon, XIcon } from "./components/lk/icons";
+import { DocIcon, GitHubIcon, GlobeIcon, MailIcon, XIcon } from "./components/lk/icons";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
@@ -16,26 +17,33 @@ export default function Home() {
 						<div className="lk-name">Laksh Nijhawan</div>
 						<div className="lk-role">software engineer · zero to production</div>
 					</div>
-					<ThemeToggle />
+					<div className="lk-actions">
+						<a className="lk-cv" href="/cv" target="_blank" rel="noopener noreferrer">
+							CV
+						</a>
+						<ThemeToggle />
+					</div>
 				</div>
 
 				<div className="lk-intro">
 					<p>
 						I take products from a blank repo to something real people use, and I care
-						most about the part that has to keep working at scale. Mostly TypeScript and
-						Node, with MySQL, Redis and queues underneath.
+						most about the parts that have to keep working once they do. Mostly TypeScript
+						and Node, with whatever the problem needs underneath, from MySQL and MongoDB to
+						Supabase.
 					</p>
 					<p>40+ products shipped since 2023. Ship first, then measure.</p>
 					<p>
-						More on <Link className="lk-u" href="/projects/parity">how I built Parity</Link>,{" "}
+						More on how I built <Link className="lk-u" href="/projects/keepr">Keepr</Link> and{" "}
+						<Link className="lk-u" href="/projects/parity">Parity</Link>,{" "}
 						<Link className="lk-u" href="/blog/shipping-40-products-lessons">what 40 products taught me</Link>, and{" "}
 						<Link className="lk-u" href="/blog">my blogs</Link>.
 					</p>
 					<p>
 						Reach me via <MailIcon className="lk-i" />
-						<a className="lk-u" href={LINKS.email} {...ext}>email</a> · see my code on{" "}
+						<a className="lk-u" href={LINKS.email} {...ext}>email</a>, see my code on{" "}
 						<GitHubIcon className="lk-i" />
-						<a className="lk-u" href={LINKS.github} {...ext}>GitHub</a> and my developer profile on{" "}
+						<a className="lk-u" href={LINKS.github} {...ext}>GitHub</a>, or view my{" "}
 						<GlobeIcon className="lk-i" />
 						<a className="lk-u" href={LINKS.codepersona} {...ext}>CodePersona</a>.
 					</p>
@@ -44,8 +52,7 @@ export default function Home() {
 						<a href={LINKS.x} {...ext} aria-label="X">
 							<XIcon className="lk-i" style={{ marginRight: 0 }} />
 						</a>
-						, watch my <PlayIcon className="lk-i" />
-						<Link className="lk-u" href="/intro">60 sec intro</Link>, or grab my <DocIcon className="lk-i" />
+						, or grab my <DocIcon className="lk-i" />
 						<a className="lk-u" href="/cv" {...ext}>CV</a>.
 					</p>
 				</div>
@@ -73,29 +80,18 @@ export default function Home() {
 				))}
 
 				<h2># projects</h2>
-				{FLAGSHIPS.map((p) => (
-					<div key={p.slug} className="lk-proj">
-						<Link href={`/projects/${p.slug}`} className="lk-tile" aria-hidden tabIndex={-1}>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img src={p.icon} alt="" />
-						</Link>
-						<Link href={`/projects/${p.slug}`} className="t">
-							<b>{p.name}</b>
-							<span className="lk-m">{p.homeMetric}</span>
-							<small>{p.oneLiner}</small>
-						</Link>
-						<div className="lk-icons">
-							<a href={p.github} {...ext} aria-label={`${p.name} on GitHub`}>
-								<GitHubIcon className="lk-ico" />
-							</a>
-							{p.live && (
-								<a href={p.live} {...ext} aria-label={`${p.name} website`}>
-									<GlobeIcon className="lk-ico" />
-								</a>
-							)}
-						</div>
-					</div>
-				))}
+				<ProjectList
+					items={FLAGSHIPS.map((p) => ({
+						slug: p.slug,
+						name: p.name,
+						icon: p.icon,
+						image: p.image,
+						metric: p.homeMetric,
+						oneLiner: p.oneLiner,
+						github: p.github,
+						live: p.live,
+					}))}
+				/>
 
 				<p style={{ marginTop: 8 }}>
 					more of the 40+ on{" "}

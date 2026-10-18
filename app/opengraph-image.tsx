@@ -11,14 +11,24 @@ export const alt = "Laksh Nijhawan · Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const ROLES = ["Byro", "The Times of India", "IAmMaturity", "WriteCream"];
 const PROJECTS: [string, string][] = [
-	["Parity", "52K rows/s"],
-	["CodePersona", "5K+ users · 95 countries"],
 	["Keepr", "95% intent accuracy"],
+	["CodePersona", "5K+ users · 95 countries"],
+	["Parity", "52K rows/sec"],
 ];
 
-export default function OpenGraphImage() {
+/** Inter from Google Fonts as TTF (the default font mis-spaces some text). */
+async function inter(weight: 400 | 600) {
+	const css = await (
+		await fetch(`https://fonts.googleapis.com/css2?family=Inter:wght@${weight}&display=swap`)
+	).text();
+	const url = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1];
+	if (!url) throw new Error("Inter font not found");
+	return (await fetch(url)).arrayBuffer();
+}
+
+export default async function OpenGraphImage() {
+	const [regular, semibold] = await Promise.all([inter(400), inter(600)]);
 	return new ImageResponse(
 		(
 			<div
@@ -31,7 +41,7 @@ export default function OpenGraphImage() {
 					background: "#ffffff",
 					color: "#111111",
 					padding: "72px 80px",
-					fontFamily: "sans-serif",
+					fontFamily: "Inter",
 				}}
 			>
 				<div style={{ display: "flex", flexDirection: "column" }}>
@@ -40,7 +50,7 @@ export default function OpenGraphImage() {
 						software engineer · zero to production
 					</div>
 					<div style={{ fontSize: 28, color: "#444444", marginTop: 36, maxWidth: 940, lineHeight: 1.4 }}>
-						{`40+ products shipped since 2023. Now at Byro; before that ${ROLES.slice(1).join(", ")}.`}
+						{"40+ products shipped since 2023. Product Engineering Intern at Byro, previously SDE Intern at The Times of India."}
 					</div>
 				</div>
 
@@ -65,10 +75,16 @@ export default function OpenGraphImage() {
 
 				<div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#8a8a8a" }}>
 					<span>laksh1.me</span>
-					<span>B.Tech AI &amp; DS · class of 2027</span>
+					<span>{"B.Tech AI & DS · class of 2027"}</span>
 				</div>
 			</div>
 		),
-		size,
+		{
+			...size,
+			fonts: [
+				{ name: "Inter", data: regular, weight: 400, style: "normal" },
+				{ name: "Inter", data: semibold, weight: 600, style: "normal" },
+			],
+		},
 	);
 }

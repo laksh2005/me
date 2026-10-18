@@ -2,7 +2,7 @@
  * Content for the home page and the three flagship project pages.
  *
  * Numbers match the CV (Oct 2026), except Parity's throughput, which the
- * owner asked to show as 52K rows/s. Keep the two documents in step: a
+ * owner asked to show as 52K rows/sec. Keep the two documents in step: a
  * recruiter will read them side by side.
  */
 
@@ -95,42 +95,44 @@ export interface Flagship {
 
 export const FLAGSHIPS: Flagship[] = [
 	{
-		slug: "parity",
-		name: "Parity",
-		icon: "/parity.png",
-		subtitle: "Sheets ↔ MySQL sync engine · 2026",
-		status: "operational",
-		oneLiner: "Real-time two-way sync between Google Sheets and MySQL.",
-		homeMetric: "52K rows/s · 99 tests",
-		lead: "Teams live in Google Sheets, but their apps need a real database. Parity keeps the two in sync both ways, in real time, without anyone exporting a CSV again.",
-		github: "https://github.com/laksh2005/parity",
-		video: "/parity.mp4",
-		image: "/parity.png",
+		slug: "keepr",
+		name: "Keepr",
+		icon: "/keepr-logo.png",
+		subtitle: "WhatsApp-native memory · 2026",
+		status: "live",
+		oneLiner: "A memory you text on WhatsApp. Save anything, ask for it back.",
+		homeMetric: "95% intent accuracy · 2–3s replies",
+		lead: "You save links, notes and screenshots in a dozen places and never find them again. Keepr is one WhatsApp number: send it anything to save, then ask for it back in plain words.",
+		github: "https://github.com/laksh2005/Keepr",
+		live: "https://keepr.website",
+		liveLabel: "keepr.website",
+		video: "/keepr.mp4",
+		image: "/keepr.png",
 		metrics: [
-			{ k: "throughput", v: "52K/s", s: "rows written" },
-			{ k: "conflicts", v: "LWW", s: "last write wins" },
-			{ k: "tests", v: "99", s: "unit · int · e2e" },
-			{ k: "ci", v: "GH Actions", s: "Docker Compose" },
+			{ k: "intent routing", v: "95%", s: "38 of 40 labelled" },
+			{ k: "shorthand recall", v: "+0.244", s: "avg cosine · wfh, eod, pto" },
+			{ k: "reply time", v: "2–3s", s: "live, in chat" },
+			{ k: "media stored", v: "0", s: "metadata only" },
 		],
 		diagramNote: [
-			"Both directions land on one queue, so every conflict resolves in one place.",
-			"Google API mocked in benchmarks",
+			"One number, two flows. The router decides whether a message is a save or a question.",
+			"per-user isolation",
 		],
 		decisions: [
 			{
-				title: "A queue, not direct writes",
-				body: "Sheets fires bursts of edits. BullMQ dedupes them and retries with backoff, so a flaky API never loses a row.",
+				title: "NLI intent routing",
+				body: "No training data needed to tell \"save this\" from \"what was that link?\". It routes 38 of 40 hand-labelled messages correctly.",
 			},
 			{
-				title: "Last write wins",
-				body: "Simple and predictable for spreadsheet users, who expect their latest edit to stick.",
+				title: "Pre-filter by user",
+				body: "Vector search only ever looks inside one user's memories, so results stay private and fast.",
 			},
 			{
-				title: "Dynamic schema",
-				body: "A new column in the sheet becomes a new MySQL column, so nobody writes a migration for a spreadsheet change.",
+				title: "Store metadata, not media",
+				body: "Less to secure and less to pay for. A unique index makes WhatsApp's webhook retries safe.",
 			},
 		],
-		stack: ["Node.js", "Express", "MySQL", "Redis", "BullMQ", "WebSockets", "React", "Docker Compose", "GitHub Actions", "Jest", "Apps Script"],
+		stack: ["NestJS", "TypeScript", "MongoDB Atlas", "Atlas Vector Search", "WhatsApp Cloud API", "Hugging Face"],
 	},
 	{
 		slug: "codepersona",
@@ -172,44 +174,42 @@ export const FLAGSHIPS: Flagship[] = [
 		stack: ["TypeScript", "React", "Supabase", "Edge Functions", "Gemini API", "GitHub API"],
 	},
 	{
-		slug: "keepr",
-		name: "Keepr",
-		icon: "/keepr.png",
-		subtitle: "WhatsApp-native memory · 2026",
-		status: "live",
-		oneLiner: "A memory you text on WhatsApp. Save anything, ask for it back.",
-		homeMetric: "95% intent accuracy · 2–3s replies",
-		lead: "You save links, notes and screenshots in a dozen places and never find them again. Keepr is one WhatsApp number: send it anything to save, then ask for it back in plain words.",
-		github: "https://github.com/laksh2005/Keepr",
-		live: "https://keepr.website",
-		liveLabel: "keepr.website",
-		video: "/keepr.mp4",
-		image: "/keepr.png",
+		slug: "parity",
+		name: "Parity",
+		icon: "/parity.png",
+		subtitle: "Sheets ↔ MySQL sync engine · 2026",
+		status: "operational",
+		oneLiner: "Real-time two-way sync between Google Sheets and MySQL.",
+		homeMetric: "52K rows/sec · 99 tests",
+		lead: "Teams live in Google Sheets, but their apps need a real database. Parity keeps the two in sync both ways, in real time, without anyone exporting a CSV again.",
+		github: "https://github.com/laksh2005/parity",
+		video: "/parity.mp4",
+		image: "/parity.png",
 		metrics: [
-			{ k: "intent routing", v: "95%", s: "38 of 40 labelled" },
-			{ k: "shorthand recall", v: "+0.244", s: "avg cosine · wfh, eod, pto" },
-			{ k: "reply time", v: "2–3s", s: "live, in chat" },
-			{ k: "media stored", v: "0", s: "metadata only" },
+			{ k: "throughput", v: "52K", s: "rows/sec written" },
+			{ k: "conflicts", v: "LWW", s: "last write wins" },
+			{ k: "tests", v: "99", s: "unit · int · e2e" },
+			{ k: "ci", v: "GH Actions", s: "Docker Compose" },
 		],
 		diagramNote: [
-			"One number, two flows. The router decides whether a message is a save or a question.",
-			"per-user isolation",
+			"Both directions land on one queue, so every conflict resolves in one place.",
+			"Google API mocked in benchmarks",
 		],
 		decisions: [
 			{
-				title: "NLI intent routing",
-				body: "No training data needed to tell \"save this\" from \"what was that link?\". It routes 38 of 40 hand-labelled messages correctly.",
+				title: "A queue, not direct writes",
+				body: "Sheets fires bursts of edits. BullMQ dedupes them and retries with backoff, so a flaky API never loses a row.",
 			},
 			{
-				title: "Pre-filter by user",
-				body: "Vector search only ever looks inside one user's memories, so results stay private and fast.",
+				title: "Last write wins",
+				body: "Simple and predictable for spreadsheet users, who expect their latest edit to stick.",
 			},
 			{
-				title: "Store metadata, not media",
-				body: "Less to secure and less to pay for. A unique index makes WhatsApp's webhook retries safe.",
+				title: "Dynamic schema",
+				body: "A new column in the sheet becomes a new MySQL column, so nobody writes a migration for a spreadsheet change.",
 			},
 		],
-		stack: ["NestJS", "TypeScript", "MongoDB Atlas", "Atlas Vector Search", "WhatsApp Cloud API", "Hugging Face"],
+		stack: ["Node.js", "Express", "MySQL", "Redis", "BullMQ", "WebSockets", "React", "Docker Compose", "GitHub Actions", "Jest", "Apps Script"],
 	},
 ];
 
