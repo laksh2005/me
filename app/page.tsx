@@ -4,6 +4,7 @@ import { ProjectList } from "./components/lk/project-list";
 import { FLAGSHIPS, LINKS, ROLES } from "@/util/portfolio";
 import { ThemeToggle } from "./components/lk/theme-toggle";
 import { DelhiClock } from "./components/lk/clock";
+import { VisitCount } from "./components/lk/visit-count";
 import { DocIcon, GitHubIcon, GlobeIcon, MailIcon, XIcon } from "./components/lk/icons";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -101,6 +102,8 @@ export default function Home() {
 					✍︎ i write about what breaks when you ship.{" "}
 					<Link className="lk-u" href="/blog">read the latest</Link>.
 				</p>
+
+				<VisitCount />
 
 				<div className="lk-foot">
 					<DelhiClock />
