@@ -2,19 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useParams } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { TweetEmbed } from "@/app/components/tweet";
 import { blogsData } from "@/util/data";
+import { PageHead, Shell } from "@/app/components/lk/shell";
 
 /**
  * A single post.
  *
- * Lookup is by slug first. The previous version did `parseInt(params.id)` and
- * used the result as an array index, which meant every slug URL quietly
- * resolved to `blogsData[0]` (NaN falls back to 0) and served the wrong post
- * with a 200. Numeric ids are still honoured so any old links keep working.
+ * Lookup is by slug first. Numeric ids (/blog/0 to /blog/4) are honoured too,
+ * because those links are already out in the world.
  */
 export default function BlogDetailPage() {
 	const params = useParams();
@@ -28,8 +25,7 @@ export default function BlogDetailPage() {
 
 	useEffect(() => {
 		const onScroll = () => {
-			const total =
-				document.documentElement.scrollHeight - window.innerHeight;
+			const total = document.documentElement.scrollHeight - window.innerHeight;
 			setScroll(total > 0 ? (window.scrollY / total) * 100 : 0);
 		};
 		onScroll();
@@ -39,90 +35,64 @@ export default function BlogDetailPage() {
 
 	if (!blog) {
 		return (
-			<div className="ak-page">
-				<Link href="/blog" className="ak-back">
-					<ArrowLeft size={13} />
-					All writing
-				</Link>
-				<header className="ak-page-head">
-					<span className="ak-eyebrow">404</span>
-					<h1 className="ak-title">Post not found</h1>
-					<p className="ak-sub">
-						That one does not exist. The index has everything that does.
-					</p>
-				</header>
-			</div>
+			<Shell back={{ href: "/blog", label: "all writing" }}>
+				<PageHead
+					eyebrow="404"
+					title="Post not found"
+					lead="That one does not exist. The index has everything that does."
+				/>
+			</Shell>
 		);
 	}
 
+	const i = blogsData.indexOf(blog);
+	const next = blogsData[(i + 1) % blogsData.length];
+
 	return (
 		<>
-			<div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/[0.06]">
-				<div
-					className="ak-progress-fill h-full transition-[width] duration-150"
-					style={{ width: `${scroll}%` }}
+			<div className="lk-progress" style={{ width: `${scroll}%` }} />
+			<Shell back={{ href: "/blog", label: "all writing" }}>
+				<PageHead
+					eyebrow={`${blog.month.toLowerCase()} ${blog.year}`}
+					title={blog.title}
+					lead={blog.overview}
 				/>
-			</div>
 
-			<div className="ak-page">
-				<Link href="/blog" className="ak-back">
-					<ArrowLeft size={13} />
-					All writing
-				</Link>
-
-				<header className="ak-page-head">
-					<span className="ak-eyebrow">
-						{blog.month} {blog.year}
-					</span>
-					<h1 className="ak-title">{blog.title}</h1>
-					{blog.overview && <p className="ak-sub">{blog.overview}</p>}
-				</header>
-
-				<article className="ak-prose mt-8">
+				<article className="lk-prose">
 					{blog.content?.map((block: any, idx: number) => {
 						if (block.type === "paragraph") {
 							return (
 								<p
 									key={idx}
-									className="whitespace-pre-line [&_a]:text-zinc-200 [&_a]:underline [&_code]:rounded [&_code]:bg-white/[0.06] [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px] [&_strong]:text-zinc-100"
+									className="whitespace-pre-line"
 									dangerouslySetInnerHTML={{ __html: block.text }}
 								/>
 							);
 						}
-
 						if (block.type === "image") {
 							return (
-								<div
-									key={idx}
-									className="my-8 overflow-hidden rounded-lg border border-white/[0.07]"
-								>
-									<Image
-										src={block.src}
-										alt={block.alt ?? ""}
-										width={1200}
-										height={630}
-										className="w-full"
-									/>
-								</div>
+								<figure key={idx}>
+									{/* eslint-disable-next-line @next/next/no-img-element */}
+									<img src={block.src} alt={block.alt ?? ""} loading="lazy" />
+								</figure>
 							);
 						}
-
 						if (block.type === "embed") {
-							return (
-								<TweetEmbed key={idx} tweetId={block.tweetId} html={block.html} />
-							);
+							return <TweetEmbed key={idx} tweetId={block.tweetId} html={block.html} />;
 						}
-
 						return null;
 					})}
 				</article>
 
-				<div className="ak-rule" />
-
-				<Link href="/" className="ak-link">
-					Ask about something else
-				</Link>
-			</div>
+				{next && next !== blog && (
+					<div className="lk-next">
+						<Link href="/blog">← all writing</Link>
+						<Link href={`/blog/${next.slug}`}>
+							<b>{next.title.length > 48 ? `${next.title.slice(0, 46)}…` : next.title}</b> →
+						</Link>
+					</div>
+				)}
+			</Shell>
 		</>
 	);
 }

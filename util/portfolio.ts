@@ -214,3 +214,6 @@ export const FLAGSHIPS: Flagship[] = [
 ];
 
 export const flagshipBySlug = (slug: string) => FLAGSHIPS.find((f) => f.slug === slug);
+
+/** Projects kept in data.ts for the console but left out of the portfolio. */
+export const HIDDEN_PROJECTS = ["one-stack"];
