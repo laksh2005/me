@@ -17,6 +17,8 @@ export const LINKS = {
 export interface Role {
 	company: string;
 	logo: string;
+	/** Transparent logo: shown on a white tile in both themes. */
+	adaptiveLogo?: boolean;
 	role: string;
 	dates: string;
 	place: string;
@@ -26,7 +28,8 @@ export interface Role {
 export const ROLES: Role[] = [
 	{
 		company: "Byro",
-		logo: "/byro-logo.jpg",
+		logo: "/byro-logo.png",
+		adaptiveLogo: true,
 		role: "Product Engineering Intern",
 		dates: "oct 2026 - present",
 		place: "Tallinn, Estonia · Remote",

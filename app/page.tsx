@@ -63,7 +63,7 @@ export default function Home() {
 					<div key={r.company} className="lk-xp" tabIndex={0}>
 						<div className="lk-exp">
 							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img className="lk-logo" src={r.logo} alt="" />
+							<img className={`lk-logo${r.adaptiveLogo ? " lk-logo-adapt" : ""}`} src={r.logo} alt="" />
 							<div className="t">
 								<b>{r.company}</b>
 								<small>{r.role}</small>
