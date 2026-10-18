@@ -12,22 +12,13 @@ export const metadata: Metadata = {
 		default: "Laksh Nijhawan · Software Engineer",
 		template: "%s · Laksh Nijhawan",
 	},
-	description:
-		"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
+	description: "Software engineer taking products from zero to production. 40+ shipped, with internships at Byro and The Times of India.",
 	openGraph: {
-		title: "Laksh Nijhawan · Product-focused engineer",
-		description:
-			"Product-focused engineer building end-to-end systems that turn ideas into real, usable products.",
+		title: "Laksh Nijhawan · Software Engineer",
+		description: "Software engineer taking products from zero to production. 40+ shipped, with internships at Byro and The Times of India.",
 		url: "https://www.laksh1.me",
 		siteName: "Laksh Nijhawan",
-		images: [
-			{
-				url: "https://pbs.twimg.com/media/HD6GC49boAA0yaZ?format=jpg&name=900x900",
-				width: 1920,
-				height: 1080,
-			},
-		],
-		locale: "en-In",
+		locale: "en_IN",
 		type: "website",
 	},
 	robots: {
@@ -42,8 +33,10 @@ export const metadata: Metadata = {
 		},
 	},
 	twitter: {
-		title: "Laksh Nijhawan",
+		title: "Laksh Nijhawan · Software Engineer",
+		description: "Software engineer taking products from zero to production. 40+ shipped, with internships at Byro and The Times of India.",
 		card: "summary_large_image",
+		creator: "@laksh_2705",
 	},
 	icons: {
 		shortcut: "/favicon.jpg",

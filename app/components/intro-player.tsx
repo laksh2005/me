@@ -164,8 +164,8 @@ export const IntroPlayer: React.FC<{ src: string; poster: string }> = ({
 			onKeyDown={onKey}
 			onMouseMove={poke}
 			onMouseLeave={() => playing && setIdle(true)}
-			className={`group relative overflow-hidden bg-black outline-none focus-visible:ring-2 focus-visible:ring-[var(--ak-accent)] ${
-				fullscreen ? "h-screen w-screen" : "aspect-video w-full rounded-xl border border-[var(--ak-line)]"
+			className={`group relative overflow-hidden bg-black outline-none focus-visible:ring-2 focus-visible:ring-[var(--lk-ink)] ${
+				fullscreen ? "h-screen w-screen" : "aspect-video w-full rounded-xl border border-[var(--lk-line)]"
 			} ${showControls ? "" : "cursor-none"}`}
 			aria-label="Intro video player"
 		>
@@ -220,7 +220,7 @@ export const IntroPlayer: React.FC<{ src: string; poster: string }> = ({
 					<div className="relative mb-1 h-4">
 						<div className="pointer-events-none absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 overflow-hidden rounded-full bg-white/20">
 							<div className="absolute inset-y-0 left-0 bg-white/30" style={{ width: `${bufPct}%` }} />
-							<div className="absolute inset-y-0 left-0 bg-[var(--ak-accent)]" style={{ width: `${pct}%` }} />
+							<div className="absolute inset-y-0 left-0 bg-white" style={{ width: `${pct}%` }} />
 						</div>
 						<input
 							type="range"
