@@ -26,7 +26,7 @@ export interface Role {
 export const ROLES: Role[] = [
 	{
 		company: "Byro",
-		logo: "/byro.png",
+		logo: "/byro-logo.jpg",
 		role: "Product Engineering Intern",
 		dates: "oct 2026 - present",
 		place: "Tallinn, Estonia · Remote",
@@ -53,7 +53,7 @@ export const ROLES: Role[] = [
 	},
 	{
 		company: "WriteCream",
-		logo: "/writecream.jpg",
+		logo: "/wc-logo.jpg",
 		role: "Full Stack Developer Intern",
 		dates: "jan 2025 - apr 2025",
 		place: "Delhi, India · Remote",
