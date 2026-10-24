@@ -12,7 +12,7 @@ const nextConfig = {
 			{
 				source: "/cv",
 				destination:
-					"https://drive.google.com/file/d/1mW2Hu5-hJvlqSIubc0j3hnUV40-1lcTh/view?usp=sharing",
+					"https://drive.google.com/file/d/13fKurxT2pizT_p867BNWwygC3dKBUm5s/view?usp=sharing",
 				permanent: false,
 			},
 		];

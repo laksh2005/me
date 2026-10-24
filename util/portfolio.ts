@@ -34,7 +34,7 @@ export const ROLES: Role[] = [
 		dates: "oct 2026 - present",
 		place: "Tallinn, Estonia · Remote",
 		bullet:
-			"Building the trust layer of an agent-first AI product: traceable memory, publishing history and secure media, so humans stay in control.",
+			"Built the Company and Profile memory for an agent-first AI product, with tests proving data isolation across 3 access levels (6,500+ database tests passing).",
 	},
 	{
 		company: "The Times of India",
