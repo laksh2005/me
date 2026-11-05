@@ -77,7 +77,7 @@ function KeeprDiagram() {
 				<Ar />
 				<Node title="Dedupe" note="claim message ID" />
 				<Ar />
-				<Node title="Router" note="rules, no model" tag="router" hl />
+				<Node title="Router" note="rules, no model call" tag="router" hl />
 			</div>
 			<div className="lk-down" aria-hidden>
 				<span>↙</span>
@@ -85,9 +85,30 @@ function KeeprDiagram() {
 				<span>↘</span>
 			</div>
 			<div className="lk-split3">
-				<Node title="Save" note="voice → text, embed, store" />
-				<Node title="Recall" note="embed, search, extract answer" />
-				<Node title="Commands" note="remind, recap, undo, digest" />
+				<div>
+					<div className="lk-lanehead">save</div>
+					<div className="lk-box">
+						<Node title="Transcribe" note="voice notes only" />
+						<Ar d="↓" />
+						<Node title="Embed + store" note="Atlas, offers reminders" />
+					</div>
+				</div>
+				<div>
+					<div className="lk-lanehead">recall</div>
+					<div className="lk-box">
+						<Node title="Vector search" note="per-user pre-filter" />
+						<Ar d="↓" />
+						<Node title="Extract answer" note="rules, quotes source" />
+					</div>
+				</div>
+				<div>
+					<div className="lk-lanehead">commands</div>
+					<div className="lk-box">
+						<Node title="remind · recap" note="list · export" />
+						<Ar d="↓" />
+						<Node title="delete + undo" note="soft delete, 10 min" />
+					</div>
+				</div>
 			</div>
 		</>
 	);
@@ -99,21 +120,21 @@ function CodePersonaDiagram() {
 			<div className="lk-lane">
 				<Node title="React app" note="enter a username" />
 				<Ar />
-				<Node title="Edge Function" note="cache check first" tag="edge" hl />
+				<Node title="Edge Function" note="reads the cache first" tag="edge" hl />
 				<Ar />
-				<Node title="GitHub API" note="only on cache miss" />
+				<Node title="Supabase cache" note="hit: served as is" />
 			</div>
-			<div className="lk-down" aria-hidden>
+			<div className="lk-down" style={{ marginBottom: 10 }} aria-hidden>
 				<span />
-				<span>↓ hit</span>
-				<span>↓</span>
+				<span>↓ miss</span>
+				<span />
 			</div>
 			<div className="lk-lane">
-				<Node title="Shareable page + PDF" note="codepersona.app/username" />
-				<Ar d="←" />
-				<Node title="Supabase cache" note="processed persona · TTL" />
-				<Ar d="←" />
-				<Node title="Persona builder" note="GitHub data + Gemini" />
+				<Node title="GitHub API" note="fetch profile data" />
+				<Ar />
+				<Node title="Hash check" note="repos, last update, languages" tag="2nd cache" />
+				<Ar />
+				<Node title="Gemini" note="only if it changed, then cached" />
 			</div>
 		</>
 	);
@@ -155,6 +176,13 @@ export function FlagshipPage({ project }: { project: Flagship }) {
 				</div>
 
 				<p className="lk-lead">{project.lead}</p>
+				{project.bullets && (
+					<ul className="lk-bullets">
+						{project.bullets.map((t) => (
+							<li key={t}>{t}</li>
+						))}
+					</ul>
+				)}
 				<div className="lk-links">
 					{project.live && (
 						<a className="lk-u" href={project.live} {...ext}>

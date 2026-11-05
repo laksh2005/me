@@ -37,7 +37,7 @@ export const ROLES: Role[] = [
 		dates: "oct 2026 - present",
 		place: "Tallinn, Estonia · Remote",
 		bullet:
-			"Built the Company and Profile memory for an agent-first AI product, with tests proving data isolation across 3 access levels (6,500+ database tests passing).",
+			"Built the Company and Profile memory (6,500+ database tests passing), then hardened its privacy filter: 289 probe sentences checked in TypeScript and SQL, 0 mismatches.",
 	},
 	{
 		company: "The Times of India",
@@ -87,7 +87,11 @@ export interface Flagship {
 	status: string;
 	oneLiner: string;
 	homeMetric: string;
+	/** Shorter stat for the link preview card, when homeMetric is too long for it. */
+	cardMetric?: string;
 	lead: string;
+	/** One-line feature bullets shown under the lead. */
+	bullets?: string[];
 	github: string;
 	live?: string;
 	liveLabel?: string;
@@ -109,7 +113,8 @@ export const FLAGSHIPS: Flagship[] = [
 		subtitle: "WhatsApp-native memory · 2026",
 		status: "live",
 		oneLiner: "A memory you text on WhatsApp. Save anything, ask for it back.",
-		homeMetric: "319 tests · 1 model call per recall",
+		homeMetric: "voice notes · 319 tests · +0.244 recall",
+		cardMetric: "voice notes · 319 tests",
 		lead: "You save links, notes and screenshots in a dozen places and never find them again. Keepr is one WhatsApp number: send it anything to save, then ask for it back in plain words. Text it, forward it, or just talk: voice notes become searchable text.",
 		github: "https://github.com/laksh2005/Keepr",
 		live: "https://keepr.website",
@@ -130,11 +135,11 @@ export const FLAGSHIPS: Flagship[] = [
 		decisions: [
 			{
 				title: "Rules, not a model, for routing",
-				body: "One fewer model call on every message, and the bot keeps working when credits run out.",
+				body: "A classifier cost a model call on every message. Rules are free, and the bot keeps working when credits run out.",
 			},
 			{
 				title: "Extract the answer, don't generate it",
-				body: "Pulls the exact password, link or date out of the saved message and quotes it. No made-up answers.",
+				body: "Recall pulls the exact password, link or date out of the saved message and quotes it. No made-up answers.",
 			},
 			{
 				title: "Claim before processing",
@@ -142,7 +147,7 @@ export const FLAGSHIPS: Flagship[] = [
 			},
 			{
 				title: "Pre-filter by user",
-				body: "Vector search only ever looks inside one user's memories, so results stay private and fast.",
+				body: "Vector search only looks inside one user's memories, so results stay private and fast.",
 			},
 		],
 		stack: ["NestJS", "TypeScript", "MongoDB Atlas", "Atlas Vector Search", "WhatsApp Cloud API", "Hugging Face (embeddings, summaries, Whisper)", "chrono-node", "Jest", "GitHub Actions", "Vercel"],
@@ -156,6 +161,11 @@ export const FLAGSHIPS: Flagship[] = [
 		oneLiner: "Turns any GitHub profile into a shareable developer story.",
 		homeMetric: "5K+ users · 95 countries",
 		lead: "A GitHub profile is a wall of green squares. CodePersona turns it into a story people can read: what you build, how you work, and what you're best at. Share a link or export a PDF.",
+		bullets: [
+			"Each report: persona title, dev timeline, skill radar, career projection.",
+			"Compare mode: two developers side by side, no extra API calls.",
+			"Per-repo AI analysis: maturity, complexity and suggestions, on demand.",
+		],
 		github: "https://github.com/laksh2005/codepersona",
 		live: "https://codepersona.app",
 		liveLabel: "codepersona.app",
@@ -163,12 +173,12 @@ export const FLAGSHIPS: Flagship[] = [
 		metrics: [
 			{ k: "users", v: "5,000+", s: "zero paid traffic" },
 			{ k: "countries", v: "95", s: "via shared links" },
-			{ k: "page load", v: "<1s", s: "edge cached" },
-			{ k: "export", v: "1-click", s: "profile → PDF" },
+			{ k: "page load", v: "<1s", s: "served from cache" },
+			{ k: "export", v: "3 formats", s: "PDF · image · Markdown" },
 		],
 		diagramNote: [
-			"Most visits never touch GitHub: they read a processed profile straight from cache.",
-			"rate-limit safe",
+			"First visit: 1 API call. Repeat visits and shared links: 0.",
+			"14-day TTL · regenerate once per 72h",
 		],
 		decisions: [
 			{
@@ -177,14 +187,22 @@ export const FLAGSHIPS: Flagship[] = [
 			},
 			{
 				title: "TTL, not invalidation",
-				body: "GitHub data changes slowly, so a time-based expiry keeps it fresh enough without extra calls.",
+				body: "GitHub data changes slowly, so a 14-day time-based expiry keeps it fresh enough without extra calls.",
 			},
 			{
 				title: "Built for sharing",
 				body: "Every profile has its own URL and a PDF export. That's how it reached 95 countries without ads.",
 			},
+			{
+				title: "Rate-limited regeneration",
+				body: "Users can force a refresh only once every 72 hours, which protects the GitHub and Gemini quotas.",
+			},
+			{
+				title: "Closed a public write hole",
+				body: "The original Supabase RLS insert and update policies applied to the public role, so anyone with the anon key could rewrite any persona page. I dropped them. service_role bypasses RLS anyway, so nothing broke.",
+			},
 		],
-		stack: ["TypeScript", "React", "Supabase", "Edge Functions", "Gemini API", "GitHub API"],
+		stack: ["TypeScript", "React", "Supabase", "Edge Functions", "Gemini API", "GitHub API", "Vercel", "Tailwind CSS", "shadcn/ui (Radix)", "Framer Motion", "TanStack Query", "Deno (Edge Functions)", "GitHub GraphQL API"],
 	},
 	{
 		slug: "parity",
@@ -194,15 +212,15 @@ export const FLAGSHIPS: Flagship[] = [
 		status: "operational",
 		oneLiner: "Real-time two-way sync between Google Sheets and MySQL.",
 		homeMetric: "52K rows/sec · 99 tests",
-		lead: "Teams live in Google Sheets, but their apps need a real database. Parity keeps the two in sync both ways, in real time, without anyone exporting a CSV again.",
+		lead: "Teams live in Google Sheets, but their apps need a real database. Parity keeps the two in sync both ways, in real time, without anyone exporting a CSV again. When both sides change the same row, the last write wins.",
 		github: "https://github.com/laksh2005/parity",
 		video: "/parity.mp4",
 		image: "/parity.png",
 		metrics: [
 			{ k: "throughput", v: "52K", s: "rows/sec written" },
-			{ k: "conflicts", v: "LWW", s: "last write wins" },
 			{ k: "tests", v: "99", s: "unit · int · e2e" },
-			{ k: "ci", v: "GH Actions", s: "Docker Compose" },
+			{ k: "load test", v: "10K rows", s: "run in CI" },
+			{ k: "setup", v: "1 command", s: "docker compose up" },
 		],
 		diagramNote: [
 			"Both directions land on one queue, so every conflict resolves in one place.",

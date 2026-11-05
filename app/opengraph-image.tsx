@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/server";
+import { FLAGSHIPS } from "@/util/portfolio";
 
 /**
  * The preview card shown when laksh1.me is shared on LinkedIn, Slack, X or
@@ -11,11 +12,9 @@ export const alt = "Laksh Nijhawan · Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const PROJECTS: [string, string][] = [
-	["Keepr", "95% intent accuracy"],
-	["CodePersona", "5K+ users · 95 countries"],
-	["Parity", "52K rows/sec"],
-];
+// Same names and green stats as the home page (or a shorter cardMetric where
+// the home line is too long), so stats live in util/portfolio.ts only.
+const PROJECTS: [string, string][] = FLAGSHIPS.map((p) => [p.name, p.cardMetric ?? p.homeMetric]);
 
 /** Inter from Google Fonts as TTF (the default font mis-spaces some text). */
 async function inter(weight: 400 | 600) {

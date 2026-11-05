@@ -28,10 +28,10 @@ export default function Home() {
 
 				<div className="lk-intro">
 					<p>
-						I take products from a blank repo to something real people use, and I care
-						most about the parts that have to keep working once they do. Mostly TypeScript
-						and Node, with whatever the problem needs underneath, from MySQL and MongoDB to
-						Supabase.
+						I take products from idea to something real people use. I like the product
+						thinking as much as the engineering, and I care most about the parts that have
+						to keep working once they do. Mostly TypeScript and Node, from WhatsApp bots
+						to sync engines.
 					</p>
 					<p>40+ products shipped since 2023. Ship first, then measure.</p>
 					<p>
