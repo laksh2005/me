@@ -190,3 +190,40 @@
 @media (prefers-reduced-motion: reduce) { .lk-enter { animation: none; } }
 .lk-visits { margin-top: 40px; margin-bottom: -40px; color: var(--lk-dim); font-size: 12px; }
 .lk-logo-adapt { background: #ffffff; outline: 1px solid var(--lk-line); outline-offset: -1px; }
+
+/* Keepr chat cards: WhatsApp-style bubbles that follow the theme */
+:root {
+  --lk-wa-bg: #efeae2;
+  --lk-wa-you: #d9fdd3;
+  --lk-wa-them: #ffffff;
+  --lk-wa-ink: #111b21;
+  --lk-wa-time: #667781;
+  --lk-wa-quote: rgba(0, 0, 0, 0.05);
+}
+:root[data-theme="dark"] {
+  --lk-wa-bg: #0b141a;
+  --lk-wa-you: #005c4b;
+  --lk-wa-them: #202c33;
+  --lk-wa-ink: #e9edef;
+  --lk-wa-time: #8696a0;
+  --lk-wa-quote: rgba(255, 255, 255, 0.07);
+}
+.lk-chat-sub { margin: -6px 0 14px; color: var(--lk-dim); font-size: 13.5px; }
+.lk-chats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 14px; align-items: start; }
+@media (max-width: 560px) { .lk-chats { grid-template-columns: 1fr; } }
+.lk-chat { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.lk-chat-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.lk-thread { display: flex; flex-direction: column; gap: 5px; padding: 10px; border-radius: 12px; border: 1px solid var(--lk-line); background: var(--lk-wa-bg); }
+.lk-bub { max-width: 92%; padding: 5px 8px 3px; border-radius: 8px; font-size: 12.5px; line-height: 1.4; color: var(--lk-wa-ink); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08); overflow-wrap: anywhere; }
+.lk-bub.you { align-self: flex-end; background: var(--lk-wa-you); border-top-right-radius: 2px; }
+.lk-bub.keepr { align-self: flex-start; background: var(--lk-wa-them); border-top-left-radius: 2px; }
+.lk-bub-text { display: block; white-space: pre-line; }
+.lk-quote { display: block; margin-bottom: 3px; padding: 3px 7px; border-left: 3px solid #06cf9c; border-radius: 4px; background: var(--lk-wa-quote); font-size: 11.5px; color: var(--lk-wa-time); }
+.lk-ans { display: block; margin-top: 2px; font-weight: 600; }
+.lk-time { display: block; text-align: right; font-size: 9.5px; color: var(--lk-wa-time); margin-top: 1px; }
+.lk-gap { align-self: center; padding: 1px 9px; border-radius: 99px; background: var(--lk-wa-quote); font-size: 10.5px; color: var(--lk-wa-time); }
+.lk-chat-cap { margin: 0; color: var(--lk-dim); font-size: 12px; line-height: 1.45; }
+.lk-split3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .lk-split3 { grid-template-columns: 1fr; } }
+
+.lk-cap .mono { white-space: nowrap; flex-shrink: 0; }

@@ -4,6 +4,7 @@ import { FLAGSHIPS, Flagship } from "@/util/portfolio";
 import { ThemeToggle } from "@/app/components/lk/theme-toggle";
 import { GitHubIcon, GlobeIcon } from "@/app/components/lk/icons";
 import { IntroPlayer } from "@/app/components/intro-player";
+import { ChatCards } from "@/app/components/lk/chat";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
@@ -72,33 +73,21 @@ function KeeprDiagram() {
 	return (
 		<>
 			<div className="lk-lane">
-				<Node title="WhatsApp" note="user sends a message" />
+				<Node title="WhatsApp" note="webhook" />
 				<Ar />
-				<Node title="Cloud API" note="webhook" />
+				<Node title="Dedupe" note="claim message ID" />
 				<Ar />
-				<Node title="NestJS" note="NLI intent · Hugging Face" tag="router" hl />
+				<Node title="Router" note="rules, no model" tag="router" hl />
 			</div>
 			<div className="lk-down" aria-hidden>
 				<span>↙</span>
+				<span>↓</span>
 				<span>↘</span>
 			</div>
-			<div className="lk-split">
-				<div>
-					<div className="lk-lanehead">save</div>
-					<div className="lk-box">
-						<Node title="Embed + store" note="metadata only, never media" />
-						<Ar d="↓" />
-						<Node title="MongoDB Atlas" note="unique compound index" />
-					</div>
-				</div>
-				<div>
-					<div className="lk-lanehead">recall</div>
-					<div className="lk-box">
-						<Node title="Vector Search" note="per-user pre-filter" />
-						<Ar d="↓" />
-						<Node title="Reply on WhatsApp" note="best matches, in 2–3s" />
-					</div>
-				</div>
+			<div className="lk-split3">
+				<Node title="Save" note="voice → text, embed, store" />
+				<Node title="Recall" note="embed, search, extract answer" />
+				<Node title="Commands" note="remind, recap, undo, digest" />
 			</div>
 		</>
 	);
@@ -207,6 +196,8 @@ export function FlagshipPage({ project }: { project: Flagship }) {
 						<span className="mono">{project.diagramNote[1]}</span>
 					</div>
 				</div>
+
+				{project.chats && <ChatCards cards={project.chats} />}
 
 				<h2># decisions</h2>
 				<div className="lk-dec">

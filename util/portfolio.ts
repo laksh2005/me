@@ -6,6 +6,9 @@
  * recruiter will read them side by side.
  */
 
+import type { ChatCard } from "./keepr-chats";
+import { KEEPR_CHATS } from "./keepr-chats";
+
 export const LINKS = {
 	email: "https://mail.google.com/mail/?view=cm&fs=1&to=lakshnijhawan.work@gmail.com",
 	github: "https://github.com/laksh2005",
@@ -94,6 +97,8 @@ export interface Flagship {
 	diagramNote: [string, string];
 	decisions: Decision[];
 	stack: string[];
+	/** Chat mockups shown under the numbers, if any. */
+	chats?: ChatCard[];
 }
 
 export const FLAGSHIPS: Flagship[] = [
@@ -104,38 +109,43 @@ export const FLAGSHIPS: Flagship[] = [
 		subtitle: "WhatsApp-native memory · 2026",
 		status: "live",
 		oneLiner: "A memory you text on WhatsApp. Save anything, ask for it back.",
-		homeMetric: "95% intent accuracy · 2–3s replies",
-		lead: "You save links, notes and screenshots in a dozen places and never find them again. Keepr is one WhatsApp number: send it anything to save, then ask for it back in plain words.",
+		homeMetric: "319 tests · 1 model call per recall",
+		lead: "You save links, notes and screenshots in a dozen places and never find them again. Keepr is one WhatsApp number: send it anything to save, then ask for it back in plain words. Text it, forward it, or just talk: voice notes become searchable text.",
 		github: "https://github.com/laksh2005/Keepr",
 		live: "https://keepr.website",
 		liveLabel: "keepr.website",
 		video: "/keepr.mp4",
 		image: "/keepr.png",
 		metrics: [
-			{ k: "intent routing", v: "95%", s: "38 of 40 labelled" },
+			{ k: "HF calls per recall", v: "1", s: "down from 2, rules route" },
 			{ k: "shorthand recall", v: "+0.244", s: "avg cosine · wfh, eod, pto" },
-			{ k: "reply time", v: "2–3s", s: "live, in chat" },
-			{ k: "media stored", v: "0", s: "metadata only" },
+			{ k: "tests", v: "319", s: "network blocked in tests" },
+			{ k: "media stored", v: "0", s: "voice → text, audio dropped" },
 		],
 		diagramNote: [
-			"One number, two flows. The router decides whether a message is a save or a question.",
-			"per-user isolation",
+			"One number, three paths. Only the paths that need understanding call a model.",
+			"rule-based routing",
 		],
+		chats: KEEPR_CHATS,
 		decisions: [
 			{
-				title: "NLI intent routing",
-				body: "No training data needed to tell \"save this\" from \"what was that link?\". It routes 38 of 40 hand-labelled messages correctly.",
+				title: "Rules, not a model, for routing",
+				body: "One fewer model call on every message, and the bot keeps working when credits run out.",
+			},
+			{
+				title: "Extract the answer, don't generate it",
+				body: "Pulls the exact password, link or date out of the saved message and quotes it. No made-up answers.",
+			},
+			{
+				title: "Claim before processing",
+				body: "WhatsApp retries webhooks. Claiming each message ID first means a retry never costs a second reply.",
 			},
 			{
 				title: "Pre-filter by user",
 				body: "Vector search only ever looks inside one user's memories, so results stay private and fast.",
 			},
-			{
-				title: "Store metadata, not media",
-				body: "Less to secure and less to pay for. A unique index makes WhatsApp's webhook retries safe.",
-			},
 		],
-		stack: ["NestJS", "TypeScript", "MongoDB Atlas", "Atlas Vector Search", "WhatsApp Cloud API", "Hugging Face"],
+		stack: ["NestJS", "TypeScript", "MongoDB Atlas", "Atlas Vector Search", "WhatsApp Cloud API", "Hugging Face (embeddings, summaries, Whisper)", "chrono-node", "Jest", "GitHub Actions", "Vercel"],
 	},
 	{
 		slug: "codepersona",

@@ -29,7 +29,7 @@ export default function IntroPage() {
 
 			<p className="lk-lead" style={{ marginTop: 22 }}>
 				Want the long version? See{" "}
-				<Link className="lk-u" href="/projects/parity">how I built Parity</Link> or grab my{" "}
+				<Link className="lk-u" href="/projects/keepr">how I built Keepr</Link> or grab my{" "}
 				<a className="lk-u" href="/cv" target="_blank" rel="noopener noreferrer">CV</a>.
 			</p>
 		</Shell>
